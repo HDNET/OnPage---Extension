@@ -1,16 +1,23 @@
 <?php
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'HDNET.'.$_EXTKEY,
+    'Onpage',
+    'OnPage - SEO Tool'
+);
+
 if (TYPO3_MODE === 'BE') {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-        $_EXTKEY,
-        'web',          // Main area
-        'mod1',         // Name of the module
-        '',             // Position of the module
+        'HDNET.'.$_EXTKEY,
+        'web',             // Position of the module
+        'management',               // module name
+        '',
         array(          // Allowed controller action combinations
+                        'Backend' => 'index',
         ),
         array(          // Additional configuration
-                        'access'    => 'user,group',
-                        'icon'      => '',
-                        'labels'    => 'OnPage.org',
-        )
-    );
+                           'access' => 'user,group',
+                           'icon'   => '',
+                           'labels' => 'OnPage.org',
+        ));
 }
