@@ -1,7 +1,7 @@
 <?php
 $EM_CONF[$_EXTKEY] = array(
     'title' => 'HDNET - OnPage',
-    'description' => 'Show Editors important information about there SEO process',
+    'description' => 'Show editors important information about their SEO process',
     'category' => 'plugin',
     'author' => 'René Backhaus',
     'author_company' => 'HDNET GmbH & Co. KG',
@@ -16,4 +16,3 @@ $EM_CONF[$_EXTKEY] = array(
         )
     )
 );
-?>
