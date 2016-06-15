@@ -28,8 +28,8 @@ class Authentication extends AbstractProvider
 
         $buildAuth = [
             'authentication' => [
-                'api_key'    => $configuration->api_key,
-                'project_id' => $configuration->project_id,
+                'api_key'    => $configuration->getApiKey(),
+                'project_id' => $configuration->getProductId(),
             ]
         ];
 
