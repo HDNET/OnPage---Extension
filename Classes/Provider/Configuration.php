@@ -15,32 +15,32 @@ class Configuration
     /**
      * build for testing
      */
-    public function buildJson() {
+    public function buildJson()
+    {
         $json = [
-            'action' => 'list',
+            'action'         => 'list',
             'authentication' => [
                 'api_key' => '5075a56ab20757eb73cc032ccf00443b',
                 'project' => 'www.cts-reisen.de',
             ],
-            'pagination' => [
-                'limit' => 1000,
+            'pagination'     => [
+                'limit'  => 1000,
                 'offset' => 0,
             ],
-            'group' => [
+            'group'          => [
                 0 => 'inventory_group',
             ],
-            'sorting' => [
+            'sorting'        => [
                 0 => [
                     'attribute' => 'count',
                     'direction' => 'DESC',
                 ],
             ],
-            'functions' => [
+            'functions'      => [
                 0 => [
-                    'name' => 'count',
-                    'method' => 'count',
-                    'parameters' =>
-                    [
+                    'name'       => 'count',
+                    'method'     => 'count',
+                    'parameters' => [
                         0 => [
                             'attribute' => 'url',
                         ],
