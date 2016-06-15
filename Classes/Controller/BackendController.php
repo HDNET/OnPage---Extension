@@ -1,6 +1,6 @@
 <?php
 
-namespace HDNET\Onpage\Controller;
+namespace HDNET\OnpageIntegration\Controller;
 
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
