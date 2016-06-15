@@ -2,7 +2,7 @@
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'HDNET.'.$_EXTKEY,
-    'Onpage',
+    'onpage_integration',
     'OnPage - SEO Tool'
 );
 
