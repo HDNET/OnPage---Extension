@@ -1,5 +1,10 @@
 <?php
 
+\HDNET\Autoloader\Loader::extTables('HDNET', 'onpage_integration', [
+    'SmartObjects',
+    'TcaFiles'
+]);
+
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'HDNET.'.$_EXTKEY,
     'onpage_integration',
