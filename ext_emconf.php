@@ -1,6 +1,6 @@
 <?php
 $EM_CONF[$_EXTKEY] = array(
-    'title' => 'HDNET - OnPage',
+    'title' => 'OnPage Integration',
     'description' => 'Show editors important information about their SEO process',
     'category' => 'plugin',
     'author' => 'René Backhaus',
