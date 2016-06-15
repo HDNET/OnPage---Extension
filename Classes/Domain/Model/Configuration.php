@@ -1,13 +1,23 @@
 <?php
 
+/**
+ * File ApiKey
+ */
+
 namespace  HDNET\OnpageIntegration\Domain\Model;
 
-class ApiKey extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+/**
+ * Class ApiKey
+ *
+ * @db
+ */
+class Configuration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
      * api_key
      *
+     * @db
      * @var string
      */
     protected $apiKey;
@@ -15,6 +25,7 @@ class ApiKey extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * project_id
      *
+     * @db
      * @var string
      */
     protected $projectId;
