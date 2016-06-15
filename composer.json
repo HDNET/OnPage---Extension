@@ -1,0 +1,59 @@
+{
+  "name": "hdnet/onpage-integration",
+  "type": "typo3-cms-extension",
+  "version": "0.0.1",
+  "description": "",
+  "autoload": {
+    "psr-4": {
+      "HDNET\\OnpageIntegration\\": "Classes/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "HDNET\\OnpageIntegration\\Tests\\": "Tests",
+      "TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests/"
+    }
+  },
+  "keywords": [
+    "TYPO3 CMS",
+    "OnPage"
+  ],
+  "authors": [
+    {
+      "name": "Sibo & René",
+      "role": "Developer",
+      "homepage": "https://github.com/HDNET"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "typo3/cms-core": ">=7.4.0,<8.2",
+    "typo3/cms": "^7.6.0"
+  },
+  "replace": {
+    "onpage-integration": "self.version",
+    "typo3-ter/onpage-integration": "self.version"
+  },
+  "homepage": "https://github.com/HDNET/onpage_integration",
+  "license": "GPL-2.0+",
+  "support": {
+    "issues": "https://github.com/HDNET/onpage_integration/issues"
+  },
+  "require-dev": {
+    "namelesscoder/typo3-repository-client": "1.1.x-dev",
+    "phpunit/phpunit": "~4.8.0"
+  },
+  "config": {
+    "vendor-dir": ".Build/vendor",
+    "bin-dir": ".Build/bin"
+  },
+  "extra": {
+    "typo3/cms": {
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": ".Build/Web",
+      "Package": {
+        "partOfMinimalUsableSystem": true
+      }
+    }
+  }
+}
