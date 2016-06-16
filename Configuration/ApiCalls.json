@@ -1,6 +1,6 @@
 {
     "zoom": {
-        "last_crawl": {
+        "lastcrawl": {
             "action": "aggregate",
             "authentication": {
             },
@@ -29,7 +29,7 @@
                 }
             ]
         },
-        "SEO_Aspekte": [
+        "seoaspects": [
             {
                 "description": "Indexierbare Seiten, die nicht in der sitemap.xml sind",
                 "priority": 2,
@@ -2502,7 +2502,7 @@
                 }
             }
         ],
-        "Inhaltliche_Aspekte": [
+        "contentaspects": [
             {
                 "description": "Indexierbare Seiten mit Description Duplikat",
                 "priority": 3,
@@ -4176,7 +4176,7 @@
                 }
             }
         ],
-        "Technische_Aspekte": [
+        "technicalaspects": [
             {
                 "description": "Defekte Seiten",
                 "priority": 3,

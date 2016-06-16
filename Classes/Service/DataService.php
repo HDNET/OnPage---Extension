@@ -6,40 +6,76 @@
 namespace HDNET\OnpageIntegration\Service;
 
 use HDNET\Autoloader\Exception;
-use HDNET\OnpageIntegration\Provider\Configuration;
+use HDNET\OnpageIntegration\Exception\ApiErrorException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use HDNET\OnpageIntegration\Provider\Configuration;
+use HDNET\OnpageIntegration\Provider\Authentication;
+use HDNET\OnpageIntegration\Service\ArrayService;
+use HDNET\OnpageIntegration\Service\ApiCallService;
 
 /**
  * Class DataService
  */
 class DataService extends AbstractService
 {
+    /**
+     * @var \HDNET\OnpageIntegration\Provider\Configuration
+     */
+    protected $configurationProvider;
+    /**
+     * @var \HDNET\OnpageIntegration\Service\ArrayService
+     */
+    protected $arrayService;
+    /**
+     * @var \HDNET\OnpageIntegration\Provider\Authentication
+     */
+    protected $authenticationProvider;
+    /**
+     * @var \HDNET\OnpageIntegration\Service\ApiCallService
+     */
+    protected $apiCallService;
 
     /**
-     * Returns a test api call
-     *
-     * @return array
-     * @throws Exception
+     * @param string $key
+     * @return string
      */
-    public function getApiCalls()
+    public function getApiResult($key)
     {
-        $configuration = GeneralUtility::makeInstance(Configuration::class);
+        $this->configurationProvider = GeneralUtility::makeInstance(Configuration::class);
+        $this->authenticationProvider = GeneralUtility::makeInstance(Authentication::class);
+        $this->arrayService = GeneralUtility::makeInstance(ArrayService::class);
+        $this->apiCallService = GeneralUtility::makeInstance(ApiCallService::class);
 
-        if (!$configuration->buildAuthentication()) {
-            throw new Exception("Can't build Authentication!");
+        $apiCall = $this->getApiCall($key);
+        $result  = $this->makeApiCall($apiCall);
+        $result = json_decode($result, true);
+
+        if (!isset($result['status']) || $result['status'] != 'success' || !isset($result['result'])){
+            throw new ApiErrorException('There has been a negative result for your request.');
         }
-        $testIdentifier = $configuration->buildAuthentication();
 
-        return $testIdentifier['zoom']['last_crawl'];
+        return $result['result'];
     }
 
     /**
-     * todo build an identifier for a single call
+     * @param array $apiCall
+     * @return string
      */
-    public function buildIdentifier()
+    protected function makeApiCall(array $apiCall)
     {
-        $identifier = 'zoom_seo_aspects_table';
-        $identifierArray = explode($identifier, '_');
+        $json = json_encode($apiCall);
+        return $this->apiCallService->makeCall($json);
+    }
 
+    /**
+     * @param string $apiCallKey
+     * @return array
+     */
+    protected function getApiCall($apiCallKey)
+    {
+        $authenticationData = $this->authenticationProvider->get();
+        $configurationData  = $this->configurationProvider->get($apiCallKey);
+
+        return $this->arrayService->replaceRecursiveByKey($configurationData, $authenticationData, 'authentication');
     }
 }

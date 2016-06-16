@@ -18,7 +18,7 @@ if (TYPO3_MODE === 'BE') {
         'management',               // module name
         '',
         array(          // Allowed controller action combinations
-                        'Backend' => 'index',
+                        'Backend' => 'index,detail,keyword',
         ),
         array(          // Additional configuration
                            'access' => 'user,group',
