@@ -8,9 +8,9 @@ use TYPO3\CMS\Core\Cache\CacheManager;
 class ApiResultToCachePersister
 {
 
-    const TAG = 'onpage_extension_deprecated';
-
-    const CACHE_LIFETIME = 86400;
+    const TAG             = 'onpage_extension_deprecated';
+    const CACHE_ID_PREFIX = 'HDNET_onpage_extension';
+    const CACHE_LIFETIME  = 86400;
 
     protected $tags = [self::TAG];
 
@@ -36,15 +36,7 @@ class ApiResultToCachePersister
      */
     protected function getIdentifier($identifier)
     {
-        return sha1($this->getPageUid() . $identifier);
-    }
-
-    /**
-     * @return int
-     */
-    protected function getPageUid()
-    {
-        return 42;
+        return sha1(self::CACHE_ID_PREFIX . $identifier);
     }
 }
 
