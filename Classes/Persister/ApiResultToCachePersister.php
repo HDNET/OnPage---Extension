@@ -14,8 +14,8 @@ class ApiResultToCachePersister
 
     protected $tags = [self::TAG];
 
-    // Formel für identifier: Page-UID + module_name + headline + index + [graph|table]
-    // Oder anders: UID + alle Array-Keys des API-Calls
+    // Formel für identifier: $data + module_name + headline + index + [graph|table]
+    // Oder anders: $data + alle Array-Keys des API-Calls
     // darüber sha1
 
     /**
@@ -34,9 +34,9 @@ class ApiResultToCachePersister
      * @param string $identifier
      * @return string
      */
-    protected function getIdentifier($identifier)
+    protected function getIdentifier($data)
     {
-        return sha1(self::CACHE_ID_PREFIX . $identifier);
+        return sha1(self::CACHE_ID_PREFIX . $data);
     }
 }
 
