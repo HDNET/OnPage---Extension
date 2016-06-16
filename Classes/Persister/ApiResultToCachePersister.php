@@ -14,10 +14,6 @@ class ApiResultToCachePersister
 
     protected $tags = [self::TAG];
 
-    // Formel für identifier: $data + module_name + headline + index + [graph|table]
-    // Oder anders: $data + alle Array-Keys des API-Calls
-    // darüber sha1
-
     /**
      * @param string $data
      * @param string $identifier
