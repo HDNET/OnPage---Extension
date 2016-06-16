@@ -15,3 +15,16 @@ TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     array()
 );
 
+// Caching
+
+if (!is_array($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['onpage_extension'])) {
+    $TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['onpage_extension'] = array();
+}
+
+if (!isset($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['onpage_extension']['backend'])) {
+    $TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['onpage_extension']['backend'] = 'TYPO3\\CMS\\Core\\Cache\\Backend\\SimpleFileBackend';
+}
+
+if (!isset($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['onpage_extension']['frontend'])) {
+    $TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['onpage_extension']['frontend'] = 'TYPO3\\CMS\\Core\\Cache\\Frontend\\StringFrontend';
+}
