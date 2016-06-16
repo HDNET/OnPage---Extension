@@ -16,7 +16,11 @@ class Configuration extends AbstractProvider
 {
 
     /**
-     * @return mixed
+     * Replace the authentication key with
+     * api-key information
+     *
+     * @return array
+     * @throws \HDNET\Autoloader\Exception
      */
     public function buildAuthentication()
     {
