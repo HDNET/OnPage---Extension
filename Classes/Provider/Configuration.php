@@ -6,35 +6,68 @@
 
 namespace HDNET\OnpageIntegration\Provider;
 
+use GeorgRinger\News\Service\FileService;
+use HDNET\OnpageIntegration\Exception\UnknownApiCallException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Class Configuration
  */
 class Configuration extends AbstractProvider
 {
+    /**
+     * @inject
+     * @var \HDNET\OnpageIntegration\Service\FileService
+     */
+    protected $fileService;
 
     /**
      * Replace the authentication key with
      * api-key information
      *
+     * @param string $apiCallKey
      * @return array
      * @throws \HDNET\Autoloader\Exception
      */
-    public function buildAuthentication()
+    public function get($apiCallKey)
     {
+        $this->fileService = GeneralUtility::makeInstance(FileService::class);
+        $apiCallData      = $this->fileService->readFile(
+            '/var/www/docroot/typo3conf/ext/onpage_integration/Configuration/ApiCalls.json'
+        );
+        $apiCallsArray    = json_decode($apiCallData, true);
+        $apiCallArrayKeys = $this->getApiCallArrayKeys($apiCallKey);
 
-        $objectManager = new ObjectManager();
-        $auth = $objectManager->get(Authentication::class);
-        $authData = $auth->buildAuthenticationArray();
+        return $this->findMatchingApiCall($apiCallsArray, $apiCallArrayKeys);
+    }
 
-        $fileService = GeneralUtility::makeInstance(\HDNET\OnpageIntegration\Service\FileService::class);
-        $apiCallsArray = json_decode($fileService->readFile('/var/www/docroot/typo3conf/ext/onpage_integration/Configuration/ApiCalls.json'), true);
+    /**
+     * @param array $apiCalls
+     * @param array $apiCallArrayKeys
+     * @return string
+     * @throws \HDNET\OnpageIntegration\Exception\UnknownApiCallException
+     */
+    protected function findMatchingApiCall(array $apiCalls, array $apiCallArrayKeys)
+    {
+        $apiCall = '';
 
-        $arrayService = GeneralUtility::makeInstance(\HDNET\OnpageIntegration\Service\ArrayService::class);
-        $apiCallsArray = $arrayService->replaceRecursiveByKey($apiCallsArray, $authData, 'authentication');
+        foreach ($apiCallArrayKeys as $key) {
+            if (!isset($apiCalls[$key])) {
+                throw new UnknownApiCallException('Unknown API Call.');
+            } else {
+                $apiCall = $apiCalls[$key];
+            }
+        }
 
-        return $apiCallsArray;
+        return $apiCall;
+    }
+
+    /**
+     * @param string $apiCallKey
+     * @return array
+     */
+    protected function getApiCallArrayKeys($apiCallKey)
+    {
+        return explode('_', $apiCallKey);
     }
 }

@@ -5,6 +5,10 @@
 
 namespace HDNET\OnpageIntegration\Provider;
 
+use HDNET\Hdnet\Configuration;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use HDNET\OnpageIntegration\Domain\Repository\ConfigurationRepository;
+
 class Authentication extends AbstractProvider
 {
 
@@ -21,8 +25,9 @@ class Authentication extends AbstractProvider
      *
      * @return array
      */
-    public function buildAuthenticationArray()
+    public function get()
     {
+        $this->configurationRepository = GeneralUtility::makeInstance(ConfigurationRepository::class);
         /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
         $configuration = $this->configurationRepository->findByUid(1);
 

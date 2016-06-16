@@ -12,6 +12,8 @@ class BackendController extends ActionController
     public function indexAction()
     {
         $dataService = GeneralUtility::makeInstance(DataService::class);
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($dataService->getSingleApiCall());
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($dataService->getApiResult('zoom_seoaspects_0_graph'));
+
+
     }
 }
