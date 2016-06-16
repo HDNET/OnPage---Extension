@@ -5,7 +5,6 @@
 
 namespace HDNET\OnpageIntegration\Provider;
 
-
 class Authentication extends AbstractProvider
 {
 
@@ -24,13 +23,14 @@ class Authentication extends AbstractProvider
      */
     public function buildAuthenticationArray()
     {
+        /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
         $configuration = $this->configurationRepository->findByUid(1);
 
         $buildAuth = [
-            'authentication' => [
-                'api_key'    => $configuration->getApiKey(),
-                'project_id' => $configuration->getProductId(),
-            ]
+
+            'api_key'    => $configuration->getApiKey(),
+            'project_id' => $configuration->getProjectId(),
+
         ];
 
         return $buildAuth;
