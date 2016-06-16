@@ -13,6 +13,8 @@ class ArrayService extends AbstractService
 {
 
     /**
+     * Replace a key $replaceKey with $replaceItem
+     *
      * @param array $array
      * @param       $replaceItem
      * @param       $replaceKey
