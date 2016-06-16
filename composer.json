@@ -27,6 +27,7 @@
   ],
   "require": {
     "php": ">=5.5.0",
+    "ext-curl": "*",
     "typo3/cms-core": ">=7.4.0,<8.2",
     "typo3/cms": "^7.6.0"
   },
