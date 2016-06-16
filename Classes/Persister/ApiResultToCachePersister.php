@@ -22,21 +22,22 @@ class ApiResultToCachePersister
      * @param string $data
      * @param string $identifier
      */
-    public function persist($data, $identifier)
+    public function persist($data)
     {
         /** @var CacheManager $cacheManager */
         $cacheManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Cache\\CacheManager');
         $cache        = $cacheManager->getCache('onpage_extension');
-        $cache->set($this->getIdentifier($identifier), $data, $this->tags, self::CACHE_LIFETIME);
+        $cache->set($this->getIdentifier($data), $data, $this->tags, self::CACHE_LIFETIME);
     }
 
     /**
-     * @param string $identifier
+     * @param string $data
      * @return string
      */
     protected function getIdentifier($data)
     {
-        return sha1(self::CACHE_ID_PREFIX . $data);
+        $id = sha1(self::CACHE_ID_PREFIX . $data);
+        return $id;
     }
 }
 
