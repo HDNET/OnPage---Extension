@@ -5,10 +5,14 @@ namespace HDNET\OnpageIntegration\Controller;
 use HDNET\OnpageIntegration\Service\DataService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class BackendController extends ActionController
 {
+    /**
+     * @var \HDNET\OnpageIntegration\Loader\ApiResultLoader
+     * @inject
+     */
+    protected $loader;
 
     /**
      * Represent the index page
@@ -17,9 +21,9 @@ class BackendController extends ActionController
     {
         $dataService = GeneralUtility::makeInstance(DataService::class);
         $latestCrawl = $dataService->getApiResult('zoom_lastcrawl');
-        
-        $seoAspects = $dataService->getApiResult('zoom_seoaspects');
 
+        $seoAspects = $dataService->getApiResult('zoom_seoaspects');
+        $result = $this->loader->load('zoom_seoaspects_0_graph');
         $this->view->assignMultiple([
             'lastCrawl'        => $latestCrawl,
             'seoAspects'       => $seoAspects,

@@ -28,16 +28,31 @@ class Configuration extends AbstractProvider
      * @return array
      * @throws \HDNET\Autoloader\Exception
      */
-    public function get($apiCallKey)
+    public function getSingleConfiguration($apiCallKey)
     {
-        $this->fileService = GeneralUtility::makeInstance(FileService::class);
-        $apiCallData      = $this->fileService->readFile(
-            '/var/www/docroot/typo3conf/ext/onpage_integration/Configuration/ApiCalls.json'
-        );
-        $apiCallsArray    = json_decode($apiCallData, true);
+        $apiCallsArray    = $this->getApiCallsArray();
         $apiCallArrayKeys = $this->getApiCallArrayKeys($apiCallKey);
 
         return $this->findMatchingApiCall($apiCallsArray, $apiCallArrayKeys);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllConfigurationData(){
+        return $this->getApiCallsArray();
+    }
+
+    /**
+     * @return array
+     */
+    protected function getApiCallsArray(){
+        $this->fileService = GeneralUtility::makeInstance(FileService::class);
+        $apiCallData      = $this->fileService->readFile(
+            '/var/www/docroot/typo3conf/ext/onpage_integration/Configuration/ApiCalls.json' //TODO: dynamic adressing
+        );
+
+        return json_decode($apiCallData, true);
     }
 
     /**
