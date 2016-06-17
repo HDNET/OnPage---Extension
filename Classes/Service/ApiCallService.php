@@ -1,15 +1,23 @@
 <?php
+/**
+ * Class ApiCallService
+ */
 
 namespace HDNET\OnpageIntegration\Service;
 
 use HDNET\OnpageIntegration\Exception\UnavailableException;
 
+/**
+ * Class ApiCallService
+ */
 class ApiCallService
 {
 
     private $url = 'https://api.onpage.org/zoom/json';
 
     /**
+     * Start the api call
+     *
      * @param string $json
      * @return string
      */
@@ -21,6 +29,8 @@ class ApiCallService
     }
 
     /**
+     * Check if curl is loaded
+     *
      * @throws \Exception
      */
     protected function checkForCurl()
@@ -31,6 +41,8 @@ class ApiCallService
     }
 
     /**
+     * Send the api request
+     *
      * @param string $data
      * @return string
      * @throws UnavailableException
