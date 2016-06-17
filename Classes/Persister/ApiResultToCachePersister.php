@@ -17,7 +17,6 @@ class ApiResultToCachePersister
     /**
      * @param string $data
      * @param string $key
-     * @param string $identifier
      */
     public function persist($data, $key)
     {

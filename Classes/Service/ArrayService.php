@@ -58,8 +58,6 @@ class ArrayService extends AbstractService
      */
     protected function findKeyChainsContainingKey(array $array, $searchKey, array $keyChains, $keyChain)
     {
-        $a = 1;
-
         foreach ($array as $key => $value) {
             if ($key !== $searchKey) {
                 if (!is_array($value)){

@@ -59,7 +59,7 @@ class Configuration extends AbstractProvider
     /**
      * @param array $apiCalls
      * @param array $apiCallArrayKeys
-     * @return string
+     * @return array
      * @throws \HDNET\OnpageIntegration\Exception\UnknownApiCallException
      */
     protected function findMatchingApiCall(array $apiCalls, array $apiCallArrayKeys)
