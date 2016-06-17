@@ -25,7 +25,7 @@ class ApiCallService
     {
         $this->checkForCurl();
 
-        return json_decode($this->send($json), true);
+        return $this->send($json);
     }
 
     /**

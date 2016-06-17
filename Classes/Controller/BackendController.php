@@ -16,8 +16,8 @@ class BackendController extends ActionController
     public function indexAction()
     {
         $dataService = GeneralUtility::makeInstance(DataService::class);
-        $seoAspects = $dataService->getApiResult('zoom_lastcrawl');
-        DebuggerUtility::var_dump($seoAspects);
+        $testCall = $dataService->getApiResult('zoom_lastcrawl');
+        DebuggerUtility::var_dump($testCall);
 
         $this->view->assignMultiple([
             'lastCrawl'        => $latestCrawl,
@@ -27,6 +27,11 @@ class BackendController extends ActionController
         ]);
     }
 
+    /**
+     * @param $detailId
+     *
+     * @throws \HDNET\OnpageIntegration\Exception\ApiErrorException
+     */
     public function detailAction($detailId)
     {
         $dataService = GeneralUtility::makeInstance(DataService::class);
@@ -40,7 +45,7 @@ class BackendController extends ActionController
     }
 
     /**
-     *
+     * @throws \HDNET\OnpageIntegration\Exception\ApiErrorException
      */
     public function keywordAction()
     {
