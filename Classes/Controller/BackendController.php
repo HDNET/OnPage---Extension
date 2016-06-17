@@ -21,9 +21,6 @@ class BackendController extends ActionController
      */
     public function indexAction()
     {
-        $progressService = GeneralUtility::makeInstance(ProgressService::class);
-        $progressService->makeProgress($lastCrawl);
-
         $metaDataProvider = GeneralUtility::makeInstance(MetaDataProvider::class);
 
         $this->view->assignMultiple([
