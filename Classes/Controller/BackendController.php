@@ -2,10 +2,10 @@
 
 namespace HDNET\OnpageIntegration\Controller;
 
-use HDNET\OnpageIntegration\Service\ApiCallService;
 use HDNET\OnpageIntegration\Service\DataService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class BackendController extends ActionController
 {
@@ -15,16 +15,9 @@ class BackendController extends ActionController
      */
     public function indexAction()
     {
-        $seoAspects = '';
-        $contentAspects = '';
-        $technicalAspects = '';
-
-        $apiCallService = GeneralUtility::makeInstance(ApiCallService::class);
-
-        $lastCrawlResult = $apiCallService->makeCall($latestCrawl);
-        $seoAspectsResult = $apiCallService->makeCall($seoAspects);
-        $contentAspectsResult = $apiCallService->makeCall($contentAspects);
-        $technicalAspectsResult = $apiCallService->makeCall($technicalAspects);
+        $dataService = GeneralUtility::makeInstance(DataService::class);
+        $seoAspects = $dataService->getApiResult('zoom_lastcrawl');
+        DebuggerUtility::var_dump($seoAspects);
 
         $this->view->assignMultiple([
             'lastCrawl'        => $latestCrawl,
@@ -34,12 +27,11 @@ class BackendController extends ActionController
         ]);
     }
 
-    public function detailAction()
+    public function detailAction($detailId)
     {
-        $apiCallService = GeneralUtility::makeInstance(ApiCallService::class);
-
-        $graph = $apiCallService->makeCall($graphApi);
-        $table = $apiCallService->makeCall($tableApi);
+        $dataService = GeneralUtility::makeInstance(DataService::class);
+        $graph = $dataService->getApiResult($detailId . '_graph');
+        $table = $dataService->getApiResult($detailId . '_table');
 
         $this->view->assignMultiple([
             'graph' => $graph,
