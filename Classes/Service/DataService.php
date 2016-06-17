@@ -5,7 +5,6 @@
 
 namespace HDNET\OnpageIntegration\Service;
 
-use HDNET\Autoloader\Exception;
 use HDNET\OnpageIntegration\Exception\ApiErrorException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use HDNET\OnpageIntegration\Provider\Configuration;
@@ -35,17 +34,19 @@ class DataService extends AbstractService
      */
     protected $apiCallService;
 
+    public function __construct(){
+        $this->configurationProvider = GeneralUtility::makeInstance(Configuration::class);
+        $this->authenticationProvider = GeneralUtility::makeInstance(Authentication::class);
+        $this->arrayService = GeneralUtility::makeInstance(ArrayService::class);
+        $this->apiCallService = GeneralUtility::makeInstance(ApiCallService::class);
+    }
+
     /**
      * @param string $key
      * @return string
      */
     public function getApiResult($key)
     {
-        $this->configurationProvider = GeneralUtility::makeInstance(Configuration::class);
-        $this->authenticationProvider = GeneralUtility::makeInstance(Authentication::class);
-        $this->arrayService = GeneralUtility::makeInstance(ArrayService::class);
-        $this->apiCallService = GeneralUtility::makeInstance(ApiCallService::class);
-
         $apiCall = $this->getApiCall($key);
         $result  = $this->makeApiCall($apiCall);
         $result = json_decode($result, true);
@@ -55,6 +56,21 @@ class DataService extends AbstractService
         }
 
         return $result['result'];
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllResults(){
+        $results = [];
+        $configData = $this->configurationProvider->getAllConfigurationData();
+        $keys = $this->arrayService->findByContainedKey($configData, 'authentication');
+
+        foreach ($keys as $key){
+            $results[$key] = $this->getApiResult($key);
+        }
+
+        return $results;
     }
 
     /**
@@ -74,7 +90,7 @@ class DataService extends AbstractService
     protected function getApiCall($apiCallKey)
     {
         $authenticationData = $this->authenticationProvider->get();
-        $configurationData  = $this->configurationProvider->get($apiCallKey);
+        $configurationData  = $this->configurationProvider->getSingleConfiguration($apiCallKey);
 
         return $this->arrayService->replaceRecursiveByKey($configurationData, $authenticationData, 'authentication');
     }
