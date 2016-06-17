@@ -2,13 +2,13 @@
 
 namespace HDNET\OnpageIntegration\Controller;
 
-use HDNET\OnpageIntegration\Service\DataService;
+use HDNET\OnpageIntegration\Service\ProgressService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use HDNET\OnpageIntegration\Provider\MetaDataProvider;
 
 class BackendController extends ActionController
 {
+
     /**
      * @var \HDNET\OnpageIntegration\Loader\ApiResultLoader
      * @inject
@@ -19,51 +19,69 @@ class BackendController extends ActionController
      * Represent the index page
      */
     public function indexAction()
-    {/** @var MetaDataProvider $meta */
-        $meta = GeneralUtility::makeInstance(MetaDataProvider::class);
-        $data = $meta->getMetaData('seoaspects');
-
-
-
-
-        $dataService = GeneralUtility::makeInstance(DataService::class);
-        $latestCrawl = $dataService->getApiResult('zoom_lastcrawl');
-
-        $seoAspects = $dataService->getApiResult('zoom_seoaspects');
-        $result = $this->loader->load('zoom_seoaspects_0_graph');
-        $this->view->assignMultiple([
-            'lastCrawl'        => $latestCrawl,
-            'seoAspects'       => $seoAspects,
-            'contentAspects'   => $contentAspects,
-            'technicalAspects' => $technicalAspects,
-        ]);
-    }
-
-    /**
-     * @param $detailId
-     *
-     * @throws \HDNET\OnpageIntegration\Exception\ApiErrorException
-     */
-    public function detailAction($detailId)
     {
-        $dataService = GeneralUtility::makeInstance(DataService::class);
-        $graph = $dataService->getApiResult($detailId . '_graph');
-        $table = $dataService->getApiResult($detailId . '_table');
+        $lastCrawl = $this->loader->load('zoom_lastcrawl');
+
+        $progressService = GeneralUtility::makeInstance(ProgressService::class);
+        $progressService->makeProgress($lastCrawl);
 
         $this->view->assignMultiple([
-            'graph' => $graph,
-            'table' => $table
+            'lastCrawl' => $lastCrawl,
+            'moduleName' => 'Zoom Module'
         ]);
     }
 
     /**
-     * @throws \HDNET\OnpageIntegration\Exception\ApiErrorException
+     * Detail Page
+     *
+     * @param string $call
+     */
+    public function SeoAction($call)
+    {
+        $apiCallString = 'zoom_' . $call . '_table';
+
+        $table = $this->loader->load($apiCallString);
+        $this->view->assignMultiple([
+            'table' => $table,
+            'moduleName' => 'SEO Aspekte'
+        ]);
+    }
+
+    /**
+     * @param string $call
+     */
+    public function ContentAction($call)
+    {
+        $apiCallString = 'zoom_' . $call . '_table';
+
+        $table = $this->loader->load($apiCallString);
+        $this->view->assignMultiple([
+            'table' => $table,
+            'moduleName' => 'Inhaltliche Aspekte'
+        ]);
+    }
+
+    /**
+     * @param string $call
+     */
+    public function TechnicalAction($call)
+    {
+        $apiCallString = 'zoom_' . $call . '_table';
+
+        $table = $this->loader->load($apiCallString);
+        $this->view->assignMultiple([
+            'table' => $table,
+            'moduleName' => 'Technische Aspekte'
+        ]);
+    }
+
+    /**
+     *
      */
     public function keywordAction()
     {
-        $dataService = GeneralUtility::makeInstance(DataService::class);
-
-        $result = $dataService->getApiResult('zoom_seoaspects_0_graph');
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($result);
+        $this->view->assignMultiple([
+            'moduleName' => 'Keyword'
+        ]);
     }
 }
