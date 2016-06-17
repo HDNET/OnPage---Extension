@@ -2,13 +2,13 @@
 
 namespace HDNET\OnpageIntegration\Controller;
 
+use HDNET\OnpageIntegration\Service\ProgressService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use HDNET\OnpageIntegration\Service\ProgressService;
 
 class BackendController extends ActionController
 {
+
     /**
      * @var \HDNET\OnpageIntegration\Loader\ApiResultLoader
      * @inject
@@ -22,11 +22,12 @@ class BackendController extends ActionController
     {
         $lastCrawl = $this->loader->load('zoom_lastcrawl');
 
-        $progressService =GeneralUtility::makeInstance(ProgressService::class);
+        $progressService = GeneralUtility::makeInstance(ProgressService::class);
         $progressService->makeProgress($lastCrawl);
 
         $this->view->assignMultiple([
-            'lastCrawl' => $lastCrawl
+            'lastCrawl' => $lastCrawl,
+            'moduleName' => 'Zoom Module'
         ]);
     }
 
@@ -37,11 +38,12 @@ class BackendController extends ActionController
      */
     public function SeoAction($call)
     {
-        $apiCallString = 'zoom_' . $call .'_table';
+        $apiCallString = 'zoom_' . $call . '_table';
 
         $table = $this->loader->load($apiCallString);
         $this->view->assignMultiple([
             'table' => $table,
+            'moduleName' => 'SEO Aspekte'
         ]);
     }
 
@@ -50,16 +52,17 @@ class BackendController extends ActionController
      */
     public function ContentAction($call)
     {
-        $apiCallString = 'zoom_' . $call .'_table';
+        $apiCallString = 'zoom_' . $call . '_table';
 
         $table = $this->loader->load($apiCallString);
         $this->view->assignMultiple([
             'table' => $table,
+            'moduleName' => 'Inhaltliche Aspekte'
         ]);
     }
 
     /**
-     * @param $call
+     * @param string $call
      */
     public function TechnicalAction($call)
     {
@@ -68,6 +71,7 @@ class BackendController extends ActionController
         $table = $this->loader->load($apiCallString);
         $this->view->assignMultiple([
             'table' => $table,
+            'moduleName' => 'Technische Aspekte'
         ]);
     }
 
@@ -76,5 +80,8 @@ class BackendController extends ActionController
      */
     public function keywordAction()
     {
+        $this->view->assignMultiple([
+            'moduleName' => 'Keyword'
+        ]);
     }
 }
