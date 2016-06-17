@@ -29,7 +29,7 @@
                 }
             ]
         },
-        "seoaspekts": [
+        "seoaspects": [
             {
                 "description": "Indexierbare Seiten, die nicht in der sitemap.xml sind",
                 "priority": 2,

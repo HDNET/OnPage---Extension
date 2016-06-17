@@ -6,6 +6,7 @@
 namespace HDNET\OnpageIntegration\Service;
 
 use HDNET\Autoloader\Exception;
+use HDNET\OnpageIntegration\Exception\ApiErrorException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use HDNET\OnpageIntegration\Provider\Configuration;
 use HDNET\OnpageIntegration\Provider\Authentication;
@@ -19,22 +20,18 @@ class DataService extends AbstractService
 {
     /**
      * @var \HDNET\OnpageIntegration\Provider\Configuration
-     * @inject
      */
     protected $configurationProvider;
     /**
      * @var \HDNET\OnpageIntegration\Service\ArrayService
-     * @inject
      */
     protected $arrayService;
     /**
      * @var \HDNET\OnpageIntegration\Provider\Authentication
-     * @inject
      */
     protected $authenticationProvider;
     /**
      * @var \HDNET\OnpageIntegration\Service\ApiCallService
-     * @inject
      */
     protected $apiCallService;
 
@@ -51,8 +48,13 @@ class DataService extends AbstractService
 
         $apiCall = $this->getApiCall($key);
         $result  = $this->makeApiCall($apiCall);
+        $result = json_decode($result, true);
 
-        return json_decode($result);
+        if (!isset($result['status']) || $result['status'] != 'success' || !isset($result['result'])){
+            throw new ApiErrorException('There has been a negative result for your request.');
+        }
+
+        return $result['result'];
     }
 
     /**

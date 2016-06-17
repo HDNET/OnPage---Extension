@@ -5,20 +5,11 @@
 
 namespace HDNET\OnpageIntegration\Provider;
 
-use HDNET\Hdnet\Configuration;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use HDNET\OnpageIntegration\Domain\Repository\ConfigurationRepository;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class Authentication extends AbstractProvider
 {
-
-    /**
-     * configurationRepository
-     *
-     * @var \HDNET\OnpageIntegration\Domain\Repository\ConfigurationRepository
-     * @inject
-     */
-    protected $configurationRepository;
 
     /**
      * Build the authentication index for an api call
@@ -27,14 +18,16 @@ class Authentication extends AbstractProvider
      */
     public function get()
     {
-        $this->configurationRepository = GeneralUtility::makeInstance(ConfigurationRepository::class);
+        $objectManager = new ObjectManager();
+        $configurationRepository = $objectManager->get(ConfigurationRepository::class);
+
         /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
-        $configuration = $this->configurationRepository->findByUid(1);
+        $configuration = $configurationRepository->findByUid(1);
 
         $buildAuth = [
 
             'api_key'    => $configuration->getApiKey(),
-            'project_id' => $configuration->getProjectId(),
+            'project' => $configuration->getProjectId(),
 
         ];
 

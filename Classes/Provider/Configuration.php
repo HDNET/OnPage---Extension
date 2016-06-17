@@ -6,7 +6,7 @@
 
 namespace HDNET\OnpageIntegration\Provider;
 
-use GeorgRinger\News\Service\FileService;
+use HDNET\OnpageIntegration\Service\FileService;
 use HDNET\OnpageIntegration\Exception\UnknownApiCallException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -16,7 +16,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Configuration extends AbstractProvider
 {
     /**
-     * @inject
      * @var \HDNET\OnpageIntegration\Service\FileService
      */
     protected $fileService;
@@ -49,13 +48,13 @@ class Configuration extends AbstractProvider
      */
     protected function findMatchingApiCall(array $apiCalls, array $apiCallArrayKeys)
     {
-        $apiCall = '';
+        $apiCall = $apiCalls;
 
         foreach ($apiCallArrayKeys as $key) {
-            if (!isset($apiCalls[$key])) {
+            if (!isset($apiCall[$key])) {
                 throw new UnknownApiCallException('Unknown API Call.');
             } else {
-                $apiCall = $apiCalls[$key];
+                $apiCall = $apiCall[$key];
             }
         }
 
