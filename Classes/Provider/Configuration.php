@@ -9,7 +9,6 @@ namespace HDNET\OnpageIntegration\Provider;
 use HDNET\OnpageIntegration\Service\FileService;
 use HDNET\OnpageIntegration\Exception\UnknownApiCallException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\PathUtility;
 
 /**
  * Class Configuration
