@@ -3,7 +3,6 @@
 namespace HDNET\OnpageIntegration\Controller;
 
 use HDNET\OnpageIntegration\Provider\MetaDataProvider;
-use HDNET\OnpageIntegration\Service\ProgressService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
