@@ -2,8 +2,8 @@
 
 namespace HDNET\OnpageIntegration\Controller;
 
-use HDNET\OnpageIntegration\Service\ProgressService;
 use HDNET\OnpageIntegration\Provider\MetaDataProvider;
+use HDNET\OnpageIntegration\Service\ProgressService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -27,11 +27,11 @@ class BackendController extends ActionController
         $metaDataProvider = GeneralUtility::makeInstance(MetaDataProvider::class);
 
         $this->view->assignMultiple([
-            'lastCrawl' => $this->loader->load('zoom_lastcrawl'),
-            'seoMetaData' => $metaDataProvider->getMetaData('seoaspects'),
-            'contentMetaData' => $metaDataProvider->getMetaData('contentaspects'),
+            'lastCrawl'         => $this->loader->load('zoom_lastcrawl'),
+            'seoMetaData'       => $metaDataProvider->getMetaData('seoaspects'),
+            'contentMetaData'   => $metaDataProvider->getMetaData('contentaspects'),
             'technicalMetaData' => $metaDataProvider->getMetaData('technicalaspects'),
-            'moduleName' => 'Zoom Module'
+            'moduleName'        => 'Zoom Module'
         ]);
     }
 
@@ -46,7 +46,7 @@ class BackendController extends ActionController
 
         $table = $this->loader->load($apiCallString);
         $this->view->assignMultiple([
-            'table' => $table,
+            'table'      => $table,
             'moduleName' => 'SEO Aspekte'
         ]);
     }
@@ -60,7 +60,7 @@ class BackendController extends ActionController
 
         $table = $this->loader->load($apiCallString);
         $this->view->assignMultiple([
-            'table' => $table,
+            'table'      => $table,
             'moduleName' => 'Inhaltliche Aspekte'
         ]);
     }
@@ -74,7 +74,7 @@ class BackendController extends ActionController
 
         $table = $this->loader->load($apiCallString);
         $this->view->assignMultiple([
-            'table' => $table,
+            'table'      => $table,
             'moduleName' => 'Technische Aspekte'
         ]);
     }
