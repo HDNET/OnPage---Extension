@@ -2,8 +2,6 @@
 
 namespace HDNET\OnpageIntegration\Controller;
 
-use HDNET\OnpageIntegration\Service\DataService;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class BackendController extends ActionController
@@ -19,44 +17,53 @@ class BackendController extends ActionController
      */
     public function indexAction()
     {
-        $dataService = GeneralUtility::makeInstance(DataService::class);
-        $latestCrawl = $dataService->getApiResult('zoom_lastcrawl');
-
-        $seoAspects = $dataService->getApiResult('zoom_seoaspects');
-        $result = $this->loader->load('zoom_seoaspects_0_graph');
-        $this->view->assignMultiple([
-            'lastCrawl'        => $latestCrawl,
-            'seoAspects'       => $seoAspects,
-            'contentAspects'   => $contentAspects,
-            'technicalAspects' => $technicalAspects,
-        ]);
     }
 
     /**
-     * @param $detailId
+     * Detail Page
      *
-     * @throws \HDNET\OnpageIntegration\Exception\ApiErrorException
+     * @param string $call
      */
-    public function detailAction($detailId)
+    public function detailSeoAction($call)
     {
-        $dataService = GeneralUtility::makeInstance(DataService::class);
-        $graph = $dataService->getApiResult($detailId . '_graph');
-        $table = $dataService->getApiResult($detailId . '_table');
+        $apiCallString = 'zoom_' . $call .'_table';
 
+        $table = $this->loader->load($apiCallString);
         $this->view->assignMultiple([
-            'graph' => $graph,
-            'table' => $table
+            'table' => $table,
         ]);
     }
 
     /**
-     * @throws \HDNET\OnpageIntegration\Exception\ApiErrorException
+     * @param string $call
+     */
+    public function detailContentAction($call)
+    {
+        $apiCallString = 'zoom_' . $call .'_table';
+
+        $table = $this->loader->load($apiCallString);
+        $this->view->assignMultiple([
+            'table' => $table,
+        ]);
+    }
+
+    /**
+     * @param $call
+     */
+    public function detailTechnicalAction($call)
+    {
+        $apiCallString = 'zoom_' . $call . '_table';
+
+        $table = $this->loader->load($apiCallString);
+        $this->view->assignMultiple([
+            'table' => $table,
+        ]);
+    }
+
+    /**
+     *
      */
     public function keywordAction()
     {
-        $dataService = GeneralUtility::makeInstance(DataService::class);
-
-        $result = $dataService->getApiResult('zoom_seoaspects_0_graph');
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($result);
     }
 }
