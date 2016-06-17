@@ -9,8 +9,6 @@ use HDNET\OnpageIntegration\Exception\ApiErrorException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use HDNET\OnpageIntegration\Provider\Configuration;
 use HDNET\OnpageIntegration\Provider\Authentication;
-use HDNET\OnpageIntegration\Service\ArrayService;
-use HDNET\OnpageIntegration\Service\ApiCallService;
 
 /**
  * Class DataService

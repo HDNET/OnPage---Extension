@@ -21,7 +21,7 @@ class ApiResultToCachePersister
     public function persist($data, $key)
     {
         /** @var CacheManager $cacheManager */
-        $cacheManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Cache\\CacheManager');
+        $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
         $cache        = $cacheManager->getCache('onpage_extension');
         $cache->set($this->getIdentifier($key), json_encode($data), $this->tags, self::CACHE_LIFETIME);
     }

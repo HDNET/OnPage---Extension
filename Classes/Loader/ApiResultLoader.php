@@ -5,6 +5,7 @@ namespace HDNET\OnpageIntegration\Loader;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use HDNET\OnpageIntegration\Service\DataService;
 use HDNET\OnpageIntegration\Persister\ApiResultToCachePersister;
+use TYPO3\CMS\Core\Cache\CacheManager;
 
 class ApiResultLoader
 {
@@ -32,7 +33,7 @@ class ApiResultLoader
     {
         $cacheId = $this->persister->getIdentifier($key);
 
-        $entry = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Cache\\CacheManager')->getCache('onpage_extension')->get(
+        $entry = GeneralUtility::makeInstance(CacheManager::class)->getCache('onpage_extension')->get(
             $cacheId
         );
 
