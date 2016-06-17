@@ -1,0 +1,7 @@
+filter:
+    paths:
+        - 'Classes/*'
+tools:
+    external_code_coverage:
+        timeout: 600
+        runs: 1
