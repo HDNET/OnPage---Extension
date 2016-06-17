@@ -2,7 +2,10 @@
 
 namespace HDNET\OnpageIntegration\Controller;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use HDNET\OnpageIntegration\Service\ProgressService;
 
 class BackendController extends ActionController
 {
@@ -17,6 +20,14 @@ class BackendController extends ActionController
      */
     public function indexAction()
     {
+        $lastCrawl = $this->loader->load('zoom_lastcrawl');
+
+        $progressService =GeneralUtility::makeInstance(ProgressService::class);
+        $progressService->makeProgress($lastCrawl);
+
+        $this->view->assignMultiple([
+            'lastCrawl' => $lastCrawl
+        ]);
     }
 
     /**
@@ -24,7 +35,7 @@ class BackendController extends ActionController
      *
      * @param string $call
      */
-    public function detailSeoAction($call)
+    public function SeoAction($call)
     {
         $apiCallString = 'zoom_' . $call .'_table';
 
@@ -37,7 +48,7 @@ class BackendController extends ActionController
     /**
      * @param string $call
      */
-    public function detailContentAction($call)
+    public function ContentAction($call)
     {
         $apiCallString = 'zoom_' . $call .'_table';
 
@@ -50,7 +61,7 @@ class BackendController extends ActionController
     /**
      * @param $call
      */
-    public function detailTechnicalAction($call)
+    public function TechnicalAction($call)
     {
         $apiCallString = 'zoom_' . $call . '_table';
 
