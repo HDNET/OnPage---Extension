@@ -1,32 +1,111 @@
 <f:layout name="Default" xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html"/>
 <f:section name="content">
 	<section class="seo-aspects">
-		<div class="page-header">
-			<h3>Crawl vom 12.06.2016</h3>
-		</div>
+		<h3>Letzter Crawl</h3>
+
 		<table class="table">
-			<thead>
-			<tr>
-				<th>Beschreibung</th>
-				<th>Priorität</th>
-				<th>Fehler</th>
-			</tr>
-			</thead>
 			<tbody>
 			<tr>
-				<td><f:link.action action="detail">Indexierbare Seiten, die nicht in der sitemap.xml sinds</f:link.action></td>
-				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
-				<td><span class="label label-danger">464</span></td>
+				<td>
+					<f:if condition="{lastCrawl.1.count}">
+						<f:then>
+							{lastCrawl.1.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Valide Seiten</td>
+				<td>
+					<f:if condition="{lastCrawl.5.count}">
+						<f:then>
+							{lastCrawl.5.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Defekt</td>
 			</tr>
 			<tr>
-				<td>Seiten, die niemals geupdated werden (sitemap.xml)</td>
-				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
-					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
-				<td><span class="label label-success">0</span></td>
+				<td>
+					<f:if condition="{lastCrawl.3.count}">
+						<f:then>
+							{lastCrawl.3.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Valide externe Seiten</td>
+				<td>
+					<f:if condition="{lastCrawl.4.count}">
+						<f:then>
+							{lastCrawl.4.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Defekt</td>
+			</tr>
+			<tr>
+				<td>
+					<f:if condition="{lastCrawl.0.count}">
+						<f:then>
+							{lastCrawl.0.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Valide Bilder</td>
+				<td>
+					<f:if condition="{lastCrawl.6.count}">
+						<f:then>
+							{lastCrawl.6.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Defekt</td>
+			</tr>
+			<tr>
+				<td>
+					<f:if condition="{lastCrawl.2.count}">
+						<f:then>
+							{lastCrawl.2.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Valide Dateien</td>
+				<td>
+					<f:if condition="{lastCrawl.7.count}">
+						<f:then>
+							{lastCrawl.7.count}
+							{lastCrawl.7.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Defekt</td>
 			</tr>
 			</tbody>
 		</table>
 	</section>
+
 	<section class="seo-aspects">
 		<div class="page-header">
 			<h3>SEO Aspekte</h3>
@@ -41,12 +120,175 @@
 			</thead>
 			<tbody>
 			<tr>
-				<td>Indexierbare Seiten, die nicht in der sitemap.xml sinds</td>
-				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
-				<td><span class="label label-danger">464</span></td>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_0'}">Indexierbare Seiten, die nicht in der
+						sitemap.xml sinds
+					</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
 			</tr>
 			<tr>
-				<td>Seiten, die niemals geupdated werden (sitemap.xml)</td>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_1'}">Indexierbare Seiten mit langem Klickpfad
+					</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_2'}">Indexierbare Seiten ohne validen Canonical
+					</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_3'}">Weiterleitungen zu anderen Subdomains
+					</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_4'}">Indexierbare Seiten mit weniger als 3
+						eingehenden Links
+					</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_5'}">Blockierte Javascript Dateien</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_6'}">Blockierte CSS Dateien</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_7'}">Nicht-indexierbare Seiten mit hohem OPR
+					</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_8'}">Interne Nofollow Links</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_9'}">Interne 302 Weiterleitungen</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_10'}">Seiten die als noindex, nofollow deklariert
+						sind
+					</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_11'}">URLs mit nicht eindeutigen robots-Angaben
+					</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_12'}">URLs mit Sonderzeichen</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_13'}">Canonicals zu anderen Domains
+					</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_14'}">Indexierbare Seiten mit fehlenden
+						Übersetzungen
+					</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_15'}">Nicht indexierbare Seiten in der
+						sitemap.xml
+					</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_16'}">Seiten ohne eingehende Links in der
+						sitemap.xml
+					</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_17'}">Seiten, die jährlich upgedatet werden
+						(sitemap.xml)
+					</f:link.action>
+				</td>
+				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
+					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
+				<td><span class="label label-success">0</span></td>
+			</tr>
+			<tr>
+				<td>
+					<f:link.action action="seo" arguments="{call:'seoaspects_18'}">Seiten, die niemals geupdated werden
+						(sitemap.xml)
+					</f:link.action>
+				</td>
 				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span><span
 					class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
 				<td><span class="label label-success">0</span></td>
@@ -68,7 +310,11 @@
 			</thead>
 			<tbody>
 			<tr>
-				<td>Indexierbare Seiten, die nicht in der sitemap.xml sinds</td>
+				<td>
+					<f:link.action action="content" arguments="{call:'contentaspects_0'}">Indexierbare Seiten mit Description
+						Duplikat
+					</f:link.action>
+				</td>
 				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
 				<td><span class="label label-danger">464</span></td>
 			</tr>
@@ -95,7 +341,11 @@
 			</thead>
 			<tbody>
 			<tr>
-				<td>Indexierbare Seiten, die nicht in der sitemap.xml sinds</td>
+				<td>
+					<f:link.action action="technical" arguments="{call:'technicalaspects_0'}">Indexierbare Seiten mit Description
+						Duplikat
+					</f:link.action>
+				</td>
 				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
 				<td><span class="label label-danger">464</span></td>
 			</tr>
