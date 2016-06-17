@@ -35,6 +35,29 @@ class ArrayService extends AbstractService
 
     /**
      * @param array $array
+     * @param string $elementName
+     * @return array
+     */
+    public function findElement(array $array, $elementName){
+        foreach ($array as $key => $element){
+            if ($key !== $elementName){
+                if (!is_array($element)){
+                    return [];
+                }
+                $result = $this->findElement($element, $elementName);
+                if ($result){
+                    return $result;
+                }
+            }else{
+                return $element;
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * @param array $array
      * @param string $searchKey
      * @return array
      */

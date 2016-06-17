@@ -5,6 +5,7 @@ namespace HDNET\OnpageIntegration\Controller;
 use HDNET\OnpageIntegration\Service\DataService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use HDNET\OnpageIntegration\Provider\MetaDataProvider;
 
 class BackendController extends ActionController
 {
@@ -18,7 +19,13 @@ class BackendController extends ActionController
      * Represent the index page
      */
     public function indexAction()
-    {
+    {/** @var MetaDataProvider $meta */
+        $meta = GeneralUtility::makeInstance(MetaDataProvider::class);
+        $data = $meta->getMetaData('seoaspects');
+
+
+
+
         $dataService = GeneralUtility::makeInstance(DataService::class);
         $latestCrawl = $dataService->getApiResult('zoom_lastcrawl');
 
