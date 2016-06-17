@@ -16,8 +16,9 @@ class BackendController extends ActionController
     public function indexAction()
     {
         $dataService = GeneralUtility::makeInstance(DataService::class);
-        $testCall = $dataService->getApiResult('zoom_lastcrawl');
-        DebuggerUtility::var_dump($testCall);
+        $latestCrawl = $dataService->getApiResult('zoom_lastcrawl');
+        
+        $seoAspects = $dataService->getApiResult('zoom_seoaspects');
 
         $this->view->assignMultiple([
             'lastCrawl'        => $latestCrawl,
