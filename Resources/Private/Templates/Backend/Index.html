@@ -1,39 +1,111 @@
 <f:layout name="Default" xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html"/>
 <f:section name="content">
 	<section class="seo-aspects">
-		<div class="page-header">
-			<f:debug>{lastCrawl}</f:debug>
-			<h3>Letzter Crawl</h3>
-			<table class="table">
-				<tbody>
-				<tr>
-					<td>{lastCrawl.1.count}</td>
-					<td>Valide Seiten</td>
-					<td>{lastCrawl.5.count}</td>
-					<td>Defekt</td>
-				</tr>
-				<tr>
-					<td>{lastCrawl.3.count}</td>
-					<td>Valide externe Seiten</td>
-					<td>{lastCrawl.4.count}</td>
-					<td>Defekt</td>
-				</tr>
-				<tr>
-					<td>{lastCrawl.0.count}</td>
-					<td>Valide Bilder</td>
-					<td>0</td>
-					<td>Defekt</td>
-				</tr>
-				<tr>
-					<td>{lastCrawl.2.count}</td>
-					<td>Valide Dateien</td>
-					<td>0</td>
-					<td>Defekt</td>
-				</tr>
-				</tbody>
-			</table>
-		</div>
+		<h3>Letzter Crawl</h3>
+
+		<table class="table">
+			<tbody>
+			<tr>
+				<td>
+					<f:if condition="{lastCrawl.1.count}">
+						<f:then>
+							{lastCrawl.1.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Valide Seiten</td>
+				<td>
+					<f:if condition="{lastCrawl.5.count}">
+						<f:then>
+							{lastCrawl.5.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Defekt</td>
+			</tr>
+			<tr>
+				<td>
+					<f:if condition="{lastCrawl.3.count}">
+						<f:then>
+							{lastCrawl.3.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Valide externe Seiten</td>
+				<td>
+					<f:if condition="{lastCrawl.4.count}">
+						<f:then>
+							{lastCrawl.4.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Defekt</td>
+			</tr>
+			<tr>
+				<td>
+					<f:if condition="{lastCrawl.0.count}">
+						<f:then>
+							{lastCrawl.0.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Valide Bilder</td>
+				<td>
+					<f:if condition="{lastCrawl.6.count}">
+						<f:then>
+							{lastCrawl.6.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Defekt</td>
+			</tr>
+			<tr>
+				<td>
+					<f:if condition="{lastCrawl.2.count}">
+						<f:then>
+							{lastCrawl.2.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Valide Dateien</td>
+				<td>
+					<f:if condition="{lastCrawl.7.count}">
+						<f:then>
+							{lastCrawl.7.count}
+							{lastCrawl.7.count}
+						</f:then>
+						<f:else>
+							0
+						</f:else>
+					</f:if>
+				</td>
+				<td>Defekt</td>
+			</tr>
+			</tbody>
+		</table>
 	</section>
+
 	<section class="seo-aspects">
 		<div class="page-header">
 			<h3>SEO Aspekte</h3>
@@ -238,7 +310,11 @@
 			</thead>
 			<tbody>
 			<tr>
-				<td><f:link.action action="detailContent" arguments="{call:'contentaspects_0'}">Indexierbare Seiten mit Description Duplikat</f:link.action> </td>
+				<td>
+					<f:link.action action="content" arguments="{call:'contentaspects_0'}">Indexierbare Seiten mit Description
+						Duplikat
+					</f:link.action>
+				</td>
 				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
 				<td><span class="label label-danger">464</span></td>
 			</tr>
@@ -265,7 +341,11 @@
 			</thead>
 			<tbody>
 			<tr>
-				<td><f:link.action action="detailContent" arguments="{call:'technicalaspects_0'}">Indexierbare Seiten mit Description Duplikat</f:link.action> </td>
+				<td>
+					<f:link.action action="technical" arguments="{call:'technicalaspects_0'}">Indexierbare Seiten mit Description
+						Duplikat
+					</f:link.action>
+				</td>
 				<td><span class="glyphicon glyphicon-asterisk"></span><span class="glyphicon glyphicon-asterisk"></span></td>
 				<td><span class="label label-danger">464</span></td>
 			</tr>
