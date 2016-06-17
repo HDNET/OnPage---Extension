@@ -1,0 +1,13 @@
+{namespace h=HDNET\OnpageIntegration\ViewHelpers}
+<f:for each="{metaData}" as="meta" iteration="objIterator">
+	<tr>
+		<td>
+			<f:link.action action="meta" arguments="{call:'meta_0'}">{meta.description}
+			</f:link.action>
+		</td>
+		<td>
+			<h:priority priority="{meta.priority}"/>
+		</td>
+		<td><span class="label label-success">0</span></td>
+	</tr>
+</f:for>
