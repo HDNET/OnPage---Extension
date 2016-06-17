@@ -9,6 +9,7 @@ namespace HDNET\OnpageIntegration\Provider;
 use HDNET\OnpageIntegration\Service\FileService;
 use HDNET\OnpageIntegration\Exception\UnknownApiCallException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 
 /**
  * Class Configuration
@@ -49,7 +50,7 @@ class Configuration extends AbstractProvider
     protected function getApiCallsArray(){
         $this->fileService = GeneralUtility::makeInstance(FileService::class);
         $apiCallData      = $this->fileService->readFile(
-            '/var/www/docroot/typo3conf/ext/onpage_integration/Configuration/ApiCalls.json' //TODO: dynamic adressing
+           PATH_site . 'typo3conf/ext/onpage_integration/Configuration/ApiCalls.json'
         );
 
         return json_decode($apiCallData, true);

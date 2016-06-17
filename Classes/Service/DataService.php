@@ -34,11 +34,12 @@ class DataService extends AbstractService
      */
     protected $apiCallService;
 
-    public function __construct(){
-        $this->configurationProvider = GeneralUtility::makeInstance(Configuration::class);
+    public function __construct()
+    {
+        $this->configurationProvider  = GeneralUtility::makeInstance(Configuration::class);
         $this->authenticationProvider = GeneralUtility::makeInstance(Authentication::class);
-        $this->arrayService = GeneralUtility::makeInstance(ArrayService::class);
-        $this->apiCallService = GeneralUtility::makeInstance(ApiCallService::class);
+        $this->arrayService           = GeneralUtility::makeInstance(ArrayService::class);
+        $this->apiCallService         = GeneralUtility::makeInstance(ApiCallService::class);
     }
 
     /**
@@ -49,9 +50,9 @@ class DataService extends AbstractService
     {
         $apiCall = $this->getApiCall($key);
         $result  = $this->makeApiCall($apiCall);
-        $result = json_decode($result, true);
+        $result  = json_decode($result, true);
 
-        if (!isset($result['status']) || $result['status'] != 'success' || !isset($result['result'])){
+        if (!isset($result['status']) || $result['status'] != 'success' || !isset($result['result'])) {
             throw new ApiErrorException('There has been a negative result for your request.');
         }
 
@@ -61,12 +62,13 @@ class DataService extends AbstractService
     /**
      * @return array
      */
-    public function getAllResults(){
-        $results = [];
+    public function getAllResults()
+    {
+        $results    = [];
         $configData = $this->configurationProvider->getAllConfigurationData();
-        $keys = $this->arrayService->findByContainedKey($configData, 'authentication');
+        $keys       = $this->arrayService->findByContainedKey($configData, 'authentication');
 
-        foreach ($keys as $key){
+        foreach ($keys as $key) {
             $results[$key] = $this->getApiResult($key);
         }
 
