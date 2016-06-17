@@ -32,7 +32,7 @@ class MetaDataProvider
         $configData = $this->configurationProvider->getAllConfigurationData();
         $searchKeys = ['description', 'priority'];
 
-        $elements = $this->arrayService->findElement($configData, 'seoaspects');
+        $elements = $this->arrayService->findElement($configData, $key);
 
         return $this->buildData($elements, $searchKeys);
     }
