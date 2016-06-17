@@ -3,10 +3,14 @@
 	<div class="page-header">
 		<h4>Graph: Sitemap(Gruppe)</h4>
 	</div>
-	<div class="rows">
-		<div class="col-md-4"></div>
-		<div class="col-md-4"></div>
-		<div class="col-md-4"></div>
+	<div class="panel panel-primary">
+		<div class="panel-heading"><span class="glyphicon glyphicon-exclamation-sign"></span> Keine Daten für diese
+			Anfrage
+		</div>
+		<div class="panel-body">Das könnte bedeuten, dass für die gewählte Filterkombination keine Daten verfügbar sind
+			oder generell keine Dokumente diesen Fehlertypus entsprechen. Hinweis: Möglicherweise muss die
+			Filterkombination angepasst werden.
+		</div>
 	</div>
 	<div class="page-header">
 		<h4>Tabelle: Was ist hinterlegt ?</h4>
@@ -25,11 +29,11 @@
 				<f:for each="{table}" as="entry">
 					<tr>
 						<td>
-							<a href="{entry.url}">{entry.url}</a>
+							<f:format.number decimals="0">{entry.opr}</f:format.number>
 						</td>
-						<td>{entry.meta_description}
+						<td>{entry.dokument}
 						</td>
-						<td>{entry.count_duplicate_descriptions }</td>
+						<td>{entry.file_size}</td>
 					</tr>
 				</f:for>
 				</tbody>
