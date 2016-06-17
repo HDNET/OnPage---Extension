@@ -56,8 +56,11 @@ class ApiCallService
         $return = curl_exec($ch);
         $code   = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-        if ($code == 500) {
+        if ($code >= 500) {
             throw new UnavailableException('The API could not be reached.');
+        }
+        if ($code >= 400) {
+            throw new UnavailableException('There has been an error reaching the API.');
         }
 
         return $return;
