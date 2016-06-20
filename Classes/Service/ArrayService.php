@@ -38,17 +38,18 @@ class ArrayService extends AbstractService
      * @param string $elementName
      * @return array
      */
-    public function findElement(array $array, $elementName){
-        foreach ($array as $key => $element){
-            if ($key !== $elementName){
-                if (!is_array($element)){
+    public function findElement(array $array, $elementName)
+    {
+        foreach ($array as $key => $element) {
+            if ($key !== $elementName) {
+                if (!is_array($element)) {
                     return [];
                 }
                 $result = $this->findElement($element, $elementName);
-                if ($result){
+                if ($result) {
                     return $result;
                 }
-            }else{
+            } else {
                 return $element;
             }
         }
@@ -83,7 +84,7 @@ class ArrayService extends AbstractService
     {
         foreach ($array as $key => $value) {
             if ($key !== $searchKey) {
-                if (!is_array($value)){
+                if (!is_array($value)) {
                     continue;
                 }
                 $keyChain[] = $key;

@@ -39,17 +39,19 @@ class Configuration extends AbstractProvider
     /**
      * @return array
      */
-    public function getAllConfigurationData(){
+    public function getAllConfigurationData()
+    {
         return $this->getApiCallsArray();
     }
 
     /**
      * @return array
      */
-    protected function getApiCallsArray(){
+    protected function getApiCallsArray()
+    {
         $this->fileService = GeneralUtility::makeInstance(FileService::class);
         $apiCallData      = $this->fileService->readFile(
-           PATH_site . 'typo3conf/ext/onpage_integration/Configuration/ApiCalls.json'
+            PATH_site . 'typo3conf/ext/onpage_integration/Configuration/ApiCalls.json'
         );
 
         return json_decode($apiCallData, true);

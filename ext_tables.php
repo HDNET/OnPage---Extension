@@ -24,5 +24,6 @@ if (TYPO3_MODE === 'BE') {
                            'access' => 'user,group',
                            'icon'   => '',
                            'labels' => 'OnPage.org',
-        ));
+        )
+    );
 }

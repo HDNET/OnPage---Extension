@@ -2,6 +2,7 @@
 
 namespace HDNET\OnpageIntegration\Exception;
 
-class UnknownApiCallException extends \Exception{
+class UnknownApiCallException extends \Exception
+{
 
 }

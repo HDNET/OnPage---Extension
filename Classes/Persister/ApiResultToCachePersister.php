@@ -36,6 +36,3 @@ class ApiResultToCachePersister
         return $id;
     }
 }
-
-
-

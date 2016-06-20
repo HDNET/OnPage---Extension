@@ -21,7 +21,7 @@ class FileService extends AbstractService
      */
     public function readFile($filePath)
     {
-        if(!file_exists($filePath)) {
+        if (!file_exists($filePath)) {
             throw new Exception("File not found!");
         }
 

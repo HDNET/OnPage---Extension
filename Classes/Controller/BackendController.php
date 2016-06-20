@@ -36,7 +36,7 @@ class BackendController extends ActionController
      *
      * @param string $call
      */
-    public function SeoAction($call)
+    public function seoAction($call)
     {
         $apiCallString = 'zoom_' . $call . '_table';
 
@@ -50,7 +50,7 @@ class BackendController extends ActionController
     /**
      * @param string $call
      */
-    public function ContentAction($call)
+    public function contentAction($call)
     {
         $apiCallString = 'zoom_' . $call . '_table';
 
@@ -64,7 +64,7 @@ class BackendController extends ActionController
     /**
      * @param string $call
      */
-    public function TechnicalAction($call)
+    public function technicalAction($call)
     {
         $apiCallString = 'zoom_' . $call . '_table';
 
