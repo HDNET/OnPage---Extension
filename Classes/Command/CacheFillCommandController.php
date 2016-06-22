@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class CacheFillController
+ * Class CacheFillCommandController
  */
 
 namespace HDNET\OnpageIntegration\Command;
@@ -9,10 +9,9 @@ namespace HDNET\OnpageIntegration\Command;
 use TYPO3\CMS\Extbase\Mvc\Controller\CommandController;
 
 /**
- * Class CacheFillController
- * @todo Registrierung ändern (ggf. über autoloader)
+ * Class CacheFillCommandController
  */
-class CacheFillController extends CommandController
+class CacheFillCommandController extends CommandController
 {
 
     /**
