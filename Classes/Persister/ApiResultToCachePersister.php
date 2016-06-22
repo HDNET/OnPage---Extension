@@ -2,17 +2,13 @@
 
 namespace HDNET\OnpageIntegration\Persister;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ApiResultToCachePersister
 {
 
-    const TAG             = 'onpage_extension_deprecated';
     const CACHE_ID_PREFIX = 'HDNET_onpage_extension';
-    const CACHE_LIFETIME  = 86400;
-
-    protected $tags = [self::TAG];
 
     /**
      * @param string $data
@@ -22,12 +18,13 @@ class ApiResultToCachePersister
     {
         /** @var CacheManager $cacheManager */
         $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
-        $cache        = $cacheManager->getCache('onpage_extension');
-        $cache->set($this->getIdentifier($key), json_encode($data), $this->tags);
+        $cache = $cacheManager->getCache('onpage_extension');
+        $cache->set($this->getIdentifier($key), json_encode($data));
     }
 
     /**
      * @param string $key
+     *
      * @return string
      */
     public function getIdentifier($key)
