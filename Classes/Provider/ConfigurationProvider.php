@@ -13,7 +13,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Class Configuration
  */
-class Configuration extends AbstractProvider
+class ConfigurationProvider extends AbstractProvider
 {
     /**
      * @var \HDNET\OnpageIntegration\Service\FileService
