@@ -1,4 +1,4 @@
-{namespace h=HDNET\OnpageIntegration\ViewHelpers}
+{namespace onpage=HDNET\OnpageIntegration\ViewHelpers}
 <table class="table">
 	<thead>
 	<tr>
@@ -15,7 +15,7 @@
 				</f:link.action>
 			</td>
 			<td>
-				<h:priority priority="{meta.priority}"/>
+				<f:for each="{onpage:arrayPad(size:meta.priority)}" as="empty" >&#8226;&bull;</f:for>
 			</td>
 			<td><span class="label label-success">0</span></td>
 		</tr>
