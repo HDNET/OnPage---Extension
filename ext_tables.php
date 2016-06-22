@@ -22,8 +22,8 @@ if (TYPO3_MODE === 'BE') {
         ),
         array(          // Additional configuration
                            'access' => 'user,group',
-                           'icon'   => '',
-                           'labels' => 'OnPage.org',
+                           'icon'   => 'EXT:onpage_integration/ext_icon.png',
+                           'labels' => 'LLL:EXT:onpage_integration/Resources/Private/Language/locallang_mod.xlf',
         )
     );
 }
