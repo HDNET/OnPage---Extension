@@ -1,12 +1,15 @@
 <?php
 
-namespace HDNET\OnpageIntegration\Controller;
+/**
+ * Class CacheFillController
+ */
+
+namespace HDNET\OnpageIntegration\Command;
 
 use TYPO3\CMS\Extbase\Mvc\Controller\CommandController;
 
 /**
  * Class CacheFillController
- * @todo falscher ORT. Command-Ordner
  * @todo Registrierung ändern (ggf. über autoloader)
  */
 class CacheFillController extends CommandController
