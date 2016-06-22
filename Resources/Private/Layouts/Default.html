@@ -1,47 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-				integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-				integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<f:be.container loadJQuery="1">
+	<div class="typo3-fullDoc">
+		<div id="typo3-docheader">
+			<div class="typo3-docheader-functions">
+				<div class="left">
+					<f:render section="Menu" optional="true" />
 
 
-</head>
-<body>
-<div class="container">
-	<div class="page-header">
-		<h1>OnPage - Integration
-			<small>{moduleName}</small>
-		</h1>
-	</div>
-</div>
-<div class="container">
-	<div class="row">
-		<div class="col-md-2">
-			<ul class="nav nav-pills nav-stacked">
-				<li class="active"><f:link.action action="index">Zoom</f:link.action></li>
-				<li><f:link.action action="keyword">Keyword</f:link.action></li>
-			</ul>
+					<f:comment>
+						<f:be.menus.actionMenu>
+							<f:be.menus.actionMenuItem label="Overview" controller="Blog" action="index" />
+							<f:be.menus.actionMenuItem label="Create new Blog" controller="Blog" action="new" />
+							<f:be.menus.actionMenuItem label="List Posts" controller="Post" action="index" arguments="{blog: blog}" />
+						</f:be.menus.actionMenu>
+
+					</f:comment>
+				</div>
+				<div class="right">
+					<f:be.pagePath />
+					<f:be.pageInfo />
+					<f:be.buttons.csh />
+				</div>
+			</div>
+			<div class="typo3-docheader-buttons">
+				<div class="left">
+					<f:render section="IconButtons" optional="true" />
+				</div>
+				<div class="right">
+					<f:be.buttons.shortcut />
+				</div>
+			</div>
 		</div>
-		<div class="col-md-10">
-			<f:render section="content"/>
+
+		<div id="typo3-docbody">
+			<div id="typo3-inner-docbody">
+				<h1>OnPage - Integration
+					<small>{moduleName}</small>
+				</h1>
+<f:comment>
+				<ul class="nav nav-pills nav-stacked">
+					<li class="active"><f:link.action action="index">Zoom</f:link.action></li>
+					<li><f:link.action action="keyword">Keyword</f:link.action></li>
+				</ul>
+</f:comment>
+				<f:flashMessages renderMode="div" />
+				<f:render section="Content" />
+			</div>
 		</div>
 	</div>
-</div>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-				integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-				crossorigin="anonymous"></script>
-</body>
-</html>
+</f:be.container>
