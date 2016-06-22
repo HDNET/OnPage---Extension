@@ -1,15 +1,7 @@
 	<div class="page-header">
 		<h4>Graph: Sitemap(Gruppe)</h4>
 	</div>
-	<div class="panel panel-primary">
-		<div class="panel-heading"><span class="glyphicon glyphicon-exclamation-sign"></span> Keine Daten für diese
-			Anfrage
-		</div>
-		<div class="panel-body">Das könnte bedeuten, dass für die gewählte Filterkombination keine Daten verfügbar sind
-			oder generell keine Dokumente diesen Fehlertypus entsprechen. Hinweis: Möglicherweise muss die
-			Filterkombination angepasst werden.
-		</div>
-	</div>
+	<f:render partial="NoData"/>
 	<div class="page-header">
 		<h4>Tabelle: Was ist hinterlegt ?</h4>
 	</div>
@@ -38,14 +30,6 @@
 			</table>
 		</f:then>
 		<f:else>
-			<div class="panel panel-primary">
-				<div class="panel-heading"><span class="glyphicon glyphicon-exclamation-sign"></span> Keine Daten für diese
-					Anfrage
-				</div>
-				<div class="panel-body">Das könnte bedeuten, dass für die gewählte Filterkombination keine Daten verfügbar sind
-					oder generell keine Dokumente diesen Fehlertypus entsprechen. Hinweis: Möglicherweise muss die
-					Filterkombination angepasst werden.
-				</div>
-			</div>
+			<f:render partial="NoData"/>
 		</f:else>
 	</f:if>
