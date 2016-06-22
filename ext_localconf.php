@@ -5,7 +5,8 @@ if (!defined('TYPO3_MODE')) {
 
 \HDNET\Autoloader\Loader::extLocalconf('HDNET', 'onpage_integration', [
     'SmartObjects',
-    'TcaFiles'
+    'TcaFiles',
+    'CommandController'
 ]);
 
 
@@ -20,7 +21,7 @@ TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
 if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['onpage_extension'])) {
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['onpage_extension'] = [];
 }
-
+// @todo Obsolet evtl Datenbank ?
 if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['onpage_extension']['backend'])) {
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['onpage_extension']['backend'] = \TYPO3\CMS\Core\Cache\Backend\SimpleFileBackend::class;
 }
