@@ -4,16 +4,10 @@
 			<div class="typo3-docheader-functions">
 				<div class="left">
 					<f:render section="Menu" optional="true" />
-
-
-					<f:comment>
 						<f:be.menus.actionMenu>
-							<f:be.menus.actionMenuItem label="Overview" controller="Blog" action="index" />
-							<f:be.menus.actionMenuItem label="Create new Blog" controller="Blog" action="new" />
-							<f:be.menus.actionMenuItem label="List Posts" controller="Post" action="index" arguments="{blog: blog}" />
+							<f:be.menus.actionMenuItem label="Zoom" controller="Backend" action="index" />
+							<f:be.menus.actionMenuItem label="Keyword" controller="Backend" action="keyword" />
 						</f:be.menus.actionMenu>
-
-					</f:comment>
 				</div>
 				<div class="right">
 					<f:be.pagePath />
