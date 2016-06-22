@@ -5,6 +5,7 @@ namespace HDNET\OnpageIntegration\Controller;
 use HDNET\OnpageIntegration\Provider\MetaDataProvider;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class BackendController extends ActionController
 {
@@ -29,6 +30,18 @@ class BackendController extends ActionController
             'technicalMetaData' => $metaDataProvider->getMetaData('technicalaspects'),
             'moduleName'        => 'Zoom Module'
         ]);
+    }
+
+    /**
+     * @param string $section
+     * @param string $call
+     */
+    public function detailAction($section, $call)
+    {
+        $apiCallString = 'zoom_' . $section . '_' .$call . '_table';
+        DebuggerUtility::var_dump($apiCallString);
+
+        #$table = $this->loader->load($apiCallString);
     }
 
     /**
