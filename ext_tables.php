@@ -2,7 +2,8 @@
 
 \HDNET\Autoloader\Loader::extTables('HDNET', 'onpage_integration', [
     'SmartObjects',
-    'TcaFiles'
+    'TcaFiles',
+    'CommandController'
 ]);
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
