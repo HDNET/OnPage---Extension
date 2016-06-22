@@ -8,51 +8,18 @@
 		<div class="page-header">
 			<h3>SEO Aspekte</h3>
 		</div>
-		<table class="table">
-			<thead>
-			<tr>
-				<th>Beschreibung</th>
-				<th>Priorität</th>
-				<th>Fehler</th>
-			</tr>
-			</thead>
-			<tbody>
-			<f:render partial="Table" arguments="{metaData: seoMetaData, section: 'seoaspects'}"/>
-			</tbody>
-		</table>
+		<f:render partial="Table" arguments="{metaData: seoMetaData, section: 'seoaspects'}"/>
 	</section>
 	<section class="content-aspects">
 		<div class="page-header">
 			<h3>Inhaltliche Aspekte</h3>
 		</div>
-		<table class="table">
-			<thead>
-			<tr>
-				<th>Beschreibung</th>
-				<th>Priorität</th>
-				<th>Fehler</th>
-			</tr>
-			</thead>
-			<tbody>
-			<f:render partial="Table" arguments="{metaData: contentMetaData, section: 'contentaspects'}"/>
-			</tbody>
-		</table>
+		<f:render partial="Table" arguments="{metaData: contentMetaData, section: 'contentaspects'}"/>
 	</section>
 	<section class="technical-aspects">
 		<div class="page-header">
 			<h3>Technische Aspekte</h3>
 		</div>
-		<table class="table">
-			<thead>
-			<tr>
-				<th>Beschreibung</th>
-				<th>Priorität</th>
-				<th>Fehler</th>
-			</tr>
-			</thead>
-			<tbody>
-			<f:render partial="Table" arguments="{metaData: technicalMetaData, section: 'technicalaspects'}"/>
-			</tbody>
-		</table>
+		<f:render partial="Table" arguments="{metaData: technicalMetaData, section: 'technicalaspects'}"/>
 	</section>
 </f:section>
