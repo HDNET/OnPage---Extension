@@ -7,8 +7,8 @@ namespace HDNET\OnpageIntegration\Service;
 
 use HDNET\OnpageIntegration\Exception\ApiErrorException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use HDNET\OnpageIntegration\Provider\Configuration;
-use HDNET\OnpageIntegration\Provider\Authentication;
+use HDNET\OnpageIntegration\Provider\ConfigurationProvider;
+use HDNET\OnpageIntegration\Provider\AuthenticationProvider;
 
 /**
  * Class DataService
@@ -16,7 +16,7 @@ use HDNET\OnpageIntegration\Provider\Authentication;
 class DataService extends AbstractService
 {
     /**
-     * @var \HDNET\OnpageIntegration\Provider\Configuration
+     * @var \HDNET\OnpageIntegration\Provider\ConfigurationProvider
      */
     protected $configurationProvider;
     /**
@@ -24,7 +24,7 @@ class DataService extends AbstractService
      */
     protected $arrayService;
     /**
-     * @var \HDNET\OnpageIntegration\Provider\Authentication
+     * @var \HDNET\OnpageIntegration\Provider\AuthenticationProvider
      */
     protected $authenticationProvider;
     /**
@@ -34,8 +34,8 @@ class DataService extends AbstractService
 
     public function __construct()
     {
-        $this->configurationProvider  = GeneralUtility::makeInstance(Configuration::class);
-        $this->authenticationProvider = GeneralUtility::makeInstance(Authentication::class);
+        $this->configurationProvider  = GeneralUtility::makeInstance(ConfigurationProvider::class);
+        $this->authenticationProvider = GeneralUtility::makeInstance(AuthenticationProvider::class);
         $this->arrayService           = GeneralUtility::makeInstance(ArrayService::class);
         $this->apiCallService         = GeneralUtility::makeInstance(ApiCallService::class);
     }

@@ -8,8 +8,9 @@ use HDNET\OnpageIntegration\Service\ArrayService;
 
 class MetaDataProvider
 {
+
     /**
-     * @var Configuration
+     * @var ConfigurationProvider
      */
     protected $configurationProvider;
     /**
@@ -19,7 +20,7 @@ class MetaDataProvider
 
     public function __construct()
     {
-        $this->configurationProvider = GeneralUtility::makeInstance(Configuration::class);
+        $this->configurationProvider = GeneralUtility::makeInstance(ConfigurationProvider::class);
         $this->arrayService          = GeneralUtility::makeInstance(ArrayService::class);
     }
 
