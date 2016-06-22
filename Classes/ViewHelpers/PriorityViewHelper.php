@@ -22,8 +22,9 @@ class PriorityViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
     public function render($priority)
     {
         $html = null;
+        // @todo ggf. im Template bauen. Wenn Iteration zu kompliziert, nur die Iteration hier vorbereiten
         for ($i = 0; $i < $priority; $i++) {
-            $html .= "<span class=\"glyphicon glyphicon-asterisk\"></span>";
+            $html .= "&#8226;&bull;";
         }
         return $html;
     }
