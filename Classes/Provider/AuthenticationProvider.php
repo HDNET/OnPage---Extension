@@ -1,6 +1,7 @@
 <?php
+
 /**
- *
+ * Class AuthenticationProvider
  */
 
 namespace HDNET\OnpageIntegration\Provider;
@@ -8,7 +9,10 @@ namespace HDNET\OnpageIntegration\Provider;
 use HDNET\OnpageIntegration\Domain\Repository\ConfigurationRepository;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
-class Authentication extends AbstractProvider
+/**
+ * Class AuthenticationProvider
+ */
+class AuthenticationProvider extends AbstractProvider
 {
 
     /**
@@ -30,6 +34,8 @@ class Authentication extends AbstractProvider
             'project' => $configuration->getProjectId(),
 
         ];
+
+
 
         return $buildAuth;
     }
