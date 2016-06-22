@@ -7,6 +7,7 @@
 namespace HDNET\OnpageIntegration\Service;
 
 use HDNET\Autoloader\Exception;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class FileService
@@ -21,10 +22,10 @@ class FileService extends AbstractService
      */
     public function readFile($filePath)
     {
-        if (!file_exists($filePath)) {
+        if (!is_file($filePath)) {
             throw new Exception("File not found!");
         }
 
-        return file_get_contents($filePath);
+        return GeneralUtility::getUrl($filePath);
     }
 }
