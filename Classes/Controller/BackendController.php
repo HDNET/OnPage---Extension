@@ -6,6 +6,8 @@
 
 namespace HDNET\OnpageIntegration\Controller;
 
+use HDNET\OnpageIntegration\Domain\Repository\ConfigurationRepository;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use HDNET\OnpageIntegration\Provider\MetaDataProvider;
 use HDNET\OnpageIntegration\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -54,17 +56,22 @@ class BackendController extends ActionController
      */
     public function detailAction($section, $call)
     {
+        $objectManager = new ObjectManager();
+        $configurationRepository = $objectManager->get(ConfigurationRepository::class);
+
+        /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
+        $configuration = $configurationRepository->findByUid(1);
+
+
         $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
         $apiCallGraph = 'zoom_' . $section . '_' . $call . '_graph';
-
-        $table = $this->loader->load($apiCallTable);
-        $graph = $this->loader->load($apiCallGraph);
 
         $layout = ucfirst(str_replace('aspects', '', $section));
 
         $this->view->assignMultiple([
-            'table'  => $table,
-            'graph'  => $graph,
+            'configuration' => $configuration,
+            'table'  => $this->loader->load($apiCallTable),
+            'graph'  => $this->loader->load($apiCallGraph),
             'layout' => $layout
         ]);
     }
