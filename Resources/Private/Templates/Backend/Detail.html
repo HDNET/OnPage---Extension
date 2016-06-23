@@ -1,13 +1,13 @@
 <f:layout name="Default" xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html"/>
 <f:section name="Content">
 	<f:if condition="{layout} == 'Seo'">
-		<f:render partial="Seo"/>
+		<f:render partial="Seo" arguments="{moduleName: 'test', table:table}" />
 	</f:if>
 	<f:if condition="{layout} == 'Content'">
-		<f:render partial="Content"/>
+		<f:render partial="Content" arguments="{moduleName: 'test', table:table}"/>
 	</f:if>
 
 	<f:if condition="{layout} == 'Technical'">
-		<f:render partial="Seo"/>
+		<f:render partial="Seo" arguments="{moduleName: 'test', table:table}"/>
 	</f:if>
 </f:section>
