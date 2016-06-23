@@ -15,8 +15,38 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class Configuration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
+
     // @todo hide fields hier eintragen
-    const DEFAULT_HIDE_FIELDS = 'is_local,passes_juice_to_url,is_indexable,mime,header_status,country,mime_error,hash,language,redirect_category,redirect_to_mime_error,redirect_type_group,redirect_to_hash,redirect_to_mime,redirect_to_language,redirect_to_is_local,redirect_to_header_status,redirect_to_country';
+    const DEFAULT_HIDE_FIELDS = 'is_local,
+                                 passes_juice_to_url,
+                                 is_indexable,
+                                 mime,
+                                 header_status,
+                                 country,
+                                 mime_error,
+                                 hash,
+                                 language,
+                                 redirect_category,
+                                 redirect_to_mime_error,
+                                 redirect_type_group,
+                                 redirect_to_hash,
+                                 redirect_to_mime,
+                                 redirect_to_language,
+                                 redirect_to_is_local,
+                                 redirect_to_header_status,
+                                 redirect_to_country,
+                                 twitter_description,
+                                 twitter_title,
+                                 twitter_image,
+                                 og_country,
+                                 og_language,
+                                 og_image,
+                                 meta_title,
+                                 meta_description,
+                                 og_url,
+                                 og_title,
+                                 og_description,
+                                 compression_type,';
 
     /**
      * api_key
