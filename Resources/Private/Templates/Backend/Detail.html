@@ -32,7 +32,14 @@
 										</f:format.number>
 									</f:then>
 									<f:else>
-										<onpage:inArray array="{configuration.hideFieldsAsArray}" value="{value}" key="{key}" negate="1"/>
+										<f:if condition="{key} == 'url'">
+											<f:then>
+												<a href="{value}">{value}</a>
+											</f:then>
+											<f:else>
+												<onpage:inArray array="{configuration.hideFieldsAsArray}" value="{value}" key="{key}" negate="1"/>
+											</f:else>
+										</f:if>
 									</f:else>
 								</f:if>
 							</td>
