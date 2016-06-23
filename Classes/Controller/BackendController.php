@@ -8,9 +8,10 @@ namespace HDNET\OnpageIntegration\Controller;
 
 use HDNET\OnpageIntegration\Domain\Repository\ConfigurationRepository;
 use HDNET\OnpageIntegration\Utility\TitleUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use HDNET\OnpageIntegration\Provider\MetaDataProvider;
 use HDNET\OnpageIntegration\Utility\ArrayUtility;
+
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -36,9 +37,9 @@ class BackendController extends ActionController
         $contentMetaData[] = $metaDataProvider->getMetaData('contentaspects');
         $technicalMetaData[] = $metaDataProvider->getMetaData('technicalaspects');
 
+        // todo implement $contentMetaData and check the fourth api call
         ArrayUtility::buildIndexActionArray($seoMetaData, 'seoaspects');
         ArrayUtility::buildIndexActionArray($technicalMetaData, 'technicalaspects');
-
 
         $this->view->assignMultiple([
             'lastCrawl'         => $this->loader->load('zoom_lastcrawl'),
@@ -62,7 +63,6 @@ class BackendController extends ActionController
 
         /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
         $configuration = $configurationRepository->findByUid(1);
-
 
         $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
         $apiCallGraph = 'zoom_' . $section . '_' . $call . '_graph';
