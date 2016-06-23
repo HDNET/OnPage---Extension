@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Class ApiResultLoader
+ */
 namespace HDNET\OnpageIntegration\Loader;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -7,6 +9,9 @@ use HDNET\OnpageIntegration\Service\DataService;
 use HDNET\OnpageIntegration\Persister\ApiResultToCachePersister;
 use TYPO3\CMS\Core\Cache\CacheManager;
 
+/**
+ * Class ApiResultLoader
+ */
 class ApiResultLoader
 {
     /**
