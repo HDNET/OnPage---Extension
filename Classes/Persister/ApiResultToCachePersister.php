@@ -1,10 +1,17 @@
 <?php
 
+/**
+ * Class ApiResultToCachePersister
+ */
+
 namespace HDNET\OnpageIntegration\Persister;
 
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * Class ApiResultToCachePersister
+ */
 class ApiResultToCachePersister
 {
 

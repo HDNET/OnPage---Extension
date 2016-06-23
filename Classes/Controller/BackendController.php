@@ -6,7 +6,12 @@
 
 namespace HDNET\OnpageIntegration\Controller;
 
+use HDNET\OnpageIntegration\Domain\Repository\ConfigurationRepository;
+use HDNET\OnpageIntegration\Utility\TitleUtility;
 use HDNET\OnpageIntegration\Provider\MetaDataProvider;
+use HDNET\OnpageIntegration\Utility\ArrayUtility;
+
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -28,12 +33,19 @@ class BackendController extends ActionController
     public function indexAction()
     {
         $metaDataProvider = GeneralUtility::makeInstance(MetaDataProvider::class);
+        $seoMetaData[] = $metaDataProvider->getMetaData('seoaspects');
+        $contentMetaData[] = $metaDataProvider->getMetaData('contentaspects');
+        $technicalMetaData[] = $metaDataProvider->getMetaData('technicalaspects');
+
+        // todo implement $contentMetaData and check the fourth api call
+        ArrayUtility::buildIndexActionArray($seoMetaData, 'seoaspects');
+        ArrayUtility::buildIndexActionArray($technicalMetaData, 'technicalaspects');
 
         $this->view->assignMultiple([
             'lastCrawl'         => $this->loader->load('zoom_lastcrawl'),
-            'seoMetaData'       => $metaDataProvider->getMetaData('seoaspects'),
-            'contentMetaData'   => $metaDataProvider->getMetaData('contentaspects'),
-            'technicalMetaData' => $metaDataProvider->getMetaData('technicalaspects'),
+            'seoMetaData'       => $seoMetaData,
+            'contentMetaData'   => $contentMetaData,
+            'technicalMetaData' => $technicalMetaData,
             'moduleName'        => 'Zoom Module'
         ]);
     }
@@ -41,19 +53,25 @@ class BackendController extends ActionController
     /**
      * Handle the detail pages
      *
-     * @param $section
-     * @param $call
+     * @param string $section
+     * @param string $call
      */
     public function detailAction($section, $call)
     {
-        $apiCallString = 'zoom_' . $section . '_' . $call . '_table';
-        $table = $this->loader->load($apiCallString);
+        $objectManager = new ObjectManager();
+        $configurationRepository = $objectManager->get(ConfigurationRepository::class);
 
-        $layout = ucfirst(str_replace('aspects', '', $section));
+        /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
+        $configuration = $configurationRepository->findByUid(1);
+
+        $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
+        $apiCallGraph = 'zoom_' . $section . '_' . $call . '_graph';
 
         $this->view->assignMultiple([
-            'table'      => $table,
-            'layout'     => $layout
+            'moduleName' => TitleUtility::makeSubTitle($section),
+            'configuration' => $configuration,
+            'table'  => $this->loader->load($apiCallTable),
+            'graph'  => $this->loader->load($apiCallGraph),
         ]);
     }
 

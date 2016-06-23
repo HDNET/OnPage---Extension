@@ -1,13 +1,55 @@
 <f:layout name="Default" xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html"/>
+{namespace onpage=HDNET\OnpageIntegration\ViewHelpers}
 <f:section name="Content">
-	<f:if condition="{layout} == 'Seo'">
-		<f:render partial="Seo"/>
-	</f:if>
-	<f:if condition="{layout} == 'Content'">
-		<f:render partial="Content"/>
-	</f:if>
-
-	<f:if condition="{layout} == 'Technical'">
-		<f:render partial="Seo"/>
+	<div class="page-header">
+		<h4>Graph: Sitemap(Gruppe)</h4>
+	</div>
+	<f:render partial="NoData"/>
+	<div class="page-header">
+		<h4>Tabelle: Was ist hinterlegt ?</h4>
+	</div>
+	<f:if condition="{table}">
+		<f:then>
+			<table class="table table-striped">
+				<thead>
+				<tr>
+					<f:for each="{table.0}" as="value" key="key" reverse="1">
+						<th>
+							<onpage:title title="{onpage:inArray(array:configuration.hideFieldsAsArray,value:key,key:key)}"/>
+						</th>
+					</f:for>
+				</tr>
+				</thead>
+				<tbody>
+				<f:for each="{table}" as="secondLayer">
+					<tr>
+						<f:for each="{secondLayer}" as="value" key="key" reverse="1">
+							<td>
+								<f:if condition="{key} == 'opr'">
+									<f:then>
+										<f:format.number decimals="0">
+											<onpage:inArray array="{configuration.hideFieldsAsArray}" value="{value}" key="{key}" negate="1"/>
+										</f:format.number>
+									</f:then>
+									<f:else>
+										<f:if condition="{key} == 'url'">
+											<f:then>
+												<a href="{value}">{value}</a>
+											</f:then>
+											<f:else>
+												<onpage:inArray array="{configuration.hideFieldsAsArray}" value="{value}" key="{key}" negate="1"/>
+											</f:else>
+										</f:if>
+									</f:else>
+								</f:if>
+							</td>
+						</f:for>
+					</tr>
+				</f:for>
+			</table>
+		</f:then>
+		<f:else>
+			<f:render partial="NoData"/>
+		</f:else>
 	</f:if>
 </f:section>
