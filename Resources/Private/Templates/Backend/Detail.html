@@ -14,7 +14,9 @@
 				<thead>
 				<tr>
 					<f:for each="{table.0}" as="value" key="key" reverse="1">
-						<th><onpage:inArray array="{configuration.hideFieldsAsArray}" value="{key}" key="{key}" negate="1"/></th>
+						<th>
+							<onpage:title title="{onpage:inArray(array:configuration.hideFieldsAsArray,value:key,key:key)}"/>
+						</th>
 					</f:for>
 				</tr>
 				</thead>
@@ -23,7 +25,16 @@
 					<tr>
 						<f:for each="{secondLayer}" as="value" key="key" reverse="1">
 							<td>
-								<onpage:inArray array="{configuration.hideFieldsAsArray}" value="{value}" key="{key}" negate="1"/>
+								<f:if condition="{key} == 'opr'">
+									<f:then>
+										<f:format.number decimals="0">
+											<onpage:inArray array="{configuration.hideFieldsAsArray}" value="{value}" key="{key}" negate="1"/>
+										</f:format.number>
+									</f:then>
+									<f:else>
+										<onpage:inArray array="{configuration.hideFieldsAsArray}" value="{value}" key="{key}" negate="1"/>
+									</f:else>
+								</f:if>
 							</td>
 						</f:for>
 					</tr>
