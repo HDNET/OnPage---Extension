@@ -17,7 +17,7 @@ class TitleUtility
      *
      * @return string
      */
-    static public function makeSubTitle($section)
+    public static function makeSubTitle($section)
     {
         switch ($section) {
             case 'seoaspects':

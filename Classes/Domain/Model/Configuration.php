@@ -133,5 +133,4 @@ class Configuration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->hideFields = $hideFields;
     }
-
 }
