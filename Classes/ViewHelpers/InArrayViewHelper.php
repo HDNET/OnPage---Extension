@@ -15,6 +15,8 @@ class InArrayViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
 {
 
     /**
+     * Look at the php docs for in_array
+     *
      * @param array  $array
      * @param string $value
      * @param string $key
