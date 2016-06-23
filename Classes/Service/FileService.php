@@ -18,7 +18,10 @@ class FileService extends AbstractService
     /**
      * Returns file content
      *
+     * @param $filePath
+     *
      * @return string
+     * @throws Exception
      */
     public function readFile($filePath)
     {

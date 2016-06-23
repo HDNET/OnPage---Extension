@@ -13,6 +13,9 @@ class ArrayUtility
 {
 
     /**
+     * Append the errors of an api call to
+     * metaDataArray
+     *
      * @param $metaDataArray
      * @param $section
      */

@@ -32,6 +32,9 @@ class DataService extends AbstractService
      */
     protected $apiCallService;
 
+    /**
+     * DataService constructor.
+     */
     public function __construct()
     {
         $this->configurationProvider  = GeneralUtility::makeInstance(ConfigurationProvider::class);
@@ -42,7 +45,9 @@ class DataService extends AbstractService
 
     /**
      * @param string $key
-     * @return string
+     *
+     * @return array
+     * @throws ApiErrorException
      */
     public function getApiResult($key)
     {
@@ -59,6 +64,7 @@ class DataService extends AbstractService
 
     /**
      * @return array
+     * @throws ApiErrorException
      */
     public function getAllResults()
     {
@@ -75,6 +81,7 @@ class DataService extends AbstractService
 
     /**
      * @param array $apiCall
+     *
      * @return string
      */
     protected function makeApiCall(array $apiCall)

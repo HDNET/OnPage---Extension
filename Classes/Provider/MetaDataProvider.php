@@ -2,7 +2,6 @@
 
 namespace HDNET\OnpageIntegration\Provider;
 
-use HDNET\OnpageIntegration\Provider\Configuration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use HDNET\OnpageIntegration\Service\ArrayService;
 
