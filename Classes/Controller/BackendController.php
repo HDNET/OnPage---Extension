@@ -7,6 +7,7 @@
 namespace HDNET\OnpageIntegration\Controller;
 
 use HDNET\OnpageIntegration\Domain\Repository\ConfigurationRepository;
+use HDNET\OnpageIntegration\Utility\TitleUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use HDNET\OnpageIntegration\Provider\MetaDataProvider;
 use HDNET\OnpageIntegration\Utility\ArrayUtility;
@@ -66,13 +67,11 @@ class BackendController extends ActionController
         $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
         $apiCallGraph = 'zoom_' . $section . '_' . $call . '_graph';
 
-        $layout = ucfirst(str_replace('aspects', '', $section));
-
         $this->view->assignMultiple([
+            'moduleName' => TitleUtility::makeSubTitle($section),
             'configuration' => $configuration,
             'table'  => $this->loader->load($apiCallTable),
             'graph'  => $this->loader->load($apiCallGraph),
-            'layout' => $layout
         ]);
     }
 
