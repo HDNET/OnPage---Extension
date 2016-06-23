@@ -13,9 +13,12 @@ class TitleUtility
 {
 
     /**
+     * Generate the $moduleName for the
+     * detail template
+     *
      * @param $section
      *
-     * @return string
+     * @return null|string
      */
     public static function makeSubTitle($section)
     {
@@ -28,6 +31,9 @@ class TitleUtility
                 break;
             case 'technicalaspects':
                 return 'Technische Aspekte';
+                break;
+            default:
+                return null;
                 break;
         }
     }
