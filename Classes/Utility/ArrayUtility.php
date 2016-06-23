@@ -16,7 +16,7 @@ class ArrayUtility
      * @param $metaDataArray
      * @param $section
      */
-    static public function buildIndexActionArray(&$metaDataArray, $section)
+    public static function buildIndexActionArray(&$metaDataArray, $section)
     {
         $loader = GeneralUtility::makeInstance(\HDNET\OnpageIntegration\Loader\ApiResultLoader::class);
         for ($i = 0; $i < count($metaDataArray[0]); $i++) {

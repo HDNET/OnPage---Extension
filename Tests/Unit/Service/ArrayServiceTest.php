@@ -76,4 +76,24 @@ class ArrayServiceTest extends UnitTestCase
         $this->assertSame($expected, $service->replaceRecursiveByKey($array, $replaceItem, $replaceKey));
     }
 
+    /**
+     * @test
+     */
+    public function testFindElement()
+    {
+        $service = new ArrayService();
+
+        $array = [
+            'wert1'  => 'Element',
+            'test'   => 'old',
+            'deeper' => [
+                'test' => [
+                    'nothing' => 99
+                ],
+            ],
+        ];
+        $findElement = 'nothing';
+
+        $this->assertSame(99, $service->findElement($array, $findElement));
+    }
 }
