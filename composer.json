@@ -20,7 +20,12 @@
   ],
   "authors": [
     {
-      "name": "Sibo & René",
+      "name": "Sibo",
+      "role": "Developer",
+      "homepage": "https://github.com/HDNET"
+    },
+    {
+      "name": "René",
       "role": "Developer",
       "homepage": "https://github.com/HDNET"
     }
