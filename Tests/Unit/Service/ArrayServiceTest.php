@@ -77,9 +77,9 @@ class ArrayServiceTest extends UnitTestCase
     }
 
     /**
-     * @test
+     * @todo rewrite!!!
      */
-    public function testFindElement()
+    public function findElement()
     {
         $service = new ArrayService();
 
