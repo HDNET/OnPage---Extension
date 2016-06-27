@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-06-15T14:14:42+02:00" product-name="onpage_integration">
+		<header/>
+		<body>
+			<trans-unit id="tx_onpageintegration_domain_model_configuration.hide_fields"><source>Hide fields (one per line)</source></trans-unit>
+			<trans-unit id="tx_onpageintegration_domain_model_configuration"><source>OnPage Configuration</source></trans-unit>
+			<trans-unit id="tx_onpageintegration_domain_model_configuration.project_id"><source>Projekt Id</source></trans-unit>
+			<trans-unit id="tx_onpageintegration_domain_model_configuration.api_key"><source>Api Key</source></trans-unit>
+		</body>
+	</file>
+</xliff>

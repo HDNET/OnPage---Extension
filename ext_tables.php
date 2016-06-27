@@ -1,8 +1,14 @@
 <?php
 
+\HDNET\Autoloader\Loader::extTables('HDNET', 'onpage_integration', [
+    'SmartObjects',
+    'TcaFiles',
+    'CommandController'
+]);
+
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'HDNET.'.$_EXTKEY,
-    'Onpage',
+    'onpage_integration',
     'OnPage - SEO Tool'
 );
 
@@ -13,11 +19,12 @@ if (TYPO3_MODE === 'BE') {
         'management',               // module name
         '',
         array(          // Allowed controller action combinations
-                        'Backend' => 'index',
+                        'Backend' => 'index,seo,content,technical,keyword,detail',
         ),
         array(          // Additional configuration
                            'access' => 'user,group',
-                           'icon'   => '',
-                           'labels' => 'OnPage.org',
-        ));
+                           'icon'   => 'EXT:onpage_integration/ext_icon.png',
+                           'labels' => 'LLL:EXT:onpage_integration/Resources/Private/Language/locallang_mod.xlf',
+        )
+    );
 }

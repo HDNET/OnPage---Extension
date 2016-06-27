@@ -1,0 +1,10 @@
+Structure of the resulting array:
+
+Module Zoom
+    last_crawl: API-Call
+    Headlines
+        Index-array containing the single categories
+            description (category name)
+            priority
+            graph: API-Call (may be obsolete)
+            table: API-Call

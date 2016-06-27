@@ -1,100 +1,87 @@
 <?php
 
-namespace HDNET\Onpage\Controller;
+/**
+ * Class BackendController
+ */
 
+namespace HDNET\OnpageIntegration\Controller;
+
+use HDNET\OnpageIntegration\Domain\Repository\ConfigurationRepository;
+use HDNET\OnpageIntegration\Utility\TitleUtility;
+use HDNET\OnpageIntegration\Provider\MetaDataProvider;
+use HDNET\OnpageIntegration\Utility\ArrayUtility;
+
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
+/**
+ * Class BackendController
+ */
 class BackendController extends ActionController
 {
 
+    /**
+     * @var \HDNET\OnpageIntegration\Loader\ApiResultLoader
+     * @inject
+     */
+    protected $loader;
+
+    /**
+     * Represent the index page
+     */
     public function indexAction()
     {
-        /**********************************************************************
-         *    CURL-less Example to get Status Code Data from OnPage.org Zoom API
-         **********************************************************************/
+        $metaDataProvider = GeneralUtility::makeInstance(MetaDataProvider::class);
+        $seoMetaData[] = $metaDataProvider->getMetaData('seoaspects');
+        $contentMetaData[] = $metaDataProvider->getMetaData('contentaspects');
+        $technicalMetaData[] = $metaDataProvider->getMetaData('technicalaspects');
 
-        /***
-         *    OnPage.org API Endpoint and Zoom Route
-         ***/
+        // todo implement $contentMetaData and check the fourth api call
+        ArrayUtility::buildIndexActionArray($seoMetaData, 'seoaspects');
+        ArrayUtility::buildIndexActionArray($technicalMetaData, 'technicalaspects');
 
-        $apiEndpoint = 'https://api.onpage.org';
-        $zoomRoute = '/zoom/json';
-
-        $requestUrl = $apiEndpoint . $zoomRoute;
-
-
-        /***
-         *    JSON Request copied from OnPage.org Zoom Interface
-         *    This example will retrieve the Status Code Overview of the project
-         *    (Number of 2xx, 3xx,301,302,4xx,5xx)
-         *    Tipp: Use the Zoom Interface to "click + play" the data you need, afterwards copy the API call and insert it here.
-         ***/
-
-        $postBody = '{
-    "action": "aggregate",
-    "authentication": {
-    },
-    "pagination": {
-        "limit": 100,
-        "offset": 0
-    },
-    "group": [
-        "indexability_group"
-    ],
-    "functions": [
-        {
-            "name": "count",
-            "method": "count",
-            "parameters": [
-                {
-                    "attribute": "url"
-                }
-            ]
-        }
-    ],
-    "filter": {
-        "AND": [
-            {
-                "field": "is_local",
-                "operator": "==",
-                "value": true
-            }
-        ]
+        $this->view->assignMultiple([
+            'lastCrawl'         => $this->loader->load('zoom_lastcrawl'),
+            'seoMetaData'       => $seoMetaData,
+            'contentMetaData'   => $contentMetaData,
+            'technicalMetaData' => $technicalMetaData,
+            'moduleName'        => 'Zoom Module'
+        ]);
     }
-}';
 
-        $options = array(
-            'http' => array(
-                'header'  => 'Content-Type: text/json',
-                'method'  => 'POST',
-                'content' => $postBody,
-            ),
-        );
+    /**
+     * Handle the detail pages
+     *
+     * @param string $section
+     * @param string $call
+     */
+    public function detailAction($section, $call)
+    {
+        $objectManager = new ObjectManager();
+        $configurationRepository = $objectManager->get(ConfigurationRepository::class);
 
-        $context = stream_context_create($options);
+        /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
+        $configuration = $configurationRepository->findByUid(1);
 
-        $result = file_get_contents($requestUrl, false, $context);
+        $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
+        $apiCallGraph = 'zoom_' . $section . '_' . $call . '_graph';
 
-        /***
-         * Handle HTTP error
-         ***/
+        $this->view->assignMultiple([
+            'moduleName' => TitleUtility::makeSubTitle($section),
+            'configuration' => $configuration,
+            'table'  => $this->loader->load($apiCallTable),
+            'graph'  => $this->loader->load($apiCallGraph),
+        ]);
+    }
 
-        if ($result === false) {
-
-            echo "Something went wrong";
-
-        } else {
-
-            /***
-             * Print Result
-             ***/
-
-            echo "Result:\n";
-            $jsonResult = json_decode($result, true);
-            echo "<pre>";
-            print_r($jsonResult);
-            echo "</pre>";
-
-        }
+    /**
+     * Empty Keyword Page
+     */
+    public function keywordAction()
+    {
+        $this->view->assignMultiple([
+            'moduleName' => 'Keyword'
+        ]);
     }
 }

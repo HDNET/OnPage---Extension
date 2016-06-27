@@ -1,0 +1,24 @@
+<f:layout name="Default" xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html"/>
+<f:section name="Content">
+	<section class="last-crawl">
+		<f:render partial="LastCrawl" arguments="{lastCrawl: lastCrawl}"/>
+	</section>
+	<section class="seo-aspects">
+		<div class="page-header">
+			<h3>SEO Aspekte</h3>
+		</div>
+		<f:render partial="Table" arguments="{metaData: seoMetaData, section: 'seoaspects'}"/>
+	</section>
+	<section class="content-aspects">
+		<div class="page-header">
+			<h3>Inhaltliche Aspekte</h3>
+		</div>
+		<f:render partial="Table" arguments="{metaData: contentMetaData, section: 'contentaspects'}"/>
+	</section>
+	<section class="technical-aspects">
+		<div class="page-header">
+			<h3>Technische Aspekte</h3>
+		</div>
+		<f:render partial="Table" arguments="{metaData: technicalMetaData, section: 'technicalaspects'}"/>
+	</section>
+</f:section>

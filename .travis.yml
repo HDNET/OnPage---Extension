@@ -4,22 +4,30 @@ php:
 - 5.6
 - 7
 env:
-- TYPO3_VERSION=^7.6.0
+- TYPO3_VERSION=^7.6.0 COVERAGE=0
 matrix:
   fast_finish: true
+  exclude:
+    - php: 5.6
+      env: TYPO3_VERSION=^7.6.0 COVERAGE=0
   include:
+    - php: 5.6
+      env: TYPO3_VERSION=^7.6.0 COVERAGE=1
     - php: 7
-      env: TYPO3_VERSION=^8.1.0
+      env: TYPO3_VERSION=^8.1.0 COVERAGE=0
     - php: 7
-      env: TYPO3_VERSION=dev-master
+      env: TYPO3_VERSION=dev-master COVERAGE=0
   allow_failures:
-    - env: TYPO3_VERSION=dev-master
+    - env: TYPO3_VERSION=dev-master COVERAGE=0
 sudo: false
 cache:
   directories:
   - "$HOME/.composer/cache"
 before_install:
-- phpenv config-rm xdebug.ini
+- |
+  if [[ "$COVERAGE" == "0" ]]; then
+    phpenv config-rm xdebug.ini
+  fi;
 - composer self-update
 - composer --version
 - if [ "$GITHUB_COMPOSER_AUTH" ]; then composer config -g github-oauth.github.com
@@ -29,7 +37,12 @@ before_script:
 - export TYPO3_PATH_WEB="$PWD/.Build/Web"
 script:
 - |
-  echo; echo "Running unit tests"; .Build/bin/phpunit -c .Build/vendor/typo3/cms/typo3/sysext/core/Build/UnitTests.xml Tests/Unit/
+  echo; echo "Running unit tests";
+  if [[ "$COVERAGE" == "1" ]]; then
+    .Build/bin/phpunit -c .Build/vendor/typo3/cms/typo3/sysext/core/Build/UnitTests.xml --coverage-clover=.Build/unittest-coverage.clover Tests/Unit/
+  else
+    .Build/bin/phpunit -c .Build/vendor/typo3/cms/typo3/sysext/core/Build/UnitTests.xml Tests/Unit/
+  fi;
 - |
   echo; echo "Executing PHP mess detector"; .Build/bin/phpmd Classes/ text cleancode,codesize,controversial,design,naming || true
 - |
@@ -47,6 +60,11 @@ after_script:
       .Build/bin/upload . "$TYPO3_ORG_USERNAME" "$TYPO3_ORG_PASSWORD" "$TAG_MESSAGE"
     fi;
   fi;
+- |
+  if [[ "$COVERAGE" == "1" ]]; then
+    echo; echo "Uploading code coverage results";
+    .Build/bin/ocular code-coverage:upload --format=php-clover .Build/unittest-coverage.clover
+  fi
 notifications:
   slack:
     secure: OkRMcSFGVYn5gRYJdRCUvMZu3sHVpF7/XcSDIOUfkULNXo8MTRso3bbALvqPve4qmOYxJIQfcn/2PK9jgq5PhE8qVfPZX9+5YuiN817L4o174BXi3Kx4Xh7fOUNNSQo9aqAKF65qaUDA3lD9BoHdPD37nP3fqNZMALOp4X+rxRWyAuwpAKSW+nDk+egnV21YkZe8af4nsFJMOUMcB/aX0Bzb9D5115JsWyBUEBpalHbtV7sbs3hxT1Q+qqEbxuHlNybG4Uxc6BbWuCzY1t3K5NWawX27/pIFBOLWGzTPrE4rXst59S0iGGply0fCUoTgM3A9uQZNuIxjO+BZbz1D4Or7xupMKG7cKu4KbWq3a6/+y2M/Fsn1GAjAHHWJZ2I6SWiQxpX1q/JGzIFw8LwwhAz0bLbNQIB0c/XImC17d0WY+0M4GcSkjszxo4WqlJzDA1BkGy2FhEUGNLWuny7erT9IZdX0VXiu+m0zfWLCbtdQ2cRu/DVQPLVMIY1CKo32Tguw4lCdIl89NeIgdt2rkWHCNiJOqloahgIAy4X7cj2tI85kNlP+es49e743gzt+pS5DjNXVryamluW+VdpKohjh+cucoiEytz/3xDHBN0gHTzgp2ApecUMDr0SuaSwnQbv6wmXLEERKmsxraak6c2HK3MxeP5iSBUbvn7kJ7nQ=

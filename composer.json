@@ -1,7 +1,7 @@
 {
   "name": "hdnet/onpage-integration",
   "type": "typo3-cms-extension",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "autoload": {
     "psr-4": {
@@ -20,13 +20,19 @@
   ],
   "authors": [
     {
-      "name": "Sibo & René",
+      "name": "Sibo",
+      "role": "Developer",
+      "homepage": "https://github.com/HDNET"
+    },
+    {
+      "name": "René",
       "role": "Developer",
       "homepage": "https://github.com/HDNET"
     }
   ],
   "require": {
     "php": ">=5.5.0",
+    "ext-curl": "*",
     "typo3/cms-core": ">=7.4.0,<8.2",
     "typo3/cms": "^7.6.0"
   },
@@ -43,7 +49,8 @@
     "namelesscoder/typo3-repository-client": "1.1.x-dev",
     "phpunit/phpunit": "~4.8.0",
     "squizlabs/php_codesniffer": "^2.6",
-    "phpmd/phpmd": "^2.4"
+    "phpmd/phpmd": "^2.4",
+    "scrutinizer/ocular": "^1.3.0"
   },
   "config": {
     "vendor-dir": ".Build/vendor",

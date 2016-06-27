@@ -1,0 +1,38 @@
+<f:be.container loadJQuery="1">
+	<div class="typo3-fullDoc">
+		<div id="typo3-docheader">
+			<div class="typo3-docheader-functions">
+				<div class="left">
+					<f:render section="Menu" optional="true" />
+						<f:be.menus.actionMenu>
+							<f:be.menus.actionMenuItem label="Zoom" controller="Backend" action="index" />
+							<f:be.menus.actionMenuItem label="Keyword" controller="Backend" action="keyword" />
+						</f:be.menus.actionMenu>
+				</div>
+				<div class="right">
+					<f:be.pagePath />
+					<f:be.pageInfo />
+					<f:be.buttons.csh />
+				</div>
+			</div>
+			<div class="typo3-docheader-buttons">
+				<div class="left">
+					<f:render section="IconButtons" optional="true" />
+				</div>
+				<div class="right">
+					<f:be.buttons.shortcut />
+				</div>
+			</div>
+		</div>
+
+		<div id="typo3-docbody">
+			<div id="typo3-inner-docbody">
+				<h1>OnPage - Integration
+					<small>{moduleName}</small>
+				</h1>
+				<f:flashMessages renderMode="div" />
+				<f:render section="Content" />
+			</div>
+		</div>
+	</div>
+</f:be.container>
