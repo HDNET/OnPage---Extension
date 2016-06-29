@@ -11,8 +11,11 @@ $custom = [
         'hide_fields' => [
             'config' => [
                 'type'    => 'text',
-                'default' => implode("\n", \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',',
-                    \HDNET\OnpageIntegration\Domain\Model\Configuration::DEFAULT_HIDE_FIELDS, true)),
+                'default' => implode("\n", \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(
+                    ',',
+                    \HDNET\OnpageIntegration\Domain\Model\Configuration::DEFAULT_HIDE_FIELDS,
+                    true
+                )),
             ],
 
         ],
