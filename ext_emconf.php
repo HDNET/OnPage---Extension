@@ -1,6 +1,6 @@
 <?php
 $EM_CONF[$_EXTKEY] = array(
-    'title' => 'OnPage Integration',
+    'title' => 'OnPage.org Integration',
     'description' => 'Show editors important information about their SEO process',
     'category' => 'plugin',
     'author' => 'Sibo and René',
