@@ -18,9 +18,9 @@
 				<f:for each="{onpage:arrayPad(size:meta.priority)}" as="empty">&#8226;&bull;</f:for>
 			</td>
 			<td>
-				<f:if condition="{meta.errors.0.count} > 0">
+				<f:if condition="{meta.errors}">
 					<f:then>
-						<span class="label label-danger">{meta.errors.0.count}</span>
+						<span class="label label-danger">{meta.errors}</span>
 					</f:then>
 					<f:else>
 						<span class="label label-success">0</span>

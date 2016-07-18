@@ -30,7 +30,7 @@ class MetaDataProvider
     public function getMetaData($key)
     {
         $configData = $this->configurationProvider->getAllConfigurationData();
-        $searchKeys = ['description', 'priority'];
+        $searchKeys = ['description', 'priority', 'errors'];
 
         $elements = $this->arrayService->findElement($configData, $key);
 

@@ -33,6 +33,7 @@
             {
                 "description": "Indexierbare Seiten, die nicht in der sitemap.xml sind",
                 "priority": 2,
+                "errors": "not_included",
                 "graph": {
                     "action": "aggregate",
                     "authentication": {
@@ -183,6 +184,7 @@
             {
                 "description": "Indexierbare Seiten mit langem Klickpfad",
                 "priority": 2,
+                "errors": "not_reached",
                 "graph": {
                     "action": "aggregate",
                     "authentication": {
@@ -336,6 +338,7 @@
             {
                 "description": "Indexierbare Seiten ohne validen Canonical",
                 "priority": 2,
+                "errors": "not_set",
                 "graph": {
                     "action": "aggregate",
                     "authentication": {
@@ -474,6 +477,7 @@
             {
                 "description": "Weiterleitungen zu anderen Subdomains",
                 "priority": 2,
+                "errors": "different_host",
                 "graph": {
                     "action": "aggregate",
                     "authentication": {
@@ -612,6 +616,7 @@
             {
                 "description": "Indexierbare Seiten mit weniger als 3 eingehenden Links",
                 "priority": 1,
+                "errors": "sum",
                 "graph": {
                     "action": "aggregate",
                     "authentication": {
@@ -1342,6 +1347,7 @@
             {
                 "description": "Seiten die als noindex, nofollow deklariert sind",
                 "priority": 2,
+                "errors": "noindex_nofollow",
                 "graph": {
                     "action": "aggregate",
                     "authentication": {
@@ -1824,6 +1830,7 @@
             {
                 "description": "Indexierbare Seiten mit fehlenden Übersetzungen",
                 "priority": 2,
+                "errors": "sum",
                 "graph": {
                     "action": "aggregate",
                     "authentication": {
@@ -1948,6 +1955,7 @@
             {
                 "description": "Nicht indexierbare Seiten in der sitemap.xml",
                 "priority": 2,
+                "errors": "included",
                 "graph": {
                     "action": "aggregate",
                     "authentication": {
@@ -2098,6 +2106,7 @@
             {
                 "description": "Seiten ohne eingehende Links in der sitemap.xml",
                 "priority": 2,
+                "errors": "sum",
                 "graph": {
                     "action": "aggregate",
                     "authentication": {
