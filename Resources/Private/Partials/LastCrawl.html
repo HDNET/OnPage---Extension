@@ -3,11 +3,12 @@
 </div>
 <table class="table">
 	<tbody>
+	<!-- Sites -->
 	<tr>
 		<td>
 			<f:if condition="{lastCrawl.1.count}">
 				<f:then>
-					{lastCrawl.1.count}
+					{lastCrawl.0.count}
 				</f:then>
 				<f:else>
 					0
@@ -18,7 +19,7 @@
 		<td>
 			<f:if condition="{lastCrawl.5.count}">
 				<f:then>
-					{lastCrawl.5.count}
+					{lastCrawl.4.count}
 				</f:then>
 				<f:else>
 					0
@@ -27,11 +28,12 @@
 		</td>
 		<td>Defekt</td>
 	</tr>
+	<!-- external Sites -->
 	<tr>
 		<td>
 			<f:if condition="{lastCrawl.3.count}">
 				<f:then>
-					{lastCrawl.3.count}
+					{lastCrawl.2.count}
 				</f:then>
 				<f:else>
 					0
@@ -42,7 +44,7 @@
 		<td>
 			<f:if condition="{lastCrawl.4.count}">
 				<f:then>
-					{lastCrawl.4.count}
+					{lastCrawl.7.count}
 				</f:then>
 				<f:else>
 					0
@@ -51,11 +53,12 @@
 		</td>
 		<td>Defekt</td>
 	</tr>
+	<!-- Images -->
 	<tr>
 		<td>
 			<f:if condition="{lastCrawl.0.count}">
 				<f:then>
-					{lastCrawl.0.count}
+					{lastCrawl.1.count}
 				</f:then>
 				<f:else>
 					0
@@ -66,7 +69,7 @@
 		<td>
 			<f:if condition="{lastCrawl.6.count}">
 				<f:then>
-					{lastCrawl.6.count}
+					{lastCrawl.5.count}
 				</f:then>
 				<f:else>
 					0
@@ -75,11 +78,12 @@
 		</td>
 		<td>Defekt</td>
 	</tr>
+	<!-- Files -->
 	<tr>
 		<td>
 			<f:if condition="{lastCrawl.2.count}">
 				<f:then>
-					{lastCrawl.2.count}
+					{lastCrawl.3.count}
 				</f:then>
 				<f:else>
 					0
@@ -90,8 +94,7 @@
 		<td>
 			<f:if condition="{lastCrawl.7.count}">
 				<f:then>
-					{lastCrawl.7.count}
-					{lastCrawl.7.count}
+					{lastCrawl.6.count}
 				</f:then>
 				<f:else>
 					0
