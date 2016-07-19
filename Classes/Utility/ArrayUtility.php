@@ -5,6 +5,7 @@
 namespace HDNET\OnpageIntegration\Utility;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class ArrayUtility
@@ -22,33 +23,40 @@ class ArrayUtility
     public static function buildIndexActionArray(&$metaDataArray, $section)
     {
         $loader = GeneralUtility::makeInstance(\HDNET\OnpageIntegration\Loader\ApiResultLoader::class);
-        for ($i = 0; $i < count($metaDataArray[0]); $i++) {
-            $graphDataArray = $loader->load('zoom_' . $section . '_' . $i . '_graph');
 
-            $metaDataArray[0][$i]['errors'] = self::getErrors($graphDataArray, $metaDataArray[0][$i]['errors']);
+        for ($i = 0; $i < count($metaDataArray[0]); $i++) {
+
+            $graphDataArray = $loader->load('zoom_' . $section . '_' . $i . '_graph');
+            $errorReportyKey = $metaDataArray[0][$i]['errors'];
+
+            DebuggerUtility::var_dump($errorReportyKey,'errorReportKey');
+            $metaDataArray[0][$i]['errors'] = self::errorReport($graphDataArray, $errorReportyKey);
             $metaDataArray[0][$i]['test'] = $graphDataArray;
         }
     }
 
     /**
-     * Set the errors report into the array ...
+     * Determine the error report of an aspect
      *
-     * @param $array
-     * @param $value
+     * @param $graphApiCallResult
+     * @param $errorReportKey
      *
+     * @return int
      */
-    protected static function getErrors($array, $value) {
-        if($value == 'sum') {
-            $total = 0;
-            foreach($array as $element) {
-                $total += $element['count'];
+    protected static function errorReport($graphApiCallResult,$errorReportKey) {
+        $totalErrors = 0;
+        foreach($graphApiCallResult as $element) {
+            DebuggerUtility::var_dump($element,'element');
+            if(in_array('sum', $errorReportKey)) {
+                if(in_array($errorReportKey['hidden'], $element)) {
+                    continue;
+                }
+                $totalErrors += $element['count'];
             }
-            return $total;
-        }
-        foreach ($array as $element) {
-            if (in_array($value, $element)) {
-                return $element['count'];
+            if(in_array($errorReportKey['show'], $graphApiCallResult)) {
+                $totalErrors += $element['count'];
             }
         }
+        return $totalErrors;
     }
 }
