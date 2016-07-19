@@ -4,6 +4,7 @@
  */
 namespace HDNET\OnpageIntegration\Loader;
 
+use HDNET\OnpageIntegration\Exception\ApiErrorException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use HDNET\OnpageIntegration\Service\DataService;
 use HDNET\OnpageIntegration\Persister\ApiResultToCachePersister;
@@ -43,7 +44,11 @@ class ApiResultLoader
         );
 
         if ($entry === false) {
-            $entry = $this->dataService->getApiResult($key);
+            try {
+                $entry = $this->dataService->getApiResult($key);
+            }catch (ApiErrorException $e) {
+
+            }
             $this->persister->persist($entry, $key);
         }
 
