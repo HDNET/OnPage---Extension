@@ -23,9 +23,13 @@ class ApiCallService
      */
     public function makeCall($json)
     {
-        $this->checkForCurl();
+        try {
+            $this->checkForCurl();
 
-        return $this->send($json);
+            return $this->send($json);
+        }catch (UnavailableException $e) {
+
+        }
     }
 
     /**
@@ -67,7 +71,6 @@ class ApiCallService
         );
         $return = curl_exec($ch);
         $code   = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
         if ($code >= 500) {
             throw new UnavailableException('The API could not be reached.');
         }
