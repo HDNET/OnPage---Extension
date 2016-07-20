@@ -70,7 +70,7 @@ class BackendController extends ActionController
             $configurationRepository = $objectManager->get(ConfigurationRepository::class);
 
             /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
-            $configuration = $configurationRepository->findByUid(1);
+            $configuration = $configurationRepository->findRecord(1);
 
             $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
             $apiCallGraph = 'zoom_' . $section . '_' . $call . '_graph';
