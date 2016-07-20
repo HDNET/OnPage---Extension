@@ -5,7 +5,6 @@
 namespace HDNET\OnpageIntegration\Utility;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class ArrayUtility
@@ -29,7 +28,6 @@ class ArrayUtility
             $graphDataArray = $loader->load('zoom_' . $section . '_' . $i . '_graph');
             $errorReportyKey = $metaDataArray[0][$i]['errors'];
 
-            DebuggerUtility::var_dump($errorReportyKey,'errorReportKey');
             $metaDataArray[0][$i]['errors'] = self::errorReport($graphDataArray, $errorReportyKey);
             $metaDataArray[0][$i]['test'] = $graphDataArray;
         }
@@ -45,15 +43,17 @@ class ArrayUtility
      */
     protected static function errorReport($graphApiCallResult,$errorReportKey) {
         $totalErrors = 0;
+
         foreach($graphApiCallResult as $element) {
-            DebuggerUtility::var_dump($element,'element');
+
             if(in_array('sum', $errorReportKey)) {
                 if(in_array($errorReportKey['hidden'], $element)) {
                     continue;
                 }
                 $totalErrors += $element['count'];
             }
-            if(in_array($errorReportKey['show'], $graphApiCallResult)) {
+
+            if(in_array($errorReportKey['show'], $element)) {
                 $totalErrors += $element['count'];
             }
         }
