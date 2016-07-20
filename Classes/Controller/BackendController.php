@@ -37,18 +37,19 @@ class BackendController extends ActionController
             $seoMetaData[] = $metaDataProvider->getMetaData('seoaspects');
 
             $contentMetaData[] = $metaDataProvider->getMetaData('contentaspects');
-            #$technicalMetaData[] = $metaDataProvider->getMetaData('technicalaspects');
+            $technicalMetaData[] = $metaDataProvider->getMetaData('technicalaspects');
 
             ArrayUtility::buildIndexActionArray($seoMetaData, 'seoaspects');
 
-            #ArrayUtility::buildIndexActionArray($technicalMetaData, 'technicalaspects');
+            ArrayUtility::buildIndexActionArray($technicalMetaData, 'technicalaspects');
             ArrayUtility::buildIndexActionArray($contentMetaData, 'contentaspects');
+
 
             $this->view->assignMultiple([
                 'lastCrawl'         => $this->loader->load('zoom_lastcrawl'),
                 'seoMetaData'       => $seoMetaData,
                 'contentMetaData'   => $contentMetaData,
-                #'technicalMetaData' => $technicalMetaData,
+                'technicalMetaData' => $technicalMetaData,
                 'moduleName'        => 'Zoom Module'
             ]);
 
