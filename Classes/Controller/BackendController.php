@@ -6,14 +6,11 @@
 
 namespace HDNET\OnpageIntegration\Controller;
 
-use HDNET\OnpageIntegration\Domain\Repository\ConfigurationRepository;
 use HDNET\OnpageIntegration\Exception\UnavailableAccessDataException;
-use HDNET\OnpageIntegration\Provider\MetaDataProvider;
 use HDNET\OnpageIntegration\Utility\ArrayUtility;
 use HDNET\OnpageIntegration\Utility\TitleUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class BackendController
@@ -28,19 +25,28 @@ class BackendController extends ActionController
     protected $loader;
 
     /**
+     * @var \HDNET\OnpageIntegration\Provider\MetaDataProvider
+     * @inject
+     */
+    protected $metaDataProvider;
+
+    /**
+     * @var \HDNET\OnpageIntegration\Domain\Repository\ConfigurationRepository
+     * @inject
+     */
+    protected $configurationRepository;
+
+    /**
      * Represent the index page
      */
     public function indexAction()
     {
         try {
-            $metaDataProvider = GeneralUtility::makeInstance(MetaDataProvider::class);
-            $seoMetaData[] = $metaDataProvider->getMetaData('seoaspects');
-
-            $contentMetaData[] = $metaDataProvider->getMetaData('contentaspects');
-            $technicalMetaData[] = $metaDataProvider->getMetaData('technicalaspects');
+            $seoMetaData[] = $this->metaDataProvider->getMetaData('seoaspects');
+            $contentMetaData[] = $this->metaDataProvider->getMetaData('contentaspects');
+            $technicalMetaData[] = $this->metaDataProvider->getMetaData('technicalaspects');
 
             ArrayUtility::buildIndexActionArray($seoMetaData, 'seoaspects');
-
             ArrayUtility::buildIndexActionArray($technicalMetaData, 'technicalaspects');
             ArrayUtility::buildIndexActionArray($contentMetaData, 'contentaspects');
 
@@ -66,20 +72,21 @@ class BackendController extends ActionController
          */
         public function detailAction($section, $call)
         {
-            $objectManager = new ObjectManager();
-            $configurationRepository = $objectManager->get(ConfigurationRepository::class);
-
             /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
-            $configuration = $configurationRepository->findRecord(1);
+            $configuration = $this->configurationRepository->findRecord(1);
 
+            $metaDataProvider = $this->metaDataProvider->getMetaData($section);
+
+            $showTableKey = $metaDataProvider[$call]['show'];
             $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
-            $apiCallGraph = 'zoom_' . $section . '_' . $call . '_graph';
+
+            $table = $this->loader->load($apiCallTable);
+            #$table = ArrayUtility::showTable($this->loader->load($apiCallTable), $showTableKey);
 
             $this->view->assignMultiple([
                 'moduleName'    => TitleUtility::makeSubTitle($section),
                 'configuration' => $configuration,
-                'table'         => $this->loader->load($apiCallTable),
-                'graph'         => $this->loader->load($apiCallGraph),
+                'table'         => $table,
             ]);
         }
 
