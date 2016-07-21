@@ -33,6 +33,7 @@
             {
                 "description": "Indexierbare Seiten, die nicht in der sitemap.xml sind",
                 "priority": 2,
+                "show": [],
                 "errors": {
                   "show": "not_included"
                 },
@@ -2536,6 +2537,7 @@
             {
                 "description": "Indexierbare Seiten mit Description Duplikat",
                 "priority": 3,
+                "show": ["url", "meta_description", "count_duplicate_descriptions"],
               "errors": {
                 "operator": "sum",
                 "hidden": [0]
@@ -2702,6 +2704,7 @@
             {
                 "description": "Indexierbare Seiten mit Title-Duplikat",
                 "priority": 3,
+                "show": ["url", "meta_title", "count_duplicate_titles"],
                 "errors": {
                   "operator": "sum",
                   "hidden": [0]
@@ -2858,6 +2861,7 @@
             {
                 "description": "Indexierbare Seiten mit mehr als einem H1 Tag",
                 "priority": 3,
+                "show": ["opr", "h1", "h1_count"],
                 "errors": {
                   "operator": "sum",
                   "hidden": [0]
@@ -3006,6 +3010,7 @@
             {
                 "description": "Bilder ohne Alt Text",
                 "priority": 2,
+                "show": ["image_url", "image_alt"],
                 "graph": {
                     "action": "aggregate",
                     "authentication": {
@@ -3132,6 +3137,7 @@
             {
                 "description": "Indexierbare Seiten mit weniger als 300 Wörtern (Thin Content)",
                 "priority": 2,
+                "show": ["opr", "count_words"],
                 "errors": {
                   "operator": "sum",
                   "hidden": ["300-400","400-500", "500-600", "600-700", "600-700", "700-800", "800-900", "900+"]
@@ -3289,6 +3295,7 @@
             {
                 "description": "Indexierbare Seiten mit H1-Duplikat",
                 "priority": 2,
+                "show": ["opr", "h1", "count_duplicate_h1"],
                 "errors": {
                   "operator": "sum",
                   "hidden": [0]
@@ -3458,6 +3465,7 @@
             {
                 "description": "Indexierbare Seiten die Flash verwenden",
                 "priority": 2,
+                "show": ["url", "meta_title", "count_duplicate_titles"],
                 "errors": {
                   "operator": "sum",
                   "hidden": [0]
@@ -3595,6 +3603,7 @@
             {
                 "description": "Indexierbare Seiten ohne Twitter Vorschau Bild",
                 "priority": 1,
+                "show": ["url", "meta_title", "count_duplicate_titles"],
                 "graph": {
                     "action": "aggregate",
                     "authentication": {
@@ -3747,6 +3756,7 @@
             {
                 "description": "Defekte extern-verlinkte Inhalte",
                 "priority": 1,
+                "show": ["opr", "count_links_incoming_internal", "count_incoming_references"],
                 "errors": "4xx",
                 "graph": {
                     "action": "aggregate",
@@ -4014,9 +4024,10 @@
             {
                 "description": "Indexierbare Seiten die nicht einzigartig sind (Duplicate Content)",
                 "priority": 3,
-                "errors": ["sum", {
-                    "hidden_fields": ["0"]
-                }],
+                "show": ["opr", "count_links_incoming_internal", "count_incoming_references"],
+                "errors": {
+                    "show": "4xx"
+                },
                 "graph": {
                     "action": "aggregate",
                     "authentication": {

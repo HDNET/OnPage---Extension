@@ -1,3 +1,5 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+			xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
 <f:layout name="Default" xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html"/>
 {namespace onpage=HDNET\OnpageIntegration\ViewHelpers}
 <f:section name="Content">
@@ -11,46 +13,138 @@
 	<div class="page-header">
 		<h4>Tabelle: Was ist hinterlegt ?</h4>
 	</div>
+	<f:debug>{table}</f:debug>
 	<f:if condition="{table}">
 		<f:then>
 			<table class="table table-striped">
-				<thead>
-				<tr>
-					<f:for each="{table.0}" as="value" key="key" reverse="1">
-						<th>
-							<onpage:title title="{onpage:inArray(array:configuration.hideFieldsAsArray,value:key,key:key)}"/>
-						</th>
-					</f:for>
-				</tr>
-				</thead>
-				<tbody>
-				<f:for each="{table}" as="secondLayer">
-					<tr>
-						<f:for each="{secondLayer}" as="value" key="key" reverse="1">
-							<td>
-								<f:if condition="{key} == 'opr'">
-									<f:then>
-										<f:format.number decimals="0">
-											<onpage:inArray array="{configuration.hideFieldsAsArray}" value="{value}" key="{key}" negate="1"/>
-										</f:format.number>
-									</f:then>
-									<f:else>
-										<f:if condition="{key} == 'url'">
-											<f:then>
-												<a target="_blank" href="{value}">{value}</a>
-											</f:then>
-											<f:else>
-												<onpage:inArray array="{configuration.hideFieldsAsArray}" value="{value}" key="{key}" negate="1"/>
-											</f:else>
-										</f:if>
-									</f:else>
-								</f:if>
-							</td>
-						</f:for>
-					</tr>
-				</f:for>
+			<thead>
+			<tr>
+				<f:if condition="{table.0.url}">
+					<th>URL</th>
+				</f:if>
+				<f:if condition="{table.0.meta_description}">
+					<th>Meta Description</th>
+				</f:if>
+				<f:if condition="{table.0.count_duplicate_descriptions}">
+					<th>Description Duplikate Zähler</th>
+				</f:if>
+				<f:if condition="{table.0.meta_title}">
+					<th>Meta Title</th>
+				</f:if>
+				<f:if condition="{table.0.count_duplicate_titles}">
+					<th>Title Duplikate Zähler</th>
+				</f:if>
+				<f:if condition="{table.0.opr}">
+					<th>OPR</th>
+				</f:if>
+				<f:if condition="{table.0.document}">
+					<th>Dokument</th>
+				</f:if>
+				<f:if condition="{table.0.h1}">
+					<th>H1 Inhalt</th>
+				</f:if>
+				<f:if condition="{table.0.count_h1}">
+					<th>Anzahl H1 Tags</th>
+				</f:if>
+				<f:if condition="{table.0.count_duplicate_h1}">
+					<th>H1 Duplikate (Zähler)</th>
+				</f:if>
+				<f:if condition="{table.0.hash}">
+					<th>Fingerabdruck des Dokuments</th>
+				</f:if>
+				<f:if condition="{table.0.image_alt}">
+					<th>ALT Text</th>
+				</f:if>
+				<f:if condition="{table.0.image_url}">
+					<th>Vorschau des Bildes</th>
+				</f:if>
+				<f:if condition="{table.0.image_url}">
+					<th>URL des Bildes</th>
+				</f:if>
+				<f:if condition="{table.0.count_words}">
+					<th>Wörter im Text</th>
+				</f:if>
+				<f:if condition="{table.0.twitter}">
+
+				</f:if>
+				<f:if condition="{table.0.facebook}">
+
+				</f:if>
+				<f:if condition="{table.0.count_links_incoming_internal}">
+					<th>Interne Links insgesamt (Zähler)</th>
+				</f:if>
+				<f:if condition="{table.0.count_incoming_references}">
+					<th>Eingehende Verweise</th>
+				</f:if>
+			</tr>
+			</thead>
+			<tbody>
+			<f:for each="{table}" as="item">
+			<tr>
+				<f:if condition="{item.url}">
+					<td><a href="{item.url}" target="_blank">{item.url}</a></td>
+				</f:if>
+				<f:if condition="{item.meta_description}">
+					<td>{item.meta_description}</td>
+				</f:if>
+				<f:if condition="{item.count_duplicate_descriptions}">
+					<td>{item.count_duplicate_descriptions} ICON</td>
+				</f:if>
+				<f:if condition="{item.meta_title}">
+					<td>{item.meta_title}</td>
+				</f:if>
+				<f:if condition="{item.count_duplicate_titles}">
+					<td>{item.count_duplicate_titles} ICON</td>
+				</f:if>
+				<f:if condition="{item.opr}">
+					<td><f:format.number decimals="0">{item.opr}</f:format.number></td>
+				</f:if>
+				<f:if condition="{table.document}">
+					<td>{item.meta_title}
+						<small><a href="{item.url}">{item.url}</a></small>
+					</td>
+				</f:if>
+				<f:if condition="{item.h1}">
+					<td>{item.h1}</td>
+				</f:if>
+				<f:if condition="{item.count_h1}">
+					<td>{item.count_h1}</td>
+				</f:if>
+				<f:if condition="{item.count_duplicate_h1}">
+					<td>{item.count_duplicate_h1}</td>
+				</f:if>
+				<f:if condition="{item.hash}">
+					<td>{item.hash}</td>
+				</f:if>
+				<f:if condition="{item.image_alt}">
+					<td>KEINE</td>
+				</f:if>
+				<f:if condition="{item.image_url}">
+					<td><img src="{item.image_url}" height="100" width="100"></td>
+				</f:if>
+				<f:if condition="{item.image_url}">
+					<td>{item.image_url}</td>
+				</f:if>
+				<f:if condition="{item.count_words">
+					<td>{item.count_words}</td>
+				</f:if>
+				<f:if condition="{table.twitter}">
+
+				</f:if>
+				<f:if condition="{table.facebook}">
+
+				</f:if>
+				<f:if condition="{item.count_links_incoming_internal}">
+					<td>{item.count_links_incoming_internal} Links</td>
+				</f:if>
+				<f:if condition="{item.count_incoming_references}">
+					<td>{item.count_incoming_references} mal gefunden</td>
+				</f:if>
+			</tr>
+			</f:for>
+			</tbody>
 			</table>
-		</f:then>
+			</f:then>
 		<f:else>
 			<f:render partial="NoData"/>
 		</f:else>
