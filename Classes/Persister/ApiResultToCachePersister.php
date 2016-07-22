@@ -14,7 +14,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ApiResultToCachePersister
 {
-
+    const CACHE_LIFETIME = 604800;
     const CACHE_ID_PREFIX = 'HDNET_onpage_extension';
 
     /**
@@ -26,7 +26,7 @@ class ApiResultToCachePersister
         /** @var CacheManager $cacheManager */
         $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
         $cache = $cacheManager->getCache('onpage_extension');
-        $cache->set($this->getIdentifier($key), json_encode($data));
+        $cache->set($this->getIdentifier($key), json_encode($data), self::CACHE_LIFETIME);
     }
 
     /**
