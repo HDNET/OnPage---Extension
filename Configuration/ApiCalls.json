@@ -35,7 +35,7 @@
         "priority": 2,
         "show": [
           "opr",
-          "document",
+          "documents",
           "sitemap_url",
           "count_links_incoming_internal"
         ],
@@ -194,9 +194,9 @@
         "priority": 2,
         "show": [
           "opr",
-          "document",
+          "documents",
           "count_minimum_clicks"
-        ]
+        ],
         "errors": {
           "show": "not_reached"
         },
@@ -355,7 +355,7 @@
         "priority": 2,
         "show": [
           "opr",
-          "document",
+          "documents",
           "canonical_group"
         ],
         "errors": {
@@ -501,7 +501,7 @@
         "priority": 2,
         "show": [
           "opr",
-          "document",
+          "documents",
           "redirect_type_group",
           "redirect_category"
         ],
@@ -648,7 +648,7 @@
         "priority": 1,
         "show": [
           "opr",
-          "document",
+          "documents",
           "count_links_incoming_internal_follow",
           "count_links_incoming_internal_ignored",
           "count_links_incoming_internal"
@@ -815,8 +815,8 @@
         "priority": 3,
         "show": [
           "opr",
-          "document",
-          "robots"
+          "documents",
+          "robots_allowed_group"
         ],
         "graph": {
           "action": "aggregate",
@@ -927,7 +927,7 @@
         "description": "Blockierte CSS Dateien",
         "show": [
           "opr",
-          "document",
+          "documents",
           "robots_allowed_group"
         ],
         "priority": 3,
@@ -1884,7 +1884,7 @@
         "priority": 2,
         "show": [
           "opr",
-          "document",
+          "documents",
           "count_translations",
           "count_incoming_translations"
         ],
@@ -2018,7 +2018,7 @@
         "priority": 2,
         "show": [
           "opr",
-          "document",
+          "documents",
           "sitemap_url",
           "count_links_incoming_internal"
         ],
@@ -2177,7 +2177,7 @@
         "priority": 2,
         "show": [
           "opr",
-          "document",
+          "documents",
           "count_links_incoming_internal_follow",
           "count_links_incoming_internal_ignored",
           "count_links_incoming_internal"
@@ -4437,7 +4437,7 @@
         "priority": 3,
         "show": [
           "opr",
-          "status_code"
+          "header_status"
         ],
         "errors": {
           "show": "4xx"
@@ -4700,7 +4700,7 @@
         "priority": 2,
         "show": [
           "opr",
-          "aggregated_file_size"
+          "file_size_aggregated"
         ],
         "errors": {
           "operator": "sum",
@@ -4847,7 +4847,7 @@
         "description": "Seiten ohne Komprimierung",
         "show": [
           "opr",
-          "document",
+          "documents",
           "compression_type"
         ],
         "priority": 1,
@@ -5825,7 +5825,7 @@
         "description": "Defekte Übersetzungen",
         "priority": 2,
         "show": [
-          "opr,status_code"
+          "documents", "reference_from_language"
         ],
         "errors": {
           "show": "4xx"
