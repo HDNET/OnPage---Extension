@@ -26,7 +26,7 @@ class ApiResultToCachePersister
         /** @var CacheManager $cacheManager */
         $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
         $cache = $cacheManager->getCache('onpage_extension');
-        $cache->set($this->getIdentifier($key), json_encode($data), self::CACHE_LIFETIME);
+        $cache->set($this->getIdentifier($key), json_encode($data), null,self::CACHE_LIFETIME);
     }
 
     /**
