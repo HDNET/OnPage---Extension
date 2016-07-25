@@ -11,6 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ApiCallUtility
 {
+
     /**
      * Append the errors of an api call to
      * metaDataArray
@@ -22,11 +23,11 @@ class ApiCallUtility
     {
         $loader = GeneralUtility::makeInstance(\HDNET\OnpageIntegration\Loader\ApiResultLoader::class);
         $i = 0;
-         foreach($metaDataArray[0] as $element) {
-            $i++;
+        foreach ($metaDataArray[0] as $element) {
             $graphDataArray = $loader->load('zoom_' . $section . '_' . $i . '_graph');
             $errorReportyKey = $element['errors'];
             $element['errors'] = self::errorReport($graphDataArray, $errorReportyKey);
+            $i++;
         }
     }
 
