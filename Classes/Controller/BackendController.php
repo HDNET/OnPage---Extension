@@ -10,7 +10,6 @@ use HDNET\OnpageIntegration\Exception\UnavailableAccessDataException;
 use HDNET\OnpageIntegration\Utility\ArrayUtility;
 use HDNET\OnpageIntegration\Utility\TitleUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class BackendController
@@ -58,45 +57,44 @@ class BackendController extends ActionController
                 'technicalMetaData' => $technicalMetaData,
                 'moduleName'        => 'Zoom Module'
             ]);
-
         } catch (UnavailableAccessDataException $e) {
             return "Bitte tragen Sie Ihre Zugangsdaten ein.";
         }
     }
 
-        /**
-         * Handle the detail pages
-         *
-         * @param string $section
-         * @param string $call
-         */
-        public function detailAction($section, $call)
-        {
-            /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
-            $configuration = $this->configurationRepository->findRecord(1);
+    /**
+     * Handle the detail pages
+     *
+     * @param string $section
+     * @param string $call
+     */
+    public function detailAction($section, $call)
+    {
+        /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
+        $configuration = $this->configurationRepository->findRecord(1);
 
-            $metaDataProvider = $this->metaDataProvider->getMetaData($section);
+        $metaDataProvider = $this->metaDataProvider->getMetaData($section);
 
-            $showTableKey = $metaDataProvider[$call]['show'];
-            $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
+        $showTableKey = $metaDataProvider[$call]['show'];
+        $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
 
-            $table = $this->loader->load($apiCallTable);
-            #$table = ArrayUtility::showTable($this->loader->load($apiCallTable), $showTableKey);
+        $table = $this->loader->load($apiCallTable);
+        #$table = ArrayUtility::showTable($this->loader->load($apiCallTable), $showTableKey);
 
-            $this->view->assignMultiple([
-                'moduleName'    => TitleUtility::makeSubTitle($section),
-                'configuration' => $configuration,
-                'table'         => $table,
-            ]);
-        }
-
-        /**
-         * Empty Keyword Page
-         */
-        public function keywordAction()
-        {
-            $this->view->assignMultiple([
-                'moduleName' => 'Keyword'
-            ]);
-        }
+        $this->view->assignMultiple([
+            'moduleName'    => TitleUtility::makeSubTitle($section),
+            'configuration' => $configuration,
+            'table'         => $table,
+        ]);
     }
+
+    /**
+     * Empty Keyword Page
+     */
+    public function keywordAction()
+    {
+        $this->view->assignMultiple([
+            'moduleName' => 'Keyword'
+        ]);
+    }
+}
