@@ -5,7 +5,6 @@ namespace HDNET\OnpageIntegration\Provider;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use HDNET\OnpageIntegration\Service\ArrayService;
 
-
 class MetaDataProvider
 {
 

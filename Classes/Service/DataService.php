@@ -79,10 +79,9 @@ class DataService extends AbstractService
         foreach ($keys as $key) {
             try {
                 $results[$key] = $this->getApiResult($key);
-            }catch (ApiErrorException $e) {
+            } catch (ApiErrorException $e) {
                 continue;
             }
-
         }
 
         return $results;
