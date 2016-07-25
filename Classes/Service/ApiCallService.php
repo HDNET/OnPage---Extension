@@ -29,7 +29,6 @@ class ApiCallService
 
             return $this->send($json);
         } catch (UnavailableException $e) {
-
         }
     }
 

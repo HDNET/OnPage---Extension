@@ -24,7 +24,6 @@ class ArrayUtility
         $loader = GeneralUtility::makeInstance(\HDNET\OnpageIntegration\Loader\ApiResultLoader::class);
 
         for ($i = 0; $i < count($metaDataArray[0]); $i++) {
-
             $graphDataArray = $loader->load('zoom_' . $section . '_' . $i . '_graph');
             $errorReportyKey = $metaDataArray[0][$i]['errors'];
 
@@ -47,7 +46,6 @@ class ArrayUtility
         $totalErrors = 0;
 
         foreach ($graphApiCallResult as $element) {
-
             if (in_array('sum', $errorReportKey)) {
                 if (in_array($errorReportKey['hidden'], $element)) {
                     continue;
@@ -75,7 +73,6 @@ class ArrayUtility
     {
         $fittedTablesRecords = [];
         foreach ($tableApiCallResult as $singleCallElement) {
-
             foreach ($showTableKey as $key) {
                 if (array_key_exists($key, $singleCallElement)) {
                     $singleRecordArray[$key] = $singleCallElement[$key];

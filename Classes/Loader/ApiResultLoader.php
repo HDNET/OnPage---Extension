@@ -49,7 +49,6 @@ class ApiResultLoader
             try {
                 $entry = $this->dataService->getApiResult($key);
             } catch (ApiErrorException $e) {
-
             }
             $this->persister->persist($entry, $key);
         }
