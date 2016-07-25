@@ -4321,6 +4321,7 @@
             {
                 "description": "Defekte Seiten",
                 "priority": 3,
+                "show": ["opr","status_code"],
                 "errors": {
                     "show": "4xx"
                 },
@@ -4447,6 +4448,7 @@
             {
                 "description": "Defekte Weiterleitungen",
                 "priority": 3,
+                "show": [""],
                 "errors": {
                     "show": "4xx"
                 },
@@ -4577,6 +4579,7 @@
             {
                 "description": "Seiten mit einer Gesamtgröße über 1 MB",
                 "priority": 2,
+                "show": ["opr", "aggregated_file_size"],
                 "errors": {
                   "operator": "sum",
                   "hidden": ["0","0KB_to_64KB","64KB_to_128KB","128KB_to_256KB","256KB_to_512KB","0.5MB_to_1MB"]
@@ -4713,6 +4716,7 @@
             },
             {
                 "description": "Seiten ohne Komprimierung",
+                "show": ["opr", "document", "compression_type"],
                 "priority": 1,
                 "errors": {
                     "show": "none"
@@ -5687,6 +5691,7 @@
             {
                 "description": "Defekte Übersetzungen",
                 "priority": 2,
+                "show": ["opr,status_code"],
                 "errors": {
                     "show": "4xx"
                 },
@@ -6076,6 +6081,7 @@
             {
                 "description": "Indexierbare Seiten ohne Sprachangaben",
                 "priority": 1,
+                "show": ["opr", "language", "country"],
                 "errors": {
                     "show": "not_set"
                 },
