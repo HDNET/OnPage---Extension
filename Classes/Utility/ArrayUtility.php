@@ -5,7 +5,6 @@
 namespace HDNET\OnpageIntegration\Utility;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class ArrayUtility
@@ -43,19 +42,20 @@ class ArrayUtility
      *
      * @return int
      */
-    protected static function errorReport($graphApiCallResult,$errorReportKey) {
+    protected static function errorReport($graphApiCallResult, $errorReportKey)
+    {
         $totalErrors = 0;
 
-        foreach($graphApiCallResult as $element) {
+        foreach ($graphApiCallResult as $element) {
 
-            if(in_array('sum', $errorReportKey)) {
-                if(in_array($errorReportKey['hidden'], $element)) {
+            if (in_array('sum', $errorReportKey)) {
+                if (in_array($errorReportKey['hidden'], $element)) {
                     continue;
                 }
                 $totalErrors += $element['count'];
             }
 
-            if(in_array($errorReportKey['show'], $element)) {
+            if (in_array($errorReportKey['show'], $element)) {
                 $totalErrors += $element['count'];
             }
         }
@@ -71,12 +71,13 @@ class ArrayUtility
      *
      * @return array
      */
-    public static function showTable(array $tableApiCallResult,array $showTableKey) {
+    public static function showTable(array $tableApiCallResult, array $showTableKey)
+    {
         $fittedTablesRecords = [];
-        foreach($tableApiCallResult as $singleCallElement) {
+        foreach ($tableApiCallResult as $singleCallElement) {
 
-            foreach($showTableKey as $key) {
-                if(array_key_exists($key, $singleCallElement)) {
+            foreach ($showTableKey as $key) {
+                if (array_key_exists($key, $singleCallElement)) {
                     $singleRecordArray[$key] = $singleCallElement[$key];
                 }
             }
