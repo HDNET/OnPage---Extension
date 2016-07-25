@@ -5,6 +5,7 @@
 namespace HDNET\OnpageIntegration\Utility;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class ArrayUtility
@@ -29,6 +30,7 @@ class ArrayUtility
             $errorReportyKey = $metaDataArray[0][$i]['errors'];
 
             $metaDataArray[0][$i]['errors'] = self::errorReport($graphDataArray, $errorReportyKey);
+            //todo remove
             $metaDataArray[0][$i]['test'] = $graphDataArray;
         }
     }
@@ -58,5 +60,28 @@ class ArrayUtility
             }
         }
         return $totalErrors;
+    }
+
+    /**
+     * Fitted $tableApiCallResult by the elements of
+     * $showTableKey
+     *
+     * @param array $tableApiCallResult
+     * @param array $showTableKey
+     *
+     * @return array
+     */
+    public static function showTable(array $tableApiCallResult,array $showTableKey) {
+        $fittedTablesRecords = [];
+        foreach($tableApiCallResult as $singleCallElement) {
+
+            foreach($showTableKey as $key) {
+                if(array_key_exists($key, $singleCallElement)) {
+                    $singleRecordArray[$key] = $singleCallElement[$key];
+                }
+            }
+            $fittedTablesRecords[] = $singleRecordArray;
+        }
+        return $fittedTablesRecords;
     }
 }

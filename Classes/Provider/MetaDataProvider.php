@@ -5,22 +5,30 @@ namespace HDNET\OnpageIntegration\Provider;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use HDNET\OnpageIntegration\Service\ArrayService;
 
+
 class MetaDataProvider
 {
 
     /**
-     * @var ConfigurationProvider
+     * @var \HDNET\OnpageIntegration\Provider\ConfigurationProvider
      */
     protected $configurationProvider;
+
     /**
-     * @var ArrayService
+     * @var \HDNET\OnpageIntegration\Service\ArrayService
      */
     protected $arrayService;
 
-    public function __construct()
+    /**
+     * MetaDataProvider constructor.
+     *
+     * @param ConfigurationProvider $configurationProvider
+     * @param ArrayService          $arrayService
+     */
+    public function __construct(ConfigurationProvider $configurationProvider, ArrayService $arrayService)
     {
-        $this->configurationProvider = GeneralUtility::makeInstance(ConfigurationProvider::class);
-        $this->arrayService          = GeneralUtility::makeInstance(ArrayService::class);
+        $this->configurationProvider = $configurationProvider;
+        $this->arrayService          = $arrayService;
     }
 
     /**
@@ -30,7 +38,7 @@ class MetaDataProvider
     public function getMetaData($key)
     {
         $configData = $this->configurationProvider->getAllConfigurationData();
-        $searchKeys = ['description', 'priority', 'errors'];
+        $searchKeys = ['description', 'priority', 'errors', 'show'];
 
         $elements = $this->arrayService->findElement($configData, $key);
 
