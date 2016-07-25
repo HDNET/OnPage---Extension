@@ -7,11 +7,10 @@ namespace HDNET\OnpageIntegration\Utility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Class ArrayUtility
+ * Class ApiCallUtility
  */
-class ArrayUtility
+class ApiCallUtility
 {
-
     /**
      * Append the errors of an api call to
      * metaDataArray
@@ -22,14 +21,12 @@ class ArrayUtility
     public static function buildIndexActionArray(&$metaDataArray, $section)
     {
         $loader = GeneralUtility::makeInstance(\HDNET\OnpageIntegration\Loader\ApiResultLoader::class);
-
-        for ($i = 0; $i < count($metaDataArray[0]); $i++) {
+        $i = 0;
+         foreach($metaDataArray[0] as $element) {
+            $i++;
             $graphDataArray = $loader->load('zoom_' . $section . '_' . $i . '_graph');
-            $errorReportyKey = $metaDataArray[0][$i]['errors'];
-
-            $metaDataArray[0][$i]['errors'] = self::errorReport($graphDataArray, $errorReportyKey);
-            //todo remove
-            $metaDataArray[0][$i]['test'] = $graphDataArray;
+            $errorReportyKey = $element['errors'];
+            $element['errors'] = self::errorReport($graphDataArray, $errorReportyKey);
         }
     }
 
@@ -69,7 +66,7 @@ class ArrayUtility
      *
      * @return array
      */
-    public static function showTable(array $tableApiCallResult, array $showTableKey)
+    public static function showColumns(array $tableApiCallResult, array $showTableKey)
     {
         $fittedTablesRecords = [];
         foreach ($tableApiCallResult as $singleCallElement) {
