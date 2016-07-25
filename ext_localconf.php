@@ -17,6 +17,9 @@ TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin('HDNET.' . $_EXTKEY,
 if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['onpage_extension'])) {
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['onpage_extension'] = [
         'frontend' => \TYPO3\CMS\Core\Cache\Frontend\StringFrontend::class,
-        'groups'   => ['onpage']
+        'groups'   => ['onpage'],
+        'options' => [
+            'defaultLifetime' => \HDNET\OnpageIntegration\Persister\ApiResultToCachePersister::DEFAULT_CACHE_LIFETIME,
+        ],
     ];
 }
