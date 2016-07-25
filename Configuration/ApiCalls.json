@@ -33,7 +33,7 @@
             {
                 "description": "Indexierbare Seiten, die nicht in der sitemap.xml sind",
                 "priority": 2,
-                "show": [],
+                "show": ["opr","document", "sitemap_url", "count_links_incoming_internal"],
                 "errors": {
                   "show": "not_included"
                 },
@@ -187,6 +187,7 @@
             {
                 "description": "Indexierbare Seiten mit langem Klickpfad",
                 "priority": 2,
+                "show": ["opr", "document", "count_minimum_clicks"]
                 "errors": {
                   "show": "not_reached"
                 },
@@ -343,6 +344,7 @@
             {
                 "description": "Indexierbare Seiten ohne validen Canonical",
                 "priority": 2,
+                "show": ["opr", "document", "canonical_group"],
                 "errors": {
                   "show": "not_set"
                 },
@@ -484,6 +486,7 @@
             {
                 "description": "Weiterleitungen zu anderen Subdomains",
                 "priority": 2,
+                "show": ["opr", "document", "redirect_type_group", "redirect_category"],
                 "errors": {
                   "show": "different_host"
                 },
@@ -625,6 +628,7 @@
             {
                 "description": "Indexierbare Seiten mit weniger als 3 eingehenden Links",
                 "priority": 1,
+                "show": ["opr", "document", "count_links_incoming_internal_follow", "count_links_incoming_internal_ignored", "count_links_incoming_internal"],
                 "errors": {
                   "operator": "sum",
                   "hidden": []
@@ -785,6 +789,7 @@
             {
                 "description": "Blockierte Javascript Dateien",
                 "priority": 3,
+                "show": ["opr","document", "robots"],
                 "graph": {
                     "action": "aggregate",
                     "authentication": {
@@ -892,6 +897,7 @@
             },
             {
                 "description": "Blockierte CSS Dateien",
+                "show": ["opr","document", "robots_allowed_group"],
                 "priority": 3,
                 "graph": {
                     "action": "aggregate",
@@ -1844,6 +1850,7 @@
             {
                 "description": "Indexierbare Seiten mit fehlenden Übersetzungen",
                 "priority": 2,
+                "show": ["opr", "document", "count_translations", "count_incoming_translations"],
                 "errors": {
                   "operator": "sum",
                   "hidden": []
@@ -1972,6 +1979,7 @@
             {
                 "description": "Nicht indexierbare Seiten in der sitemap.xml",
                 "priority": 2,
+                "show": ["opr", "document", "sitemap_url", "count_links_incoming_internal"],
                 "errors": {
                   "show": "included"
                 },
@@ -2125,6 +2133,7 @@
             {
                 "description": "Seiten ohne eingehende Links in der sitemap.xml",
                 "priority": 2,
+                "show": ["opr", "document", "count_links_incoming_internal_follow", "count_links_incoming_internal_ignored", "count_links_incoming_internal"],
               "errors": {
                 "operator": "sum",
                 "hidden": []
