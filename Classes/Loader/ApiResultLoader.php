@@ -46,7 +46,6 @@ class ApiResultLoader
     public function load($key)
     {
         $cacheId = $this->persister->getIdentifier($key);
-
         $entry = GeneralUtility::makeInstance(CacheManager::class)
             ->getCache('onpage_extension')
             ->get($cacheId);
@@ -58,7 +57,6 @@ class ApiResultLoader
             }
             $this->persister->persist($entry, $key);
         }
-
         return json_decode($entry, true);
     }
 }
