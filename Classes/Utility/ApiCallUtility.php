@@ -4,7 +4,7 @@
  */
 namespace HDNET\OnpageIntegration\Utility;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use HDNET\OnpageIntegration\Loader\ApiResultLoader;
 
 /**
  * Class ApiCallUtility
@@ -16,12 +16,12 @@ class ApiCallUtility
      * Append the errors of an api call to
      * metaDataArray
      *
-     * @param $metaDataArray
-     * @param $section
+     * @param                 $metaDataArray
+     * @param                 $section
+     * @param ApiResultLoader $loader
      */
-    public static function buildIndexActionArray(&$metaDataArray, $section)
+    public static function buildIndexActionArray(&$metaDataArray, $section, ApiResultLoader $loader)
     {
-        $loader = GeneralUtility::makeInstance(\HDNET\OnpageIntegration\Loader\ApiResultLoader::class);
         $i = 0;
         foreach ($metaDataArray[0] as $element) {
             $graphDataArray = $loader->load('zoom_' . $section . '_' . $i . '_graph');

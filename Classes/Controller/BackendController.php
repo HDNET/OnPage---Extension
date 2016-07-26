@@ -46,9 +46,9 @@ class BackendController extends ActionController
             $technicalMetaData[] = $this->metaDataProvider->getMetaData('technicalaspects');
 
             // todo replace
-            ApiCallUtility::buildIndexActionArray($seoMetaData, 'seoaspects');
-            ApiCallUtility::buildIndexActionArray($technicalMetaData, 'technicalaspects');
-            ApiCallUtility::buildIndexActionArray($contentMetaData, 'contentaspects');
+            ApiCallUtility::buildIndexActionArray($seoMetaData, 'seoaspects', $this->loader);
+            ApiCallUtility::buildIndexActionArray($technicalMetaData, 'technicalaspects', $this->loader);
+            ApiCallUtility::buildIndexActionArray($contentMetaData, 'contentaspects', $this->loader);
 
 
             $this->view->assignMultiple([

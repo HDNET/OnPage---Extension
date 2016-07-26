@@ -17,19 +17,25 @@ class ApiResultLoader
 {
 
     /**
-     * @var DataService
+     * @var \HDNET\OnpageIntegration\Service\DataService
      */
     protected $dataService;
 
     /**
-     * @var ApiResultToCachePersister
+     * @var \HDNET\OnpageIntegration\Persister\ApiResultToCachePersister
      */
     protected $persister;
 
-    public function __construct()
+    /**
+     * ApiResultLoader constructor.
+     *
+     * @param \HDNET\OnpageIntegration\Service\DataService               $dataService
+     * @param \HDNET\OnpageIntegration\Persister\ApiResultToCachePersister $apiResultToCachePersister
+     */
+    public function __construct(DataService $dataService, ApiResultToCachePersister $apiResultToCachePersister)
     {
-        $this->dataService = GeneralUtility::makeInstance(DataService::class);
-        $this->persister = GeneralUtility::makeInstance(ApiResultToCachePersister::class);
+        $this->dataService = $dataService;
+        $this->persister = $apiResultToCachePersister;
     }
 
     /**
