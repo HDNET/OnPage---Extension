@@ -61,9 +61,6 @@ class BackendController extends ActionController
      */
     public function detailAction($section, $call, OnPageService $onPageService)
     {
-        /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
-        $configuration = $this->configurationRepository->findRecord(1);
-
         $metaDataResult = $this->metaDataProvider->getMetaData($section);
 
         $showTableKey = $metaDataResult[$call]['show'];
@@ -71,7 +68,6 @@ class BackendController extends ActionController
 
         $this->view->assignMultiple([
             'moduleName'    => TitleUtility::makeSubTitle($section),
-            'configuration' => $configuration,
             'table'         => $onPageService->showColumns($apiCallTable, $showTableKey),
         ]);
     }
