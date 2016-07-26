@@ -7,7 +7,7 @@
 namespace HDNET\OnpageIntegration\Controller;
 
 use HDNET\OnpageIntegration\Exception\UnavailableAccessDataException;
-use HDNET\OnpageIntegration\Utility\ApiCallUtility;
+use HDNET\OnpageIntegration\Service\OnPageService;
 use HDNET\OnpageIntegration\Utility\TitleUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -41,21 +41,11 @@ class BackendController extends ActionController
     public function indexAction()
     {
         try {
-            $seoMetaData[] = $this->metaDataProvider->getMetaData('seoaspects');
-            $contentMetaData[] = $this->metaDataProvider->getMetaData('contentaspects');
-            $technicalMetaData[] = $this->metaDataProvider->getMetaData('technicalaspects');
-
-            // todo replace
-            ApiCallUtility::buildIndexActionArray($seoMetaData, 'seoaspects', $this->loader);
-            ApiCallUtility::buildIndexActionArray($technicalMetaData, 'technicalaspects', $this->loader);
-            ApiCallUtility::buildIndexActionArray($contentMetaData, 'contentaspects', $this->loader);
-
-
             $this->view->assignMultiple([
                 'lastCrawl'         => $this->loader->load('zoom_lastcrawl'),
-                'seoMetaData'       => $seoMetaData,
-                'contentMetaData'   => $contentMetaData,
-                'technicalMetaData' => $technicalMetaData,
+                'seoMetaData'       => $this->metaDataProvider->getMetaData('seoaspects'),
+                'contentMetaData'   => $this->metaDataProvider->getMetaData('contentaspects'),
+                'technicalMetaData' => $this->metaDataProvider->getMetaData('technicalaspects'),
                 'moduleName'        => 'Zoom Module'
             ]);
         } catch (UnavailableAccessDataException $e) {
@@ -69,7 +59,7 @@ class BackendController extends ActionController
      * @param string $section
      * @param string $call
      */
-    public function detailAction($section, $call)
+    public function detailAction($section, $call, OnPageService $onPageService)
     {
         /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
         $configuration = $this->configurationRepository->findRecord(1);
@@ -82,7 +72,7 @@ class BackendController extends ActionController
         $this->view->assignMultiple([
             'moduleName'    => TitleUtility::makeSubTitle($section),
             'configuration' => $configuration,
-            'table'         => ApiCallUtility::showColumns($this->loader->load($apiCallTable), $showTableKey),
+            'table'         => $onPageService->showColumns($apiCallTable, $showTableKey),
         ]);
     }
 
