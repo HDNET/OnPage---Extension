@@ -33,11 +33,11 @@ class OnPageService extends AbstractService
      * its stores in the field 'errors'.
      * '     *
      *
-     * @param array           $metaDataArray
+     * @param array           $buildData
      * @param string          $section
      * @param ApiResultLoader $loader
      */
-    public function build(array $buildData, $section)
+    public function build($buildData, $section)
     {
         $i = 0;
         foreach ($buildData as $element) {
@@ -53,12 +53,12 @@ class OnPageService extends AbstractService
      * Generates the error report key of an api call and
      * return the result.
      *
-     * @param array $graphApiCallResult
+     * @param mixed $graphApiCallResult
      * @param mixed $errorReportKey
      *
      * @return int
      */
-    protected function errorReport(array $graphApiCallResult, $errorReportKey)
+    protected function errorReport($graphApiCallResult, $errorReportKey)
     {
         $totalErrors = 0;
 
