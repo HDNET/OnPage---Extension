@@ -1,0 +1,13 @@
+.category > td,th:nth-child(1) {
+	width: 60%;
+}
+.category > td,th:nth-child(2) {
+	width: 20%;
+}
+.category > td,th:nth-child(3) {
+	width: 20%;
+}
+
+.crawl > td,th {
+	width: 25%;
+}
