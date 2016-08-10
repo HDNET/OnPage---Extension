@@ -36,6 +36,12 @@ class BackendController extends ActionController
     protected $configurationRepository;
 
     /**
+     * @var \HDNET\OnpageIntegration\Service\OnPageService
+     * @inject
+     */
+    protected $onpPageService;
+
+    /**
      * Load all filter options and show them on the index page
      */
     public function indexAction()
@@ -56,10 +62,10 @@ class BackendController extends ActionController
     /**
      * Show the details of an api call
      *
-     * @param string $section
-     * @param string $call
+     * @param string        $section
+     * @param string        $call
      */
-    public function detailAction($section, $call, OnPageService $onPageService)
+    public function detailAction($section, $call)
     {
         $metaDataResult = $this->metaDataProvider->getMetaData($section);
 
@@ -68,7 +74,7 @@ class BackendController extends ActionController
 
         $this->view->assignMultiple([
             'moduleName'    => TitleUtility::makeSubTitle($section),
-            'table'         => $onPageService->showColumns($apiCallTable, $showTableKey),
+            'table'         => $this->onpPageService->showColumns($apiCallTable, $showTableKey),
         ]);
     }
 
