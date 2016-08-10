@@ -7,7 +7,6 @@
 namespace HDNET\OnpageIntegration\Controller;
 
 use HDNET\OnpageIntegration\Exception\UnavailableAccessDataException;
-use HDNET\OnpageIntegration\Service\OnPageService;
 use HDNET\OnpageIntegration\Utility\TitleUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
