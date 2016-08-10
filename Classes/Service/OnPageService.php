@@ -7,10 +7,15 @@ namespace HDNET\OnpageIntegration\Service;
 
 
 use HDNET\OnpageIntegration\Loader\ApiResultLoader;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class OnPageService extends AbstractService
 {
 
+    /**
+     * @var ApiResultLoader
+     */
+    protected $loader;
     /**
      * OnPageService constructor.
      *
@@ -40,7 +45,7 @@ class OnPageService extends AbstractService
     public function build($buildData, $section)
     {
         $i = 0;
-        foreach ($buildData as $element) {
+        foreach ($buildData as &$element) {
             $graphDataArray = $this->loader->load('zoom_' . $section . '_' . $i . '_graph');
             $errorReportKey = $element['errors'];
             $element['errors'] = $this->errorReport($graphDataArray, $errorReportKey);
@@ -60,16 +65,17 @@ class OnPageService extends AbstractService
      */
     protected function errorReport($graphApiCallResult, $errorReportKey)
     {
+        // todo fix sorting problem
         $totalErrors = 0;
-
         foreach ($graphApiCallResult as $element) {
             if (in_array('sum', $errorReportKey)) {
-                if (in_array($errorReportKey['hidden'], $element)) {
-                    continue;
+                foreach($errorReportKey['hidden'] as $hidden) {
+                    if(in_array($hidden, $element)) {
+                        continue 2;
+                    }
                 }
                 $totalErrors += $element['count'];
             }
-
             if (in_array($errorReportKey['show'], $element)) {
                 $totalErrors += $element['count'];
             }
@@ -88,7 +94,7 @@ class OnPageService extends AbstractService
      */
     public function showColumns($apiCall, array $showTableKey)
     {
-        $apiCallResult = $this->loader($apiCall);
+        $apiCallResult = $this->loader->load($apiCall);
 
         $fittedTablesRecords = [];
         foreach ($apiCallResult as $singleCallElement) {
