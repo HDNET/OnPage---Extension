@@ -38,13 +38,18 @@ class DataService extends AbstractService
 
     /**
      * DataService constructor.
+     *
+     * @param ConfigurationProvider  $configurationProvider
+     * @param AuthenticationProvider $authenticationProvider
+     * @param ArrayService           $arrayService
+     * @param ApiCallService         $apiCallService
      */
-    public function __construct()
+    public function __construct(ConfigurationProvider $configurationProvider, AuthenticationProvider $authenticationProvider, ArrayService $arrayService, ApiCallService $apiCallService)
     {
-        $this->configurationProvider = GeneralUtility::makeInstance(ConfigurationProvider::class);
-        $this->authenticationProvider = GeneralUtility::makeInstance(AuthenticationProvider::class);
-        $this->arrayService = GeneralUtility::makeInstance(ArrayService::class);
-        $this->apiCallService = GeneralUtility::makeInstance(ApiCallService::class);
+        $this->configurationProvider = $configurationProvider;
+        $this->authenticationProvider = $authenticationProvider;
+        $this->arrayService = $arrayService;
+        $this->apiCallService = $apiCallService;
     }
 
     /**

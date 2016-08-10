@@ -7,7 +7,6 @@
 namespace HDNET\OnpageIntegration\Controller;
 
 use HDNET\OnpageIntegration\Exception\UnavailableAccessDataException;
-use HDNET\OnpageIntegration\Utility\ArrayUtility;
 use HDNET\OnpageIntegration\Utility\TitleUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -36,25 +35,22 @@ class BackendController extends ActionController
     protected $configurationRepository;
 
     /**
-     * Represent the index page
+     * @var \HDNET\OnpageIntegration\Service\OnPageService
+     * @inject
+     */
+    protected $onpPageService;
+
+    /**
+     * Load all filter options and show them on the index page
      */
     public function indexAction()
     {
         try {
-            $seoMetaData[] = $this->metaDataProvider->getMetaData('seoaspects');
-            $contentMetaData[] = $this->metaDataProvider->getMetaData('contentaspects');
-            $technicalMetaData[] = $this->metaDataProvider->getMetaData('technicalaspects');
-
-            ArrayUtility::buildIndexActionArray($seoMetaData, 'seoaspects');
-            ArrayUtility::buildIndexActionArray($technicalMetaData, 'technicalaspects');
-            ArrayUtility::buildIndexActionArray($contentMetaData, 'contentaspects');
-
-
             $this->view->assignMultiple([
                 'lastCrawl'         => $this->loader->load('zoom_lastcrawl'),
-                'seoMetaData'       => $seoMetaData,
-                'contentMetaData'   => $contentMetaData,
-                'technicalMetaData' => $technicalMetaData,
+                'seoMetaData'       => $this->metaDataProvider->getMetaData('seoaspects'),
+                'contentMetaData'   => $this->metaDataProvider->getMetaData('contentaspects'),
+                'technicalMetaData' => $this->metaDataProvider->getMetaData('technicalaspects'),
                 'moduleName'        => 'Zoom Module'
             ]);
         } catch (UnavailableAccessDataException $e) {
@@ -63,28 +59,25 @@ class BackendController extends ActionController
     }
 
     /**
-     * Handle the detail pages
+     * Show the details of an api call
      *
-     * @param string $section
-     * @param string $call
+     * @param string        $section
+     * @param string        $call
      */
     public function detailAction($section, $call)
     {
-        /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
-        $configuration = $this->configurationRepository->findRecord(1);
+        $metaDataResult = $this->metaDataProvider->getMetaData($section);
 
-        $metaDataProvider = $this->metaDataProvider->getMetaData($section);
+        $showTableKey = $metaDataResult[$call]['show'];
+        // todo fix
+        if(!$showTableKey) {
+            $showTableKey = [];
+        }
 
-        $showTableKey = $metaDataProvider[$call]['show'];
         $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
-
-        $table = $this->loader->load($apiCallTable);
-        #$table = ArrayUtility::showTable($this->loader->load($apiCallTable), $showTableKey);
-
         $this->view->assignMultiple([
             'moduleName'    => TitleUtility::makeSubTitle($section),
-            'configuration' => $configuration,
-            'table'         => $table,
+            'table'         => $this->onpPageService->showColumns($apiCallTable, $showTableKey),
         ]);
     }
 

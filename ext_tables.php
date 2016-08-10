@@ -28,3 +28,9 @@ if (TYPO3_MODE === 'BE') {
         )
     );
 }
+$GLOBALS['TBE_STYLES']['skins']['onpage_integration'] = [
+    'name' => 'onpage_integration',
+    'stylesheetDirectories' => [
+        'css' => 'EXT:' . $_EXTKEY . '/Resources/Public/css/'
+    ],
+];

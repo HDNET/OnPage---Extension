@@ -813,6 +813,9 @@
       {
         "description": "Blockierte Javascript Dateien",
         "priority": 3,
+        "errors": {
+          "show": "disallowed"
+        },
         "show": [
           "opr",
           "documents",
@@ -930,6 +933,9 @@
           "documents",
           "robots_allowed_group"
         ],
+        "errors": {
+          "show": "disallowed"
+        },
         "priority": 3,
         "graph": {
           "action": "aggregate",
@@ -1264,6 +1270,9 @@
       {
         "description": "Interne 302 Weiterleitungen",
         "priority": 3,
+        "errors": {
+          "show": "301"
+        },
         "graph": {
           "action": "aggregate",
           "authentication": {
@@ -3392,9 +3401,7 @@
         ],
         "errors": {
           "operator": "sum",
-          "hidden": [
-            0
-          ]
+          "hidden": [0]
         },
         "graph": {
           "action": "aggregate",
@@ -3710,6 +3717,9 @@
           "meta_title",
           "count_duplicate_titles"
         ],
+        "errors": {
+          "show": "all_missing"
+        },
         "graph": {
           "action": "aggregate",
           "authentication": {
@@ -3867,7 +3877,15 @@
           "count_links_incoming_internal",
           "count_incoming_references"
         ],
-        "errors": "4xx",
+        "errors": {
+          "operator": "sum",
+          "hidden": [
+            "2xx",
+            "301",
+            "302",
+            "unknown"
+          ]
+        },
         "graph": {
           "action": "aggregate",
           "authentication": {
@@ -3977,6 +3995,9 @@
       {
         "description": "Indexierbare Seiten ohne Facebook Vorschau Bild",
         "priority": 1,
+        "errors": {
+          "show": "all_missing"
+        },
         "graph": {
           "action": "aggregate",
           "authentication": {
@@ -4140,7 +4161,8 @@
           "count_incoming_references"
         ],
         "errors": {
-          "show": "4xx"
+          "operator": "sum",
+          "hidden": [0]
         },
         "graph": {
           "action": "aggregate",
@@ -4437,7 +4459,8 @@
         "priority": 3,
         "show": [
           "opr",
-          "header_status"
+          "header_status",
+          "documents"
         ],
         "errors": {
           "show": "4xx"
@@ -4566,10 +4589,12 @@
         "description": "Defekte Weiterleitungen",
         "priority": 3,
         "show": [
-          ""
+          "opr",
+          "documents",
+          "redirect_to_header_status_group"
         ],
         "errors": {
-          "show": "4xx"
+          "show": "5xx"
         },
         "graph": {
           "action": "aggregate",
@@ -4700,7 +4725,8 @@
         "priority": 2,
         "show": [
           "opr",
-          "file_size_aggregated"
+          "file_size_aggregated",
+          "documents"
         ],
         "errors": {
           "operator": "sum",
@@ -6219,7 +6245,8 @@
         "show": [
           "opr",
           "language",
-          "country"
+          "country",
+          "documents"
         ],
         "errors": {
           "show": "not_set"
