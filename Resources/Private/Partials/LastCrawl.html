@@ -1,14 +1,14 @@
+{namespace onpage=HDNET\OnpageIntegration\ViewHelpers}
 <div class="page-header">
 	<h3>Letzter Crawl</h3>
 </div>
+<f:alias map="{test: '{onpage:arrayTransform(lastCrawl:lastCrawl)}'}">
 <table class="table crawl">
 	<tbody>
-	<!-- Sites -->
-	<tr>
-		<td>
-			<f:if condition="{lastCrawl.1.count}">
+	<td>
+			<f:if condition="{test.working_page}">
 				<f:then>
-					{lastCrawl.0.count}
+					{test.working_page}
 				</f:then>
 				<f:else>
 					0
@@ -17,9 +17,9 @@
 		</td>
 		<td>Valide Seiten</td>
 		<td>
-			<f:if condition="{lastCrawl.5.count}">
+			<f:if condition="{test.broken_page}">
 				<f:then>
-					{lastCrawl.4.count}
+					{test.broken_page}
 				</f:then>
 				<f:else>
 					0
@@ -31,9 +31,9 @@
 	<!-- external Sites -->
 	<tr>
 		<td>
-			<f:if condition="{lastCrawl.3.count}">
+			<f:if condition="{test.working_external_link}">
 				<f:then>
-					{lastCrawl.2.count}
+					{test.working_external_link}
 				</f:then>
 				<f:else>
 					0
@@ -42,9 +42,9 @@
 		</td>
 		<td>Valide externe Seiten</td>
 		<td>
-			<f:if condition="{lastCrawl.4.count}">
+			<f:if condition="{test.broken_external_link}">
 				<f:then>
-					{lastCrawl.7.count}
+					{test.broken_external_link}
 				</f:then>
 				<f:else>
 					0
@@ -56,9 +56,9 @@
 	<!-- Images -->
 	<tr>
 		<td>
-			<f:if condition="{lastCrawl.0.count}">
+			<f:if condition="{test.working_image}">
 				<f:then>
-					{lastCrawl.1.count}
+					{test.working_image}
 				</f:then>
 				<f:else>
 					0
@@ -67,9 +67,9 @@
 		</td>
 		<td>Valide Bilder</td>
 		<td>
-			<f:if condition="{lastCrawl.6.count}">
+			<f:if condition="{test.broken_image}">
 				<f:then>
-					{lastCrawl.5.count}
+					{test.broken_image}
 				</f:then>
 				<f:else>
 					0
@@ -81,9 +81,9 @@
 	<!-- Files -->
 	<tr>
 		<td>
-			<f:if condition="{lastCrawl.2.count}">
+			<f:if condition="{test.working_asset}">
 				<f:then>
-					{lastCrawl.3.count}
+					{test.working_asset}
 				</f:then>
 				<f:else>
 					0
@@ -92,9 +92,9 @@
 		</td>
 		<td>Valide Dateien</td>
 		<td>
-			<f:if condition="{lastCrawl.7.count}">
+			<f:if condition="{test.broken_asset}">
 				<f:then>
-					{lastCrawl.6.count}
+					{test.broken_asset}
 				</f:then>
 				<f:else>
 					0
@@ -105,3 +105,4 @@
 	</tr>
 	</tbody>
 </table>
+</f:alias>
