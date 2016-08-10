@@ -4459,7 +4459,8 @@
         "priority": 3,
         "show": [
           "opr",
-          "header_status"
+          "header_status",
+          "documents"
         ],
         "errors": {
           "show": "4xx"
@@ -4588,7 +4589,9 @@
         "description": "Defekte Weiterleitungen",
         "priority": 3,
         "show": [
-          ""
+          "opr",
+          "documents",
+          "redirect_to_header_status_group"
         ],
         "errors": {
           "show": "5xx"
@@ -4722,7 +4725,8 @@
         "priority": 2,
         "show": [
           "opr",
-          "file_size_aggregated"
+          "file_size_aggregated",
+          "documents"
         ],
         "errors": {
           "operator": "sum",
@@ -6241,7 +6245,8 @@
         "show": [
           "opr",
           "language",
-          "country"
+          "country",
+          "documents"
         ],
         "errors": {
           "show": "not_set"
