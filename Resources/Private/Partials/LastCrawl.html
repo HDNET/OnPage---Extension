@@ -2,13 +2,13 @@
 <div class="page-header">
 	<h3>Letzter Crawl</h3>
 </div>
-<f:alias map="{test: '{onpage:arrayTransform(lastCrawl:lastCrawl)}'}">
+<f:alias map="{crawl: '{onpage:arrayTransform(lastCrawl:lastCrawl)}'}">
 <table class="table crawl">
 	<tbody>
 	<td>
-			<f:if condition="{test.working_page}">
+			<f:if condition="{crawl.working_page}">
 				<f:then>
-					{test.working_page}
+					{crawl.working_page}
 				</f:then>
 				<f:else>
 					0
@@ -17,9 +17,9 @@
 		</td>
 		<td>Valide Seiten</td>
 		<td>
-			<f:if condition="{test.broken_page}">
+			<f:if condition="{crawl.broken_page}">
 				<f:then>
-					{test.broken_page}
+					{crawl.broken_page}
 				</f:then>
 				<f:else>
 					0
@@ -31,9 +31,9 @@
 	<!-- external Sites -->
 	<tr>
 		<td>
-			<f:if condition="{test.working_external_link}">
+			<f:if condition="{crawl.working_external_link}">
 				<f:then>
-					{test.working_external_link}
+					{crawl.working_external_link}
 				</f:then>
 				<f:else>
 					0
@@ -42,9 +42,9 @@
 		</td>
 		<td>Valide externe Seiten</td>
 		<td>
-			<f:if condition="{test.broken_external_link}">
+			<f:if condition="{crawl.broken_external_link}">
 				<f:then>
-					{test.broken_external_link}
+					{crawl.broken_external_link}
 				</f:then>
 				<f:else>
 					0
@@ -56,9 +56,9 @@
 	<!-- Images -->
 	<tr>
 		<td>
-			<f:if condition="{test.working_image}">
+			<f:if condition="{crawl.working_image}">
 				<f:then>
-					{test.working_image}
+					{crawl.working_image}
 				</f:then>
 				<f:else>
 					0
@@ -67,9 +67,9 @@
 		</td>
 		<td>Valide Bilder</td>
 		<td>
-			<f:if condition="{test.broken_image}">
+			<f:if condition="{crawl.broken_image}">
 				<f:then>
-					{test.broken_image}
+					{crawl.broken_image}
 				</f:then>
 				<f:else>
 					0
@@ -81,9 +81,9 @@
 	<!-- Files -->
 	<tr>
 		<td>
-			<f:if condition="{test.working_asset}">
+			<f:if condition="{crawl.working_asset}">
 				<f:then>
-					{test.working_asset}
+					{crawl.working_asset}
 				</f:then>
 				<f:else>
 					0
@@ -92,9 +92,9 @@
 		</td>
 		<td>Valide Dateien</td>
 		<td>
-			<f:if condition="{test.broken_asset}">
+			<f:if condition="{crawl.broken_asset}">
 				<f:then>
-					{test.broken_asset}
+					{crawl.broken_asset}
 				</f:then>
 				<f:else>
 					0
