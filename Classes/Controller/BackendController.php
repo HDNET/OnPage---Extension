@@ -69,8 +69,12 @@ class BackendController extends ActionController
         $metaDataResult = $this->metaDataProvider->getMetaData($section);
 
         $showTableKey = $metaDataResult[$call]['show'];
-        $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
+        // todo fix
+        if(!$showTableKey) {
+            $showTableKey = [];
+        }
 
+        $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
         $this->view->assignMultiple([
             'moduleName'    => TitleUtility::makeSubTitle($section),
             'table'         => $this->onpPageService->showColumns($apiCallTable, $showTableKey),
