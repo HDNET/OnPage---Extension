@@ -47,7 +47,7 @@
 					<f:if condition="{table.0.sitemap_url}">
 						<th>Gefunden in der Sitemap.xml(URL)</th>
 					</f:if>
-					<f:if condition="{table.0.canoical_group}">
+					<f:if condition="{table.0.canonical_group}">
 						<th>Canonical Status (Gruppe)</th>
 					</f:if>
 					<f:if condition="{table.0.robots_allowed_group}">
@@ -138,6 +138,23 @@
 								<f:format.number decimals="0">{item.opr}</f:format.number>
 							</td>
 						</f:if>
+						<f:if condition="{item.document}">
+							<td>
+								<div class="document-group">
+									<div class="document-icon">
+										{item.document.mime}
+									</div>
+									<div class="document-basics">
+										<span class="title">
+											{item.document.meta_title}
+										</span>
+										<span class="url">
+											<a href="{item.document.url}" target="_blank">{item.document.url}</a>
+										</span>
+									</div>
+								</div>
+							</td>
+						</f:if>
 						<f:if condition="{table.document}">
 							<td>{item.meta_title}
 								<small><a href="{item.url}">{item.url}</a></small>
@@ -185,15 +202,14 @@
 						<f:if condition="{item.image_url}">
 							<td>{item.image_url}</td>
 						</f:if>
-						<f:if condition="{item.count_words">
+						<f:if condition="{item.count_words}">
 							<td>{item.count_words}</td>
 						</f:if>
 						<f:if condition="{table.twitter}">
-
 						</f:if>
 						<f:if condition="{table.facebook}">
-
 						</f:if>
+
 						<f:if condition="{item.count_links_incoming_internal}">
 							<td>{item.count_links_incoming_internal} Links</td>
 						</f:if>

@@ -7,7 +7,6 @@ namespace HDNET\OnpageIntegration\Service;
 
 
 use HDNET\OnpageIntegration\Loader\ApiResultLoader;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class OnPageService extends AbstractService
 {
@@ -16,6 +15,7 @@ class OnPageService extends AbstractService
      * @var ApiResultLoader
      */
     protected $loader;
+
     /**
      * OnPageService constructor.
      *
@@ -65,12 +65,11 @@ class OnPageService extends AbstractService
      */
     protected function errorReport($graphApiCallResult, $errorReportKey)
     {
-        // todo fix sorting problem
         $totalErrors = 0;
         foreach ($graphApiCallResult as $element) {
             if (in_array('sum', $errorReportKey)) {
-                foreach($errorReportKey['hidden'] as $hidden) {
-                    if(in_array($hidden, $element)) {
+                foreach ($errorReportKey['hidden'] as $hidden) {
+                    if (in_array($hidden, $element)) {
                         continue 2;
                     }
                 }
@@ -102,9 +101,30 @@ class OnPageService extends AbstractService
                 if (array_key_exists($key, $singleCallElement)) {
                     $singleRecordArray[$key] = $singleCallElement[$key];
                 }
+                if($key === 'documents') {
+                    $documents = [
+                        'mime' => $singleCallElement['mime'],
+                        'meta_title' => $singleCallElement['meta_title'],
+                        'url' => $singleCallElement['url'],
+                    ];
+                    $singleRecordArray['document'] = $documents;
+                }
             }
-            $fittedTablesRecords[] = $singleRecordArray;
+            $fittedTablesRecords[] = $this->replaceNULL($singleRecordArray);
         }
         return $fittedTablesRecords;
+    }
+
+    /**
+     * Build only for development
+     */
+    public function replaceNULL($array)
+    {
+        foreach ($array as &$element) {
+            if(empty($element)) {
+                $element = "Keine";
+            }
+        }
+        return $array;
     }
 }
