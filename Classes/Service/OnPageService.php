@@ -5,7 +5,6 @@
 
 namespace HDNET\OnpageIntegration\Service;
 
-
 use HDNET\OnpageIntegration\Loader\ApiResultLoader;
 
 class OnPageService extends AbstractService
@@ -101,11 +100,11 @@ class OnPageService extends AbstractService
                 if (array_key_exists($key, $singleCallElement)) {
                     $singleRecordArray[$key] = $singleCallElement[$key];
                 }
-                if($key === 'documents') {
+                if ($key === 'documents') {
                     $documents = [
-                        'mime' => $singleCallElement['mime'],
+                        'mime'       => $singleCallElement['mime'],
                         'meta_title' => $singleCallElement['meta_title'],
-                        'url' => $singleCallElement['url'],
+                        'url'        => $singleCallElement['url'],
                     ];
                     $singleRecordArray['document'] = $documents;
                 }
@@ -121,7 +120,7 @@ class OnPageService extends AbstractService
     public function replaceNULL($array)
     {
         foreach ($array as &$element) {
-            if(empty($element)) {
+            if (empty($element)) {
                 $element = "Keine";
             }
         }
