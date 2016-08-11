@@ -40,17 +40,18 @@ class ArrayService extends AbstractService
      */
     public function findElement(array $array, $elementName)
     {
+        if(array_key_exists($elementName, $array)) {
+            return $array[$elementName];
+        }
+
         foreach ($array as $key => $element) {
-            if ($key !== $elementName) {
-                if (!is_array($element)) {
-                    return [];
-                }
-                $result = $this->findElement($element, $elementName);
-                if ($result) {
-                    return $result;
-                }
-            } else {
-                return $element;
+            if (!is_array($element)) {
+                continue;
+            }
+
+            $result = $this->findElement($element, $elementName);
+            if ($result) {
+                return $result;
             }
         }
 
