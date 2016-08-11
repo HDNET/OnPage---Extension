@@ -1,5 +1,5 @@
 {namespace onpage=HDNET\OnpageIntegration\ViewHelpers}
-<table class="table">
+<table class="table category">
 	<thead>
 	<tr>
 		<th>Beschreibung</th>
@@ -8,7 +8,7 @@
 	</tr>
 	</thead>
 	<tbody>
-	<f:for each="{metaData.0}" as="meta" iteration="iterator">
+	<f:for each="{metaData}" as="meta" iteration="iterator">
 		<tr>
 			<td>
 				<f:link.action action="detail" arguments="{section: section, call: iterator.index }">{meta.description}
@@ -18,9 +18,9 @@
 				<f:for each="{onpage:arrayPad(size:meta.priority)}" as="empty">&#8226;&bull;</f:for>
 			</td>
 			<td>
-				<f:if condition="{meta.errors.0.count} > 0">
+				<f:if condition="{meta.errors}">
 					<f:then>
-						<span class="label label-danger">{meta.errors.0.count}</span>
+						<span class="label label-danger">{meta.errors}</span>
 					</f:then>
 					<f:else>
 						<span class="label label-success">0</span>

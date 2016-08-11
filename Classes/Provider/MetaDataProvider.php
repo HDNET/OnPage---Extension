@@ -2,44 +2,63 @@
 
 namespace HDNET\OnpageIntegration\Provider;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use HDNET\OnpageIntegration\Service\ArrayService;
+use HDNET\OnpageIntegration\Service\OnPageService;
 
 class MetaDataProvider
 {
 
     /**
-     * @var ConfigurationProvider
+     * @var \HDNET\OnpageIntegration\Provider\ConfigurationProvider
      */
     protected $configurationProvider;
+
     /**
-     * @var ArrayService
+     * @var \HDNET\OnpageIntegration\Service\ArrayService
      */
     protected $arrayService;
 
-    public function __construct()
-    {
-        $this->configurationProvider = GeneralUtility::makeInstance(ConfigurationProvider::class);
-        $this->arrayService          = GeneralUtility::makeInstance(ArrayService::class);
+    /**
+     * @var \HDNET\OnpageIntegration\Service\OnPageService
+     */
+    protected $onPageService;
+
+    /**
+     * MetaDataProvider constructor.
+     *
+     * @param ConfigurationProvider $configurationProvider
+     * @param ArrayService          $arrayService
+     */
+    public function __construct(
+        ConfigurationProvider $configurationProvider,
+        ArrayService $arrayService,
+        OnPageService $onPageService
+    ) {
+        $this->configurationProvider = $configurationProvider;
+        $this->arrayService = $arrayService;
+        $this->onPageService = $onPageService;
     }
 
     /**
      * @param string $key
+     *
      * @return array
      */
     public function getMetaData($key)
     {
         $configData = $this->configurationProvider->getAllConfigurationData();
-        $searchKeys = ['description', 'priority'];
+        $searchKeys = ['description', 'priority', 'errors', 'show'];
 
         $elements = $this->arrayService->findElement($configData, $key);
+        $buildData = $this->buildData($elements, $searchKeys);
 
-        return $this->buildData($elements, $searchKeys);
+        return $this->onPageService->build($buildData, $key);
     }
 
     /**
      * @param array $array
      * @param array $searchKeys
+     *
      * @return array
      */
     protected function buildData(array $array, array $searchKeys)
@@ -56,6 +75,7 @@ class MetaDataProvider
     /**
      * @param array $array
      * @param array $searchKeys
+     *
      * @return array
      */
     protected function filter(array $array, array $searchKeys)

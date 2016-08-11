@@ -14,7 +14,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ApiResultToCachePersister
 {
-
+    const DEFAULT_CACHE_LIFETIME = 604800;
     const CACHE_ID_PREFIX = 'HDNET_onpage_extension';
 
     /**

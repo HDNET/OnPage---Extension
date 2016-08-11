@@ -6,27 +6,30 @@
 namespace HDNET\OnpageIntegration\Service;
 
 use HDNET\OnpageIntegration\Exception\ApiErrorException;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use HDNET\OnpageIntegration\Provider\ConfigurationProvider;
 use HDNET\OnpageIntegration\Provider\AuthenticationProvider;
+use HDNET\OnpageIntegration\Provider\ConfigurationProvider;
 
 /**
  * Class DataService
  */
 class DataService extends AbstractService
 {
+
     /**
      * @var \HDNET\OnpageIntegration\Provider\ConfigurationProvider
      */
     protected $configurationProvider;
+
     /**
      * @var \HDNET\OnpageIntegration\Service\ArrayService
      */
     protected $arrayService;
+
     /**
      * @var \HDNET\OnpageIntegration\Provider\AuthenticationProvider
      */
     protected $authenticationProvider;
+
     /**
      * @var \HDNET\OnpageIntegration\Service\ApiCallService
      */
@@ -34,13 +37,22 @@ class DataService extends AbstractService
 
     /**
      * DataService constructor.
+     *
+     * @param ConfigurationProvider $configurationProvider
+     * @param AuthenticationProvider $authenticationProvider
+     * @param ArrayService $arrayService
+     * @param ApiCallService $apiCallService
      */
-    public function __construct()
-    {
-        $this->configurationProvider  = GeneralUtility::makeInstance(ConfigurationProvider::class);
-        $this->authenticationProvider = GeneralUtility::makeInstance(AuthenticationProvider::class);
-        $this->arrayService           = GeneralUtility::makeInstance(ArrayService::class);
-        $this->apiCallService         = GeneralUtility::makeInstance(ApiCallService::class);
+    public function __construct(
+        ConfigurationProvider $configurationProvider,
+        AuthenticationProvider $authenticationProvider,
+        ArrayService $arrayService,
+        ApiCallService $apiCallService
+    ) {
+        $this->configurationProvider = $configurationProvider;
+        $this->authenticationProvider = $authenticationProvider;
+        $this->arrayService = $arrayService;
+        $this->apiCallService = $apiCallService;
     }
 
     /**
@@ -52,8 +64,8 @@ class DataService extends AbstractService
     public function getApiResult($key)
     {
         $apiCall = $this->getApiCall($key);
-        $result  = $this->makeApiCall($apiCall);
-        $result  = json_decode($result, true);
+        $result = $this->makeApiCall($apiCall);
+        $result = json_decode($result, true);
 
         if (!isset($result['status']) || $result['status'] != 'success' || !isset($result['result'])) {
             throw new ApiErrorException('There has been a negative result for your request.');
@@ -68,12 +80,16 @@ class DataService extends AbstractService
      */
     public function getAllResults()
     {
-        $results    = [];
+        $results = [];
         $configData = $this->configurationProvider->getAllConfigurationData();
-        $keys       = $this->arrayService->findByContainedKey($configData, 'authentication');
+        $keys = $this->arrayService->findByContainedKey($configData, 'authentication');
 
         foreach ($keys as $key) {
-            $results[$key] = $this->getApiResult($key);
+            try {
+                $results[$key] = $this->getApiResult($key);
+            } catch (ApiErrorException $e) {
+                continue;
+            }
         }
 
         return $results;
@@ -92,12 +108,13 @@ class DataService extends AbstractService
 
     /**
      * @param string $apiCallKey
+     *
      * @return array
      */
     protected function getApiCall($apiCallKey)
     {
         $authenticationData = $this->authenticationProvider->get();
-        $configurationData  = $this->configurationProvider->getSingleConfiguration($apiCallKey);
+        $configurationData = $this->configurationProvider->getSingleConfiguration($apiCallKey);
 
         return $this->arrayService->replaceRecursiveByKey($configurationData, $authenticationData, 'authentication');
     }

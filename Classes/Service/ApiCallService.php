@@ -19,13 +19,17 @@ class ApiCallService
      * Start the api call
      *
      * @param string $json
+     *
      * @return string
      */
     public function makeCall($json)
     {
-        $this->checkForCurl();
+        try {
+            $this->checkForCurl();
 
-        return $this->send($json);
+            return $this->send($json);
+        } catch (UnavailableException $e) {
+        }
     }
 
     /**
@@ -44,6 +48,7 @@ class ApiCallService
      * Send the api request
      *
      * @param string $data
+     *
      * @return string
      * @throws UnavailableException
      */
@@ -57,17 +62,12 @@ class ApiCallService
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt(
-            $ch,
-            CURLOPT_HTTPHEADER,
-            array(
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json',
                 'Content-Length: ' . strlen($data)
-            )
-        );
+            ));
         $return = curl_exec($ch);
-        $code   = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($code >= 500) {
             throw new UnavailableException('The API could not be reached.');
         }

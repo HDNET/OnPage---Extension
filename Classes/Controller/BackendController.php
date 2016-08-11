@@ -6,13 +6,8 @@
 
 namespace HDNET\OnpageIntegration\Controller;
 
-use HDNET\OnpageIntegration\Domain\Repository\ConfigurationRepository;
+use HDNET\OnpageIntegration\Exception\UnavailableAccessDataException;
 use HDNET\OnpageIntegration\Utility\TitleUtility;
-use HDNET\OnpageIntegration\Provider\MetaDataProvider;
-use HDNET\OnpageIntegration\Utility\ArrayUtility;
-
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -28,50 +23,61 @@ class BackendController extends ActionController
     protected $loader;
 
     /**
-     * Represent the index page
+     * @var \HDNET\OnpageIntegration\Provider\MetaDataProvider
+     * @inject
+     */
+    protected $metaDataProvider;
+
+    /**
+     * @var \HDNET\OnpageIntegration\Domain\Repository\ConfigurationRepository
+     * @inject
+     */
+    protected $configurationRepository;
+
+    /**
+     * @var \HDNET\OnpageIntegration\Service\OnPageService
+     * @inject
+     */
+    protected $onpPageService;
+
+    /**
+     * Load all filter options and show them on the index page
      */
     public function indexAction()
     {
-        $metaDataProvider = GeneralUtility::makeInstance(MetaDataProvider::class);
-        $seoMetaData[] = $metaDataProvider->getMetaData('seoaspects');
-        $contentMetaData[] = $metaDataProvider->getMetaData('contentaspects');
-        $technicalMetaData[] = $metaDataProvider->getMetaData('technicalaspects');
-
-        // todo implement $contentMetaData and check the fourth api call
-        ArrayUtility::buildIndexActionArray($seoMetaData, 'seoaspects');
-        ArrayUtility::buildIndexActionArray($technicalMetaData, 'technicalaspects');
-
-        $this->view->assignMultiple([
-            'lastCrawl'         => $this->loader->load('zoom_lastcrawl'),
-            'seoMetaData'       => $seoMetaData,
-            'contentMetaData'   => $contentMetaData,
-            'technicalMetaData' => $technicalMetaData,
-            'moduleName'        => 'Zoom Module'
-        ]);
+        try {
+            $this->view->assignMultiple([
+                'lastCrawl'         => $this->loader->load('zoom_lastcrawl'),
+                'seoMetaData'       => $this->metaDataProvider->getMetaData('seoaspects'),
+                'contentMetaData'   => $this->metaDataProvider->getMetaData('contentaspects'),
+                'technicalMetaData' => $this->metaDataProvider->getMetaData('technicalaspects'),
+                'moduleName'        => 'Zoom Module'
+            ]);
+        } catch (UnavailableAccessDataException $e) {
+            return "Bitte tragen Sie Ihre Zugangsdaten ein.";
+        }
     }
 
     /**
-     * Handle the detail pages
+     * Show the details of an api call
      *
      * @param string $section
      * @param string $call
      */
     public function detailAction($section, $call)
     {
-        $objectManager = new ObjectManager();
-        $configurationRepository = $objectManager->get(ConfigurationRepository::class);
+        $metaDataResult = $this->metaDataProvider->getMetaData($section);
 
-        /** @var \HDNET\OnpageIntegration\Domain\Model\Configuration $configuration */
-        $configuration = $configurationRepository->findByUid(1);
+        $showTableKey = $metaDataResult[$call]['show'];
+        // todo fix
+        if (!$showTableKey) {
+            $showTableKey = [];
+        }
 
         $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
-        $apiCallGraph = 'zoom_' . $section . '_' . $call . '_graph';
-
         $this->view->assignMultiple([
             'moduleName' => TitleUtility::makeSubTitle($section),
-            'configuration' => $configuration,
-            'table'  => $this->loader->load($apiCallTable),
-            'graph'  => $this->loader->load($apiCallGraph),
+            'table'      => $this->onpPageService->showColumns($apiCallTable, $showTableKey),
         ]);
     }
 
