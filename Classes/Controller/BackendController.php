@@ -61,8 +61,8 @@ class BackendController extends ActionController
     /**
      * Show the details of an api call
      *
-     * @param string        $section
-     * @param string        $call
+     * @param string $section
+     * @param string $call
      */
     public function detailAction($section, $call)
     {
@@ -70,14 +70,14 @@ class BackendController extends ActionController
 
         $showTableKey = $metaDataResult[$call]['show'];
         // todo fix
-        if(!$showTableKey) {
+        if (!$showTableKey) {
             $showTableKey = [];
         }
 
         $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
         $this->view->assignMultiple([
-            'moduleName'    => TitleUtility::makeSubTitle($section),
-            'table'         => $this->onpPageService->showColumns($apiCallTable, $showTableKey),
+            'moduleName' => TitleUtility::makeSubTitle($section),
+            'table'      => $this->onpPageService->showColumns($apiCallTable, $showTableKey),
         ]);
     }
 
