@@ -2,9 +2,8 @@
 
 namespace HDNET\OnpageIntegration\Provider;
 
-use HDNET\OnpageIntegration\Service\OnPageService;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use HDNET\OnpageIntegration\Service\ArrayService;
+use HDNET\OnpageIntegration\Service\OnPageService;
 
 class MetaDataProvider
 {
@@ -30,15 +29,19 @@ class MetaDataProvider
      * @param ConfigurationProvider $configurationProvider
      * @param ArrayService          $arrayService
      */
-    public function __construct(ConfigurationProvider $configurationProvider, ArrayService $arrayService, OnPageService $onPageService)
-    {
+    public function __construct(
+        ConfigurationProvider $configurationProvider,
+        ArrayService $arrayService,
+        OnPageService $onPageService
+    ) {
         $this->configurationProvider = $configurationProvider;
-        $this->arrayService          = $arrayService;
+        $this->arrayService = $arrayService;
         $this->onPageService = $onPageService;
     }
 
     /**
      * @param string $key
+     *
      * @return array
      */
     public function getMetaData($key)
@@ -47,7 +50,7 @@ class MetaDataProvider
         $searchKeys = ['description', 'priority', 'errors', 'show'];
 
         $elements = $this->arrayService->findElement($configData, $key);
-        $buildData  = $this->buildData($elements, $searchKeys);
+        $buildData = $this->buildData($elements, $searchKeys);
 
         return $this->onPageService->build($buildData, $key);
     }
@@ -55,6 +58,7 @@ class MetaDataProvider
     /**
      * @param array $array
      * @param array $searchKeys
+     *
      * @return array
      */
     protected function buildData(array $array, array $searchKeys)
@@ -71,6 +75,7 @@ class MetaDataProvider
     /**
      * @param array $array
      * @param array $searchKeys
+     *
      * @return array
      */
     protected function filter(array $array, array $searchKeys)
