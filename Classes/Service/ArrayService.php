@@ -40,17 +40,18 @@ class ArrayService extends AbstractService
      */
     public function findElement(array $array, $elementName)
     {
+        if (array_key_exists($elementName, $array)) {
+            return $array[$elementName];
+        }
+
         foreach ($array as $key => $element) {
-            if ($key !== $elementName) {
-                if (!is_array($element)) {
-                    return [];
-                }
-                $result = $this->findElement($element, $elementName);
-                if ($result) {
-                    return $result;
-                }
-            } else {
-                return $element;
+            if (!is_array($element)) {
+                continue;
+            }
+
+            $result = $this->findElement($element, $elementName);
+            if ($result) {
+                return $result;
             }
         }
 
@@ -65,7 +66,7 @@ class ArrayService extends AbstractService
     public function findByContainedKey(array $array, $searchKey)
     {
         $keyChains = $this->findKeyChainsContainingKey($array, $searchKey, [], []);
-        $results   = [];
+        $results = [];
 
         foreach ($keyChains as $chain) {
             $results[] = implode('_', $chain);
@@ -88,7 +89,7 @@ class ArrayService extends AbstractService
                     continue;
                 }
                 $keyChain[] = $key;
-                $keyChains  = $this->findKeyChainsContainingKey($value, $searchKey, $keyChains, $keyChain);
+                $keyChains = $this->findKeyChainsContainingKey($value, $searchKey, $keyChains, $keyChain);
                 array_pop($keyChain);
             } else {
                 $keyChains[] = $keyChain;

@@ -77,7 +77,7 @@ class ArrayServiceTest extends UnitTestCase
     }
 
     /**
-     * @todo rewrite!!!
+     * @test
      */
     public function findElement()
     {
