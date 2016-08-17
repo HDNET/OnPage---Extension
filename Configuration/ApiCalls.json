@@ -2942,7 +2942,8 @@
         "show": [
           "opr",
           "h1",
-          "h1_count"
+          "h1_count",
+          "documents"
         ],
         "errors": {
           "operator": "sum",
