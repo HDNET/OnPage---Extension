@@ -135,7 +135,14 @@
 						</f:if>
 						<f:if condition="{item.opr}">
 							<td class="width-3 text-center">
-								<f:format.number decimals="0">{item.opr}</f:format.number>
+								<f:if condition="{item.opr} > 0">
+									<f:then>
+										<f:format.number decimals="0">{item.opr}</f:format.number>
+									</f:then>
+									<f:else>
+										0
+									</f:else>
+								</f:if>
 							</td>
 						</f:if>
 						<f:if condition="{item.document}">
