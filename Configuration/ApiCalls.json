@@ -3397,7 +3397,8 @@
         "show": [
           "opr",
           "h1",
-          "count_duplicate_h1"
+          "count_duplicate_h1",
+          "documents"
         ],
         "errors": {
           "operator": "sum",
