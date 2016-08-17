@@ -2942,7 +2942,8 @@
         "show": [
           "opr",
           "h1",
-          "h1_count"
+          "h1_count",
+          "documents"
         ],
         "errors": {
           "operator": "sum",
@@ -3397,7 +3398,8 @@
         "show": [
           "opr",
           "h1",
-          "count_duplicate_h1"
+          "count_duplicate_h1",
+          "documents"
         ],
         "errors": {
           "operator": "sum",
@@ -4463,7 +4465,8 @@
           "documents"
         ],
         "errors": {
-          "show": "4xx"
+          "operator": "sum",
+          "hidden": ["2xx", "301", "302", "3xx", "unknown"]
         },
         "graph": {
           "action": "aggregate",
@@ -4594,7 +4597,8 @@
           "redirect_to_header_status_group"
         ],
         "errors": {
-          "show": "5xx"
+          "operator": "sum",
+          "hidden": ["2xx", "301", "302", "3xx", "unknown"]
         },
         "graph": {
           "action": "aggregate",
@@ -5854,7 +5858,8 @@
           "documents", "reference_from_language"
         ],
         "errors": {
-          "show": "4xx"
+          "operator": "sum",
+          "hidden": ["2xx", "301", "302", "3xx", "unknown"]
         },
         "graph": {
           "action": "aggregate",

@@ -11,3 +11,31 @@
 .crawl > td,th {
 	width: 25%;
 }
+/*
+ * Helper
+ */
+.width-3 {
+	width: 3% !important;
+}
+.width-5 {
+	width: 5% !important;
+}
+.width-10 {
+	width: 10% !important;
+}
+.width-40 {
+	width: 40% !important;
+}
+.width-50 {
+	width: 40% !important;
+}
+.text-center {
+	text-align: center;
+}
+.text-right {
+	text-align: right;
+}
+.padding-r-1 {
+	padding-right: 1% !important;
+}
+

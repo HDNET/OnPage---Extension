@@ -18,25 +18,25 @@
 				<thead>
 				<tr>
 					<f:if condition="{table.0.url}">
-						<th>URL</th>
+						<th class="width-50">URL</th>
 					</f:if>
 					<f:if condition="{table.0.meta_description}">
-						<th>Meta Description</th>
+						<th class="width-40">Meta Description</th>
 					</f:if>
 					<f:if condition="{table.0.count_duplicate_descriptions}">
-						<th>Description Duplikate Zähler</th>
+						<th class="text-center padding-r-1">Description Duplikate Zähler</th>
 					</f:if>
 					<f:if condition="{table.0.meta_title}">
 						<th>Meta Title</th>
 					</f:if>
 					<f:if condition="{table.0.count_duplicate_titles}">
-						<th>Title Duplikate Zähler</th>
+						<th class="text-center padding-r-1">Title Duplikate Zähler</th>
 					</f:if>
 					<f:if condition="{table.0.opr}">
-						<th>OPR</th>
+						<th class="width-3 text-center">OPR</th>
 					</f:if>
 					<f:if condition="{table.0.document}">
-						<th>Dokument</th>
+						<th class="width-40">Dokument</th>
 					</f:if>
 					<f:if condition="{table.0.redirect_type_group}">
 						<th>Art der Weiterleitung (Gruppe)</th>
@@ -53,11 +53,11 @@
 					<f:if condition="{table.0.robots_allowed_group}">
 						<th>Durch Robots.txt freigegeben (Gruppe)</th>
 					</f:if>
-					<f:if condition="{item.count_translations}">
-						<td>Übersetzungen (Anzahl)</td>
+					<f:if condition="{table.0.count_translations}">
+						<th class="text-center">Übersetzungen (Anzahl)</th>
 					</f:if>
-					<f:if condition="{item.count_incoming_translations}">
-						<td>Verweisende Übersetzungen (Anzahl)</td>
+					<f:if condition="{table.0.count_incoming_translations}">
+						<th class="text-center">Verweisende Übersetzungen (Anzahl)</th>
 					</f:if>
 					<f:if condition="{table.0.h1}">
 						<th>H1 Inhalt</th>
@@ -90,7 +90,7 @@
 
 					</f:if>
 					<f:if condition="{table.0.count_links_incoming_internal}">
-						<th>Interne Links insgesamt (Zähler)</th>
+						<th class="text-right padding-r-1">Interne Links insgesamt (Zähler)</th>
 					</f:if>
 					<f:if condition="{table.0.count_incoming_references}">
 						<th>Eingehende Verweise</th>
@@ -119,27 +119,34 @@
 				<f:for each="{table}" as="item">
 					<tr>
 						<f:if condition="{item.url}">
-							<td><a href="{item.url}" target="_blank">{item.url}</a></td>
+							<td class="width-50"><a href="{item.url}" target="_blank">{item.url}</a></td>
 						</f:if>
 						<f:if condition="{item.meta_description}">
-							<td>{item.meta_description}</td>
+							<td class="width-40">{item.meta_description}</td>
 						</f:if>
 						<f:if condition="{item.count_duplicate_descriptions}">
-							<td>{item.count_duplicate_descriptions} ICON</td>
+							<td class="text-center padding-r-1">{item.count_duplicate_descriptions}</td>
 						</f:if>
 						<f:if condition="{item.meta_title}">
 							<td>{item.meta_title}</td>
 						</f:if>
 						<f:if condition="{item.count_duplicate_titles}">
-							<td>{item.count_duplicate_titles} ICON</td>
+							<td class="text-center padding-r-1">{item.count_duplicate_titles}</td>
 						</f:if>
 						<f:if condition="{item.opr}">
-							<td>
-								<f:format.number decimals="0">{item.opr}</f:format.number>
+							<td class="width-3 text-center">
+								<f:if condition="{item.opr} > 0">
+									<f:then>
+										<f:format.number decimals="0">{item.opr}</f:format.number>
+									</f:then>
+									<f:else>
+										0
+									</f:else>
+								</f:if>
 							</td>
 						</f:if>
 						<f:if condition="{item.document}">
-							<td>
+							<td class="width-40">
 								<div class="document-group">
 									<div class="document-icon">
 										{item.document.mime}
@@ -153,11 +160,6 @@
 										</span>
 									</div>
 								</div>
-							</td>
-						</f:if>
-						<f:if condition="{table.document}">
-							<td>{item.meta_title}
-								<small><a href="{item.url}">{item.url}</a></small>
 							</td>
 						</f:if>
 						<f:if condition="{item.redirect_type_group}">
@@ -176,10 +178,10 @@
 							<td>{item.robots_allowed_group}</td>
 						</f:if>
 						<f:if condition="{item.count_translations}">
-							<td>{item.count_translations}</td>
+							<td class="text-center">{item.count_translations}</td>
 						</f:if>
 						<f:if condition="{item.count_incoming_translations}">
-							<td>{item.count_incoming_translations}</td>
+							<td class="text-center">{item.count_incoming_translations}</td>
 						</f:if>
 						<f:if condition="{item.h1}">
 							<td>{item.h1}</td>
@@ -211,7 +213,7 @@
 						</f:if>
 
 						<f:if condition="{item.count_links_incoming_internal}">
-							<td>{item.count_links_incoming_internal} Links</td>
+							<td class="text-right padding-r-1">{item.count_links_incoming_internal} Links</td>
 						</f:if>
 						<f:if condition="{item.count_incoming_references}">
 							<td>{item.count_incoming_references} mal gefunden</td>
