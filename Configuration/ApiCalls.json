@@ -4464,7 +4464,8 @@
           "documents"
         ],
         "errors": {
-          "show": "4xx"
+          "operator": "sum",
+          "hidden": ["2xx", "301", "302", "3xx", "unknown"]
         },
         "graph": {
           "action": "aggregate",
