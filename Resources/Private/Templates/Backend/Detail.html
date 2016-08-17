@@ -53,11 +53,11 @@
 					<f:if condition="{table.0.robots_allowed_group}">
 						<th>Durch Robots.txt freigegeben (Gruppe)</th>
 					</f:if>
-					<f:if condition="{item.count_translations}">
-						<td>Übersetzungen (Anzahl)</td>
+					<f:if condition="{table.0.count_translations}">
+						<th class="text-center">Übersetzungen (Anzahl)</th>
 					</f:if>
-					<f:if condition="{item.count_incoming_translations}">
-						<td>Verweisende Übersetzungen (Anzahl)</td>
+					<f:if condition="{table.0.count_incoming_translations}">
+						<th class="text-center">Verweisende Übersetzungen (Anzahl)</th>
 					</f:if>
 					<f:if condition="{table.0.h1}">
 						<th>H1 Inhalt</th>
@@ -178,10 +178,10 @@
 							<td>{item.robots_allowed_group}</td>
 						</f:if>
 						<f:if condition="{item.count_translations}">
-							<td>{item.count_translations}</td>
+							<td class="text-center">{item.count_translations}</td>
 						</f:if>
 						<f:if condition="{item.count_incoming_translations}">
-							<td>{item.count_incoming_translations}</td>
+							<td class="text-center">{item.count_incoming_translations}</td>
 						</f:if>
 						<f:if condition="{item.h1}">
 							<td>{item.h1}</td>
