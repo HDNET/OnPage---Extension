@@ -4596,7 +4596,8 @@
           "redirect_to_header_status_group"
         ],
         "errors": {
-          "show": "5xx"
+          "operator": "sum",
+          "hidden": ["2xx", "301", "302", "3xx", "unknown"]
         },
         "graph": {
           "action": "aggregate",
