@@ -8,6 +8,8 @@ namespace HDNET\OnpageIntegration\Controller;
 
 use HDNET\OnpageIntegration\Exception\UnavailableAccessDataException;
 use HDNET\OnpageIntegration\Utility\TitleUtility;
+use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -45,9 +47,14 @@ class BackendController extends ActionController
      */
     public function indexAction()
     {
+        /** @var CacheManager $cacheManager */
+        $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
+        $cache = $cacheManager->getCache('onpage_extension');
+
         try {
             $this->view->assignMultiple([
                 'lastCrawl'         => $this->loader->load('zoom_lastcrawl'),
+                'lastCrawlDate'     => $cache->get('lastCrawlDate'),
                 'seoMetaData'       => $this->metaDataProvider->getMetaData('seoaspects'),
                 'contentMetaData'   => $this->metaDataProvider->getMetaData('contentaspects'),
                 'technicalMetaData' => $this->metaDataProvider->getMetaData('technicalaspects'),

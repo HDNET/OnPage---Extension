@@ -1,6 +1,6 @@
 {namespace onpage=HDNET\OnpageIntegration\ViewHelpers}
 <div class="page-header">
-	<h3>Letzter Crawl</h3>
+	<h3>Letzter Crawl <f:if condition="{lastCrawlDate}">vom {lastCrawlDate}</f:if></h3>
 </div>
 <f:alias map="{crawl: '{onpage:arrayTransform(lastCrawl:lastCrawl)}'}">
 <table class="table crawl">
