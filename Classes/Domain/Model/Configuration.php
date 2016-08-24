@@ -8,6 +8,7 @@ namespace HDNET\OnpageIntegration\Domain\Model;
 
 /**
  * Class Configuration
+ *
  * @db
  */
 class Configuration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
