@@ -5,13 +5,16 @@
 	<button class="btn btn-default" onclick="window.history.back()">
 		Zurück
 	</button>
-	<div class="page-header">
-		<h4>Graph: Sitemap(Gruppe)</h4>
-	</div>
-	<f:render partial="NoData"/>
-	<div class="page-header">
-		<h4>Tabelle: Was ist hinterlegt ?</h4>
-	</div>
+	<p>
+	<f:comment>
+		<div class="page-header">
+			<h4>Graph: Sitemap(Gruppe)</h4>
+		</div>
+		<f:render partial="NoData"/>
+		<div class="page-header">
+			<h4>Tabelle: Was ist hinterlegt ?</h4>
+		</div>
+	</f:comment>
 	<f:if condition="{table}">
 		<f:then>
 			<table class="table table-striped">
