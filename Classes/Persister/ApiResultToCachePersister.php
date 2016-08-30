@@ -26,7 +26,7 @@ class ApiResultToCachePersister
         /** @var CacheManager $cacheManager */
         $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
         $cache = $cacheManager->getCache('onpage_extension');
-        if(!$cache->get('lastCrawlDate')) {
+        if (!$cache->get('lastCrawlDate')) {
             $cache->set('lastCrawlDate', date('d.m.Y'));
         }
         $cache->set($this->getIdentifier($key), json_encode($data));
