@@ -27,8 +27,13 @@
 
 		<div id="typo3-docbody">
 			<div id="typo3-inner-docbody">
-				<h1>OnPage.org - Integration
-					<small>{moduleName} <f:if condition="{moduleCategory}">- {moduleCategory}</f:if></small>
+				<h1>OnPage.org
+					<small>
+						<f:if condition="{moduleName}">
+							<f:then>{moduleName}</f:then>
+							<f:else>{moduleCategory}</f:else>
+						</f:if>
+					</small>
 				</h1>
 				<f:flashMessages renderMode="div" />
 				<f:render section="Content" />

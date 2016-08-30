@@ -83,7 +83,6 @@ class BackendController extends ActionController
 
         $apiCallTable = 'zoom_' . $section . '_' . $call . '_table';
         $this->view->assignMultiple([
-            'moduleName' => TitleUtility::makeSubTitle($section),
             'moduleCategory' => $metaDataResult[$call]['description'],
             'table'      => $this->onpPageService->showColumns($apiCallTable, $showTableKey),
         ]);
