@@ -52,7 +52,7 @@ class MetaDataProvider
         // todo outsourced
         $trimmedConfigData = [];
         foreach ($configData['zoom'][$key] as $element) {
-            if(!array_key_exists('disable', $element)) {
+            if (!array_key_exists('disable', $element)) {
                 $trimmedConfigData[] = $element;
             }
         }
