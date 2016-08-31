@@ -49,9 +49,17 @@ class MetaDataProvider
         $configData = $this->configurationProvider->getAllConfigurationData();
         $searchKeys = ['description', 'priority', 'errors', 'show'];
 
-        $elements = $this->arrayService->findElement($configData, $key);
-        $buildData = $this->buildData($elements, $searchKeys);
+        // todo outsourced
+        $trimmedConfigData = [];
+        foreach ($configData['zoom'][$key] as $element) {
+            if(!array_key_exists('disable', $element)) {
+                $trimmedConfigData[] = $element;
+            }
+        }
+        // todo deprecated
+        // $elements = $this->arrayService->findElement($trimmedConfigData, $key);
 
+        $buildData = $this->buildData($trimmedConfigData, $searchKeys);
         return $this->onPageService->build($buildData, $key);
     }
 

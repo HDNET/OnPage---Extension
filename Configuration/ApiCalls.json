@@ -33,6 +33,7 @@
       {
         "description": "Indexierbare Seiten, die nicht in der sitemap.xml sind",
         "priority": 2,
+        "disable": true,
         "show": [
           "opr",
           "documents",
@@ -192,6 +193,7 @@
       {
         "description": "Indexierbare Seiten mit langem Klickpfad",
         "priority": 2,
+        "disable": true,
         "show": [
           "opr",
           "documents",
@@ -353,6 +355,7 @@
       {
         "description": "Indexierbare Seiten ohne validen Canonical",
         "priority": 2,
+        "disable": true,
         "show": [
           "opr",
           "documents",
@@ -499,6 +502,7 @@
       {
         "description": "Weiterleitungen zu anderen Subdomains",
         "priority": 2,
+        "disable": true,
         "show": [
           "opr",
           "documents",
@@ -1045,6 +1049,7 @@
       {
         "description": "Nicht-indexierbare Seiten mit hohem OPR",
         "priority": 3,
+        "disable": true,
         "graph": {
           "action": "aggregate",
           "authentication": {
@@ -1270,6 +1275,7 @@
       {
         "description": "Interne 302 Weiterleitungen",
         "priority": 3,
+        "disable": true,
         "errors": {
           "show": "301"
         },
@@ -1406,6 +1412,7 @@
       {
         "description": "Seiten die als noindex, nofollow deklariert sind",
         "priority": 2,
+        "disable": true,
         "errors": {
           "show": "noindex_nofollow"
         },
@@ -1528,6 +1535,7 @@
       {
         "description": "URLs mit nicht eindeutigen robots-Angaben",
         "priority": 2,
+        "disable": true,
         "graph": {
           "action": "aggregate",
           "authentication": {
@@ -1637,6 +1645,7 @@
       {
         "description": "URLs mit Sonderzeichen",
         "priority": 2,
+        "disable": true,
         "graph": {
           "action": "aggregate",
           "authentication": {
@@ -1745,6 +1754,7 @@
       {
         "description": "Canonicals zu anderen Domains",
         "priority": 2,
+        "disable": true,
         "graph": {
           "action": "aggregate",
           "authentication": {
@@ -2184,6 +2194,7 @@
       {
         "description": "Seiten ohne eingehende Links in der sitemap.xml",
         "priority": 2,
+        "disable": true,
         "show": [
           "opr",
           "documents",
@@ -2361,6 +2372,7 @@
       {
         "description": "Seiten, die jährlich upgedatet werden (sitemap.xml)",
         "priority": 1,
+        "disable": true,
         "graph": {
           "action": "aggregate",
           "authentication": {
@@ -2481,6 +2493,7 @@
       {
         "description": "Seiten, die niemals geupdated werden (sitemap.xml)",
         "priority": 1,
+        "disable": true,
         "graph": {
           "action": "aggregate",
           "authentication": {
@@ -2603,6 +2616,7 @@
       {
         "description": "Indexierbare Seiten mit Description Duplikat",
         "priority": 3,
+        "disable": true,
         "show": [
           "url",
           "meta_description",
@@ -2776,6 +2790,7 @@
       {
         "description": "Indexierbare Seiten mit Title-Duplikat",
         "priority": 3,
+        "disable": true,
         "show": [
           "url",
           "meta_title",
@@ -3095,6 +3110,7 @@
       {
         "description": "Bilder ohne Alt Text",
         "priority": 2,
+        "disable": true,
         "show": [
           "image_url",
           "image_alt"
@@ -3225,6 +3241,7 @@
       {
         "description": "Indexierbare Seiten mit weniger als 300 Wörtern (Thin Content)",
         "priority": 2,
+        "disable": true,
         "show": [
           "opr",
           "count_words"
@@ -3395,6 +3412,7 @@
       {
         "description": "Indexierbare Seiten mit H1-Duplikat",
         "priority": 2,
+        "disable": true,
         "show": [
           "opr",
           "h1",
@@ -3570,6 +3588,7 @@
       {
         "description": "Indexierbare Seiten die Flash verwenden",
         "priority": 2,
+        "disable": true,
         "show": [
           "url",
           "meta_title",
@@ -3873,6 +3892,7 @@
       },
       {
         "description": "Defekte extern-verlinkte Inhalte",
+        "disable": true,
         "priority": 1,
         "show": [
           "opr",
@@ -3996,6 +4016,7 @@
       },
       {
         "description": "Indexierbare Seiten ohne Facebook Vorschau Bild",
+        "disable": true,
         "priority": 1,
         "errors": {
           "show": "all_missing"
@@ -4157,6 +4178,7 @@
       {
         "description": "Indexierbare Seiten die nicht einzigartig sind (Duplicate Content)",
         "priority": 3,
+        "disable": true,
         "show": [
           "opr",
           "count_links_incoming_internal",
@@ -4342,6 +4364,7 @@
       {
         "description": "Links zu potentiell unseriösen Seiten",
         "priority": 2,
+        "disable": true,
         "graph": {
           "action": "aggregate",
           "authentication": {
@@ -4591,6 +4614,7 @@
       {
         "description": "Defekte Weiterleitungen",
         "priority": 3,
+        "disable": true,
         "show": [
           "opr",
           "documents",
@@ -5012,6 +5036,7 @@
       {
         "description": "Seiten die größer als 250 kb sind",
         "priority": 1,
+        "disable": true,
         "graph": {
           "action": "aggregate",
           "authentication": {
@@ -5135,6 +5160,7 @@
       {
         "description": "Defekte Canonicals",
         "priority": 3,
+        "disable": true,
         "errors": {
           "show": "4xx"
         },
@@ -5275,6 +5301,7 @@
       {
         "description": "Defekte CSS Dateien",
         "priority": 3,
+        "disable": true,
         "errors": {
           "show": "4xx"
         },
@@ -5387,6 +5414,7 @@
       {
         "description": "Defekte Javascript Dateien",
         "priority": 3,
+        "disable": true,
         "errors": {
           "show": "4xx"
         },
@@ -5499,6 +5527,7 @@
       {
         "description": "Defekte XML Dateien",
         "priority": 2,
+        "disable": true,
         "errors": {
           "show": "4xx"
         },
@@ -5624,6 +5653,7 @@
       {
         "description": "Defekte Bilder",
         "priority": 2,
+        "disable": true,
         "errors": {
           "show": "4xx"
         },
@@ -5729,6 +5759,7 @@
       {
         "description": "Seitenladezeit > 1 Sek.",
         "priority": 2,
+        "disable": true,
         "graph": {
           "action": "aggregate",
           "authentication": {
@@ -5854,6 +5885,7 @@
       {
         "description": "Defekte Übersetzungen",
         "priority": 2,
+        "disable": true,
         "show": [
           "documents", "reference_from_language"
         ],
@@ -5978,6 +6010,7 @@
       {
         "description": "Defekte paginierte Seiten",
         "priority": 2,
+        "disable": true,
         "errors": {
           "show": "4xx"
         },
@@ -6108,6 +6141,7 @@
       {
         "description": "Indexierbare Seiten ohne Mime Type",
         "priority": 1,
+        "disable": true,
         "graph": {
           "action": "aggregate",
           "authentication": {
@@ -6247,6 +6281,7 @@
       {
         "description": "Indexierbare Seiten ohne Sprachangaben",
         "priority": 1,
+        "disable": true,
         "show": [
           "opr",
           "language",
