@@ -2,7 +2,7 @@
   "name": "hdnet/onpage-integration",
   "type": "typo3-cms-extension",
   "version": "0.1.1",
-  "description": "",
+  "description": "Show editors important information about their SEO process",
   "autoload": {
     "psr-4": {
       "HDNET\\OnpageIntegration\\": "Classes/"
